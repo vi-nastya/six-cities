@@ -357,6 +357,7 @@ exports[`App is rendered correctly after relaunch 1`] = `
                   >
                     <a
                       href="#"
+                      onClick={[Function]}
                     >
                       place 1
                     </a>
@@ -458,6 +459,7 @@ exports[`App is rendered correctly after relaunch 1`] = `
                   >
                     <a
                       href="#"
+                      onClick={[Function]}
                     >
                       place 2
                     </a>
@@ -559,6 +561,7 @@ exports[`App is rendered correctly after relaunch 1`] = `
                   >
                     <a
                       href="#"
+                      onClick={[Function]}
                     >
                       place 3
                     </a>
@@ -660,6 +663,7 @@ exports[`App is rendered correctly after relaunch 1`] = `
                   >
                     <a
                       href="#"
+                      onClick={[Function]}
                     >
                       place 4
                     </a>

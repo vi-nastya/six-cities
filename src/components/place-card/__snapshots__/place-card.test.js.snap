@@ -91,6 +91,7 @@ exports[`Place Card is rendered correctly after relaunch 1`] = `
     >
       <a
         href="#"
+        onClick={[MockFunction]}
       >
         Name
       </a>
