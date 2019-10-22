@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const getPlaceCard = (placeName) => {
-  return <article className="cities__place-card place-card">
+const getPlaceCard = (placeName, index) => {
+  return <article className="cities__place-card place-card" key={`place-card-` + index.toString()}>
     <div className="place-card__mark">
       <span>Premium</span>
     </div>
@@ -147,7 +147,7 @@ const MainPage = (props) => {
                 */}
               </form>
               <div className="cities__places-list places__list tabs__content">
-                ${placeNames.map((place) => getPlaceCard(place))}
+                ${placeNames.map((place, index) => getPlaceCard(place, index))}
               </div>
             </section>
             <div className="cities__right-section">
