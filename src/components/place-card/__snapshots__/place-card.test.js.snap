@@ -3,9 +3,11 @@
 exports[`Place Card is rendered correctly after relaunch 1`] = `
 <article
   className="cities__place-card place-card"
+  onMouseOver={[Function]}
 >
   <div
     className="place-card__mark"
+    style={Object {}}
   >
     <span>
       Premium
@@ -21,7 +23,7 @@ exports[`Place Card is rendered correctly after relaunch 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/apartment-03.jpg"
+        src="img/apartment-01.jpg"
         width="260"
       />
     </a>
@@ -38,16 +40,18 @@ exports[`Place Card is rendered correctly after relaunch 1`] = `
         <b
           className="place-card__price-value"
         >
-          €180
+          €
+          80
         </b>
         <span
           className="place-card__price-text"
         >
-          / night
+          / 
+          night
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button"
+        className="place-card__bookmark-button--active"
         type="button"
       >
         <svg
@@ -91,15 +95,14 @@ exports[`Place Card is rendered correctly after relaunch 1`] = `
     >
       <a
         href="#"
-        onClick={[MockFunction]}
       >
-        Name
+        Wood and stone place
       </a>
     </h2>
     <p
       className="place-card__type"
     >
-      Apartment
+      Private room
     </p>
   </div>
 </article>

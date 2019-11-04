@@ -1,13 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PlaceCard from "../place-card/place-card.jsx";
-
-const onPlaceNameClick = () => {
-  // TODO: implement
-};
+import PlacesList from "../places-list/places-list.jsx";
 
 const MainPage = (props) => {
-  const placeNames = props.placeNames;
+  const places = props.places;
 
   return <section className="welcome">
     <div style={{display: `none`}}>
@@ -105,18 +101,8 @@ const MainPage = (props) => {
                   <li className="places__option" tabIndex="0">Price: high to low</li>
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
-                {/*
-                <select className="places__sorting-type" id="places-sorting">
-                  <option className="places__option" value="popular" selected="">Popular</option>
-                  <option className="places__option" value="to-high">Price: low to high</option>
-                  <option className="places__option" value="to-low">Price: high to low</option>
-                  <option className="places__option" value="top-rated">Top rated first</option>
-                </select>
-                */}
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                ${placeNames.map((place, index) => <PlaceCard placeName={place} onNameClick={onPlaceNameClick} key={index} />)}
-              </div>
+              <PlacesList places={places}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -129,7 +115,7 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  placeNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  places: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default MainPage;

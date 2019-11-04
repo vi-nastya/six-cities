@@ -1,0 +1,38 @@
+export const offers = [
+  {
+    name: `Wood and stone place`,
+    price: 80,
+    priceText: `night`,
+    type: `Private room`,
+    picture: `img/apartment-01.jpg`,
+    isPremium: false,
+    isBookmarked: true,
+  },
+  {
+    name: `Beautiful & luxurious apartment at great location`,
+    price: 120,
+    priceText: `night`,
+    type: `Apartment`,
+    picture: `img/apartment-02.jpg`,
+    isPremium: true,
+    isBookmarked: false,
+  },
+  {
+    name: `Nice, cozy, warm big bed apartment`,
+    price: 180,
+    priceText: `night`,
+    type: `Apartment`,
+    picture: `img/apartment-03.jpg`,
+    isPremium: true,
+    isBookmarked: true,
+  },
+  {
+    name: `Wood and stone place`,
+    price: 90,
+    priceText: `night`,
+    type: `Private room`,
+    picture: `https://picsum.photos/260/200`,
+    isPremium: false,
+    isBookmarked: false,
+  },
+];

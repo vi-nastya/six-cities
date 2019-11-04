@@ -2,15 +2,22 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import PlaceCard from "./place-card";
+import {offers} from "../../mocks/offers";
 
 Enzyme.configure({adapter: new Adapter()});
 
-it(`PlaceCard name click handler works correctly`, () => {
-  const clickHandler = jest.fn();
-  const welcomeScreen = shallow(<PlaceCard placeName={`Place`} onNameClick={clickHandler}/>);
 
-  const nameLink = welcomeScreen.find(`.place-card__name a`);
-  nameLink.simulate(`click`);
+const hoverHandler = jest.fn();
+const welcomeScreen = shallow(<PlaceCard place={offers[0]} onHover={hoverHandler}/>);
 
-  expect(clickHandler).toHaveBeenCalledTimes(1);
+welcomeScreen.simulate(`mouseover`);
+
+describe(`Test for PlaceCard hover`, () => {
+  it(`PlaceCard hover handler works correctly`, () => {
+    expect(hoverHandler).toHaveBeenCalledTimes(1);
+  });
+
+  it(`Hover handler received the correct place data as an argument`, () => {
+    expect(hoverHandler).toBeCalledWith(offers[0]);
+  });
 });
