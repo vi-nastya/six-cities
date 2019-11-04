@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {PLACE_TYPES, PRICE_TEXTS} from "../../utils";
 
 const PlaceCard = (props) => {
   const {place, onHover} = props;
@@ -45,9 +46,9 @@ const PlaceCard = (props) => {
 PlaceCard.propTypes = {
   place: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(PLACE_TYPES).isRequired,
     price: PropTypes.number.isRequired,
-    priceText: PropTypes.string.isRequired,
+    priceText: PropTypes.oneOf(PRICE_TEXTS).isRequired,
     picture: PropTypes.string.isRequired,
     isPremium: PropTypes.bool.isRequired,
     isBookmarked: PropTypes.bool.isRequired,
