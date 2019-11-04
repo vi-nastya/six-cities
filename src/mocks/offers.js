@@ -1,7 +1,7 @@
 export const offers = [
   {
     name: `Wood and stone place`,
-    price: `80`,
+    price: 80,
     priceText: `night`,
     type: `Private room`,
     picture: `img/apartment-01.jpg`,
@@ -10,7 +10,7 @@ export const offers = [
   },
   {
     name: `Beautiful & luxurious apartment at great location`,
-    price: `120`,
+    price: 120,
     priceText: `night`,
     type: `Apartment`,
     picture: `img/apartment-02.jpg`,
@@ -19,7 +19,7 @@ export const offers = [
   },
   {
     name: `Nice, cozy, warm big bed apartment`,
-    price: `180`,
+    price: 180,
     priceText: `night`,
     type: `Apartment`,
     picture: `img/apartment-03.jpg`,
@@ -28,7 +28,7 @@ export const offers = [
   },
   {
     name: `Wood and stone place`,
-    price: `90`,
+    price: 90,
     priceText: `night`,
     type: `Private room`,
     picture: `https://picsum.photos/260/200`,

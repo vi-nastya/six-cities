@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const PlaceCard = (props) => {
-  const {place, onNameClick} = props;
+  const {place, onHover} = props;
   const {name, type, price, priceText, picture, isPremium, isBookmarked} = place;
 
-  return <article className="cities__place-card place-card">
-    <div className="place-card__mark" style={isPremium ? {display: `none`} : ``}>
+  return <article className="cities__place-card place-card" onMouseOver={onHover}>
+    <div className="place-card__mark" style={isPremium ? {display: `none`} : {}}>
       <span>Premium</span>
     </div>
     <div className="cities__image-wrapper place-card__image-wrapper">
@@ -34,7 +34,7 @@ const PlaceCard = (props) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#" onClick={onNameClick}>{name}</a>
+        <a href="#">{name}</a>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>
@@ -52,7 +52,7 @@ PlaceCard.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     isBookmarked: PropTypes.bool.isRequired,
   }).isRequired,
-  onNameClick: PropTypes.func.isRequired,
+  onHover: PropTypes.func.isRequired,
 };
 
 export default PlaceCard;

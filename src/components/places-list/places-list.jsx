@@ -12,11 +12,12 @@ export default class PlacesList extends PureComponent {
   }
 
   render() {
-    const {activePlace} = this.state;
     const {places} = this.props;
 
     return <div className="cities__places-list places__list tabs__content">
-                ${places.map((place, index) => <PlaceCard placeName={place} onNameClick={onPlaceNameClick} key={index} />)}
+                ${places.map((place, index) => <PlaceCard place={place} onHover={() => {
+        this.setState({activePlace: index});
+      }} key={index} />)}
     </div>;
   }
 }
