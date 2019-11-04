@@ -12,7 +12,8 @@ export default class PlacesList extends PureComponent {
   }
 
   render() {
-    const places = this.props.places;
+    const {activePlace} = this.state;
+    const {places} = this.props;
 
     return <div className="cities__places-list places__list tabs__content">
                 ${places.map((place, index) => <PlaceCard placeName={place} onNameClick={onPlaceNameClick} key={index} />)}

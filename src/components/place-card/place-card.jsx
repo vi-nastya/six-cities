@@ -43,7 +43,15 @@ const PlaceCard = (props) => {
 
 
 PlaceCard.propTypes = {
-  place: PropTypes.object.isRequired,
+  place: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    priceText: PropTypes.string.isRequired,
+    picture: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    isBookmarked: PropTypes.bool.isRequired,
+  }).isRequired,
   onNameClick: PropTypes.func.isRequired,
 };
 
