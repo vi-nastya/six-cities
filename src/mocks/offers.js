@@ -6,7 +6,7 @@ export const offers = [
     type: `Private room`,
     picture: `img/apartment-01.jpg`,
     isPremium: false,
-    bookmark: true,
+    isBookmarked: true,
   },
   {
     name: `Beautiful & luxurious apartment at great location`,
@@ -15,7 +15,7 @@ export const offers = [
     type: `Apartment`,
     picture: `img/apartment-02.jpg`,
     isPremium: true,
-    bookmark: false,
+    isBookmarked: false,
   },
   {
     name: `Nice, cozy, warm big bed apartment`,
@@ -24,7 +24,7 @@ export const offers = [
     type: `Apartment`,
     picture: `img/apartment-03.jpg`,
     isPremium: true,
-    bookmark: true,
+    isBookmarked: true,
   },
   {
     name: `Wood and stone place`,
@@ -33,6 +33,6 @@ export const offers = [
     type: `Private room`,
     picture: `https://picsum.photos/260/200`,
     isPremium: false,
-    bookmark: false,
+    isBookmarked: false,
   },
 ];
