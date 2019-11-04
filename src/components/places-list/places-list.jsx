@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import PlaceCard from "../place-card/place-card.jsx";
 
-export default class PlacesList extends PureComponent {
+class PlacesList extends PureComponent {
   constructor() {
     super();
 
@@ -26,3 +26,4 @@ PlacesList.propTypes = {
   places: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
+export default PlacesList;
