@@ -3,7 +3,7 @@
 exports[`Place Card is rendered correctly after relaunch 1`] = `
 <article
   className="cities__place-card place-card"
-  onMouseOver={[MockFunction]}
+  onMouseOver={[Function]}
 >
   <div
     className="place-card__mark"

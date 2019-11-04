@@ -6,7 +6,7 @@ const PlaceCard = (props) => {
   const {place, onHover} = props;
   const {name, type, price, priceText, picture, isPremium, isBookmarked} = place;
 
-  return <article className="cities__place-card place-card" onMouseOver={onHover}>
+  return <article className="cities__place-card place-card" onMouseOver={() => onHover(place)}>
     <div className="place-card__mark" style={isPremium ? {display: `none`} : {}}>
       <span>Premium</span>
     </div>
