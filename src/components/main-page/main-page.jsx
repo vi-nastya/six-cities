@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import PlaceCard from "../place-card/place-card.jsx";
+import PlacesList from "../places-list/places-list";
 
 const onPlaceNameClick = () => {
   // TODO: implement
 };
 
 const MainPage = (props) => {
-  const placeNames = props.placeNames;
+  const places = props.places;
 
   return <section className="welcome">
     <div style={{display: `none`}}>
@@ -114,9 +114,7 @@ const MainPage = (props) => {
                 </select>
                 */}
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                ${placeNames.map((place, index) => <PlaceCard placeName={place} onNameClick={onPlaceNameClick} key={index} />)}
-              </div>
+              <PlacesList places={places}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
