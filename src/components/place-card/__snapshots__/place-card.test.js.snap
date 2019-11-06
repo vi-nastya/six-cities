@@ -7,7 +7,11 @@ exports[`Place Card is rendered correctly after relaunch 1`] = `
 >
   <div
     className="place-card__mark"
-    style={Object {}}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
   >
     <span>
       Premium
@@ -51,7 +55,7 @@ exports[`Place Card is rendered correctly after relaunch 1`] = `
         </span>
       </div>
       <button
-        className="place-card__bookmark-button--active"
+        className="place-card__bookmark-button button place-card__bookmark-button--active"
         type="button"
       >
         <svg
