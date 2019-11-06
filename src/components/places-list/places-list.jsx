@@ -7,7 +7,7 @@ class PlacesList extends PureComponent {
     super();
 
     this.state = {
-      activePlace: -1
+      activePlace: null
     };
   }
 
@@ -16,7 +16,7 @@ class PlacesList extends PureComponent {
 
     return <div className="cities__places-list places__list tabs__content">
                 ${places.map((place, index) => <PlaceCard place={place} onHover={() => {
-        this.setState({activePlace: index});
+        this.setState({activePlace: place});
       }} key={index} />)}
     </div>;
   }
