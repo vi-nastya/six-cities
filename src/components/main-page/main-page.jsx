@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import PlacesList from "../places-list/places-list.jsx";
+import Map from "../map/map.jsx";
 
 const MainPage = (props) => {
   const places = props.places;
@@ -105,7 +106,9 @@ const MainPage = (props) => {
               <PlacesList places={places}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map points={places.map((place) => place.coordinates)}/>
+              </section>
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import MainPage from "./main-page";
-import {offers} from "../../mocks/offers";
+import Map from "./map";
 
 jest.mock(`leaflet`, () => ({
   icon: jest.fn(),
@@ -17,8 +16,8 @@ jest.mock(`leaflet`, () => ({
   }),
 }));
 
-it(`Main Page is rendered correctly after relaunch`, () => {
-  const tree = renderer.create(<MainPage places={offers}/>).toJSON();
+it(`Map component is rendered correctly after relaunch`, () => {
+  const tree = renderer.create(<Map points={[]}/>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

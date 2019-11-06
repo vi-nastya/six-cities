@@ -273,7 +273,11 @@ exports[`App is rendered correctly after relaunch 1`] = `
               >
                 <div
                   className="place-card__mark"
-                  style={Object {}}
+                  style={
+                    Object {
+                      "display": "none",
+                    }
+                  }
                 >
                   <span>
                     Premium
@@ -317,7 +321,7 @@ exports[`App is rendered correctly after relaunch 1`] = `
                       </span>
                     </div>
                     <button
-                      className="place-card__bookmark-button--active"
+                      className="place-card__bookmark-button button place-card__bookmark-button--active"
                       type="button"
                     >
                       <svg
@@ -378,11 +382,7 @@ exports[`App is rendered correctly after relaunch 1`] = `
               >
                 <div
                   className="place-card__mark"
-                  style={
-                    Object {
-                      "display": "none",
-                    }
-                  }
+                  style={Object {}}
                 >
                   <span>
                     Premium
@@ -426,7 +426,7 @@ exports[`App is rendered correctly after relaunch 1`] = `
                       </span>
                     </div>
                     <button
-                      className="place-card__bookmark-button--active"
+                      className="place-card__bookmark-button button"
                       type="button"
                     >
                       <svg
@@ -487,11 +487,7 @@ exports[`App is rendered correctly after relaunch 1`] = `
               >
                 <div
                   className="place-card__mark"
-                  style={
-                    Object {
-                      "display": "none",
-                    }
-                  }
+                  style={Object {}}
                 >
                   <span>
                     Premium
@@ -535,7 +531,7 @@ exports[`App is rendered correctly after relaunch 1`] = `
                       </span>
                     </div>
                     <button
-                      className="place-card__bookmark-button--active"
+                      className="place-card__bookmark-button button place-card__bookmark-button--active"
                       type="button"
                     >
                       <svg
@@ -596,7 +592,11 @@ exports[`App is rendered correctly after relaunch 1`] = `
               >
                 <div
                   className="place-card__mark"
-                  style={Object {}}
+                  style={
+                    Object {
+                      "display": "none",
+                    }
+                  }
                 >
                   <span>
                     Premium
@@ -640,7 +640,7 @@ exports[`App is rendered correctly after relaunch 1`] = `
                       </span>
                     </div>
                     <button
-                      className="place-card__bookmark-button--active"
+                      className="place-card__bookmark-button button"
                       type="button"
                     >
                       <svg
@@ -702,7 +702,11 @@ exports[`App is rendered correctly after relaunch 1`] = `
           >
             <section
               className="cities__map map"
-            />
+            >
+              <div
+                id="map"
+              />
+            </section>
           </div>
         </div>
       </div>

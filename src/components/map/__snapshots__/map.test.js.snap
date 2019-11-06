@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Map component is rendered correctly after relaunch 1`] = `
+<div
+  id="map"
+/>
+`;
