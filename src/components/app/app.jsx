@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {MainPage} from '../main-page/main-page.jsx';
+import MainPage from '../main-page/main-page.jsx';
 
 const App = (props) => {
   const places = props.places;
