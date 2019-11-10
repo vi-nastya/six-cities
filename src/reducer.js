@@ -41,5 +41,5 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-export {ActionCreator, reducer};
+export {ActionCreator, reducer, getOffersForCity};
 
