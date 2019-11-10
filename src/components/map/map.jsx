@@ -33,7 +33,6 @@ class Map extends PureComponent {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
     })
     .addTo(this._map);
-
     points.forEach((point) => {
       leaflet.marker(point, {icon: ICON}).addTo(this._map);
     });

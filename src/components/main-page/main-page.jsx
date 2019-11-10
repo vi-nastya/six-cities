@@ -6,7 +6,7 @@ import CitiesList from "../cities-list/cities-list.jsx";
 import {connect} from "react-redux";
 
 const MainPage = (props) => {
-  const {offers, city, offersForCity} = props;
+  const {city, offersForCity} = props;
 
   return <section className="welcome">
     <div style={{display: `none`}}>
@@ -87,14 +87,12 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   city: PropTypes.string.isRequired,
   offersForCity: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
-  offers: state.offers,
   offersForCity: state.offersForCity
 });
 
