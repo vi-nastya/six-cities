@@ -1,12 +1,15 @@
-import {offers} from './mocks';
-
-const initialState = {
-  city: `Amsterdam`,
-  offers: {offers},
-};
+import {offers} from './mocks/offers';
 
 const getOffersForCity = (offersList, city) => {
   return offersList.filter((offer) => offer.city === city);
+};
+
+const INITIAL_CITY = offers[0].city;
+
+const initialState = {
+  city: INITIAL_CITY,
+  offers,
+  offersForCity: getOffersForCity(offers, INITIAL_CITY),
 };
 
 const ActionCreator = {
@@ -31,7 +34,7 @@ const reducer = (state = initialState, action) => {
       });
     case `GET_OFFERS`:
       return Object.assign({}, state, {
-        offers: action.payload
+        offersForCity: action.payload
       });
   }
 
