@@ -14,6 +14,7 @@ class Map extends PureComponent {
     super(props);
 
     this._map = null;
+    this._markers = [];
   }
 
   componentDidMount() {
@@ -33,10 +34,7 @@ class Map extends PureComponent {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
     })
     .addTo(this._map);
-
-    points.forEach((point) => {
-      leaflet.marker(point, {icon: ICON}).addTo(this._map);
-    });
+    this.updateMarkers(points);
   }
 
   componentWillUnmount() {
@@ -45,8 +43,20 @@ class Map extends PureComponent {
     }
   }
 
+  componentDidUpdate() {
+    this.updateMarkers(this.props.points);
+  }
+
   render() {
-    return <div id="map"></div>;
+    return <div id="map" style={{height: 100 + `%`}}></div>;
+  }
+
+  updateMarkers(points) {
+    this._markers.forEach((marker) => this._map.removeLayer(marker));
+    this._markers = [];
+    points.forEach((point) => {
+      this._markers.push(leaflet.marker(point, {icon: ICON}).addTo(this._map));
+    });
   }
 }
 

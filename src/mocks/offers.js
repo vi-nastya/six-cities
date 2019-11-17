@@ -2,6 +2,7 @@ export const offers = [
   {
     name: `Wood and stone place`,
     price: 80,
+    city: `Amsterdam`,
     coordinates: [52.3909553943508, 4.85309666406198],
     priceText: `night`,
     type: `Private room`,
@@ -12,6 +13,7 @@ export const offers = [
   {
     name: `Beautiful & luxurious apartment at great location`,
     price: 120,
+    city: `Amsterdam`,
     coordinates: [52.369553943508, 4.85309666406198],
     priceText: `night`,
     type: `Apartment`,
@@ -22,6 +24,7 @@ export const offers = [
   {
     name: `Nice, cozy, warm big bed apartment`,
     price: 180,
+    city: `Amsterdam`,
     coordinates: [52.3909553943508, 4.929309666406198],
     priceText: `night`,
     type: `Apartment`,
@@ -32,6 +35,7 @@ export const offers = [
   {
     name: `Wood and stone place`,
     price: 90,
+    city: `Moscow`,
     coordinates: [52.3809553943508, 4.939309666406198],
     priceText: `night`,
     type: `Private room`,

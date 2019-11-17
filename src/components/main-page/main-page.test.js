@@ -1,7 +1,11 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import MainPage from "./main-page";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import toJSON from "enzyme-to-json";
+import {MainPage} from "./main-page";
 import {offers} from "../../mocks/offers";
+
+Enzyme.configure({adapter: new Adapter()});
 
 jest.mock(`leaflet`, () => ({
   icon: jest.fn(),
@@ -18,7 +22,7 @@ jest.mock(`leaflet`, () => ({
 }));
 
 it(`Main Page is rendered correctly after relaunch`, () => {
-  const tree = renderer.create(<MainPage places={offers}/>).toJSON();
+  const tree = shallow(<MainPage offersForCity={[offers[0]]} city={`Amsterdam`}/>);
 
-  expect(tree).toMatchSnapshot();
+  expect(toJSON(tree)).toMatchSnapshot();
 });
