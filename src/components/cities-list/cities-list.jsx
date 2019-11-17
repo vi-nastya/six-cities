@@ -27,7 +27,7 @@ CitiesList.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.object).isRequired // TODO: add shape
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+const mapStateToProps = (state) => Object.assign({}, {
   activeCity: state.city,
   offers: state.offers
 });
