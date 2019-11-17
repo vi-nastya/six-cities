@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import PlacesList from "../places-list/places-list.jsx";
-import Map from "../map/map.jsx";
+import {Map} from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import {connect} from "react-redux";
 
