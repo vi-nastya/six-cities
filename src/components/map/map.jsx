@@ -19,7 +19,6 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const {points = []} = this.props;
-    console.log(points);
 
     this._map = leaflet.map(`map`, {
       center: CITY,
@@ -65,4 +64,4 @@ Map.propTypes = {
   points: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
 };
 
-export {Map};
+export default Map;

@@ -3,5 +3,10 @@
 exports[`Map component is rendered correctly after relaunch 1`] = `
 <div
   id="map"
+  style={
+    Object {
+      "height": "100%",
+    }
+  }
 />
 `;
