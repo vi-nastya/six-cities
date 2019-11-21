@@ -5,25 +5,31 @@ import PlaceCard from "../place-card/place-card.jsx";
 class PlacesList extends PureComponent {
   constructor() {
     super();
-
-    this.state = {
-      activePlace: null
-    };
   }
 
   render() {
-    const {places} = this.props;
+    const {
+      places,
+      // getActiveItem,
+      setActiveItem
+    } = this.props;
 
     return <div className="cities__places-list places__list tabs__content">
-                ${places.map((place, index) => <PlaceCard place={place} onHover={() => {
-        this.setState({activePlace: place});
-      }} key={index} />)}
+                ${places.map((place, index) => <PlaceCard
+        place={place}
+        onHover={() => {
+          setActiveItem(index);
+        }}
+        // isActive={getActiveItem() === index}
+        key={index} />)}
     </div>;
   }
 }
 
 PlacesList.propTypes = {
   places: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setActiveItem: PropTypes.func.isRequired,
+  // getActiveItem: PropTypes.func.isRequired,
 };
 
 export default PlacesList;

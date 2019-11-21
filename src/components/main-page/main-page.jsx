@@ -1,9 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import PlacesList from "../places-list/places-list.jsx";
-import {Map} from "../map/map.jsx";
+import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import {connect} from "react-redux";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
+
+const WrappedPlacesList = withActiveItem(PlacesList);
 
 const MainPage = (props) => {
   const {city, offersForCity} = props;
@@ -72,7 +75,7 @@ const MainPage = (props) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <PlacesList places={offersForCity}/>
+              <WrappedPlacesList places={offersForCity}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
