@@ -187,7 +187,7 @@ exports[`Main Page is rendered correctly after relaunch 1`] = `
                 </li>
               </ul>
             </form>
-            <PlacesList
+            <WithActiveItem
               places={
                 Array [
                   Object {
@@ -214,7 +214,7 @@ exports[`Main Page is rendered correctly after relaunch 1`] = `
             <section
               className="cities__map map"
             >
-              <Component
+              <Map
                 points={
                   Array [
                     Array [
