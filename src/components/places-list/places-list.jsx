@@ -10,7 +10,6 @@ class PlacesList extends PureComponent {
   render() {
     const {
       places,
-      // getActiveItem,
       setActiveItem
     } = this.props;
 
@@ -23,7 +22,6 @@ class PlacesList extends PureComponent {
         onHoverOff={() => {
           setActiveItem(-1);
         }}
-        // isActive={getActiveItem() === index}
         key={index} />)}
     </div>;
   }
@@ -32,7 +30,6 @@ class PlacesList extends PureComponent {
 PlacesList.propTypes = {
   places: PropTypes.arrayOf(PropTypes.object).isRequired,
   setActiveItem: PropTypes.func.isRequired,
-  // getActiveItem: PropTypes.func.isRequired,
 };
 
 export default PlacesList;

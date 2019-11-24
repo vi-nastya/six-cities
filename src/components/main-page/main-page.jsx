@@ -7,8 +7,6 @@ import {connect} from "react-redux";
 import {compose} from "recompose";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
-// const WrappedPlacesList = withActiveItem(PlacesList);
-
 const MainPage = (props) => {
   const {city, offersForCity, activeItem, setActiveItem} = props;
 
@@ -104,7 +102,6 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 
 export {MainPage};
 
-// export default connect(mapStateToProps)(MainPage);
 export default compose(
     connect(mapStateToProps),
     withActiveItem
