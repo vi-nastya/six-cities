@@ -8,6 +8,11 @@ const ICON = leaflet.icon({
   iconUrl: `img/pin.svg`,
   iconSize: [30, 30]
 });
+const ICON_ACTIVE = leaflet.icon({
+  iconUrl: `img/pin-active.svg`,
+  iconSize: [30, 30]
+});
+
 
 class Map extends PureComponent {
   constructor(props) {
@@ -52,16 +57,22 @@ class Map extends PureComponent {
   }
 
   updateMarkers(points) {
+    const activePoint = this.props.activePoint;
     this._markers.forEach((marker) => this._map.removeLayer(marker));
     this._markers = [];
-    points.forEach((point) => {
-      this._markers.push(leaflet.marker(point, {icon: ICON}).addTo(this._map));
+    points.forEach((point, index) => {
+      if (activePoint === index) {
+        this._markers.push(leaflet.marker(point, {icon: ICON_ACTIVE}).addTo(this._map));
+      } else {
+        this._markers.push(leaflet.marker(point, {icon: ICON}).addTo(this._map));
+      }
     });
   }
 }
 
 Map.propTypes = {
   points: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  activePoint: PropTypes.number.isRequired
 };
 
 export default Map;

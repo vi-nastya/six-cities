@@ -110,7 +110,16 @@ exports[`Main Page is rendered correctly after relaunch 1`] = `
       <div
         className="tabs"
       >
-        <Connect(CitiesList) />
+        <CitiesList
+          activeCity="Amsterdam"
+          changeCityHandler={[Function]}
+          cities={
+            Array [
+              "Amsterdam",
+              "Moscow",
+            ]
+          }
+        />
       </div>
       <div
         className="cities"
@@ -206,6 +215,7 @@ exports[`Main Page is rendered correctly after relaunch 1`] = `
                   },
                 ]
               }
+              setActiveItem={[MockFunction]}
             />
           </section>
           <div
@@ -214,7 +224,8 @@ exports[`Main Page is rendered correctly after relaunch 1`] = `
             <section
               className="cities__map map"
             >
-              <Component
+              <Map
+                activePoint={-1}
                 points={
                   Array [
                     Array [

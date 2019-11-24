@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import {PLACE_TYPES, PRICE_TEXTS} from "../../utils";
 
 const PlaceCard = (props) => {
-  const {place, onHover} = props;
+  const {place, onHoverOn, onHoverOff} = props;
   const {name, type, price, priceText, picture, isPremium, isBookmarked} = place;
 
-  return <article className="cities__place-card place-card" onMouseOver={() => onHover(place)}>
+  return <article className="cities__place-card place-card" onMouseEnter={() => onHoverOn()} onMouseLeave={() => onHoverOff()}>
     <div className="place-card__mark" style={!isPremium ? {display: `none`} : {}}>
       <span>Premium</span>
     </div>
@@ -53,7 +53,8 @@ PlaceCard.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     isBookmarked: PropTypes.bool.isRequired,
   }).isRequired,
-  onHover: PropTypes.func.isRequired,
+  onHoverOn: PropTypes.func.isRequired,
+  onHoverOff: PropTypes.func.isRequired,
 };
 
 export default PlaceCard;
