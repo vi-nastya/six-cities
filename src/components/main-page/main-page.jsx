@@ -4,12 +4,13 @@ import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
 import {connect} from "react-redux";
+import {compose} from "recompose";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
-const WrappedPlacesList = withActiveItem(PlacesList);
+// const WrappedPlacesList = withActiveItem(PlacesList);
 
 const MainPage = (props) => {
-  const {city, offersForCity} = props;
+  const {city, offersForCity, activeItem, setActiveItem} = props;
 
   return <section className="welcome">
     <div style={{display: `none`}}>
@@ -75,11 +76,11 @@ const MainPage = (props) => {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <WrappedPlacesList places={offersForCity}/>
+              <PlacesList places={offersForCity} setActiveItem={setActiveItem}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map points={offersForCity.map((offer) => offer.coordinates)}/>
+                <Map points={offersForCity.map((offer) => offer.coordinates)} activePoint={activeItem}/>
               </section>
             </div>
           </div>
@@ -92,6 +93,8 @@ const MainPage = (props) => {
 MainPage.propTypes = {
   city: PropTypes.string.isRequired,
   offersForCity: PropTypes.arrayOf(PropTypes.object).isRequired,
+  activeItem: PropTypes.number.isRequired,
+  setActiveItem: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -101,4 +104,8 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 
 export {MainPage};
 
-export default connect(mapStateToProps)(MainPage);
+// export default connect(mapStateToProps)(MainPage);
+export default compose(
+    connect(mapStateToProps),
+    withActiveItem
+)(MainPage);

@@ -17,8 +17,11 @@ class PlacesList extends PureComponent {
     return <div className="cities__places-list places__list tabs__content">
                 ${places.map((place, index) => <PlaceCard
         place={place}
-        onHover={() => {
+        onHoverOn={() => {
           setActiveItem(index);
+        }}
+        onHoverOff={() => {
+          setActiveItem(-1);
         }}
         // isActive={getActiveItem() === index}
         key={index} />)}

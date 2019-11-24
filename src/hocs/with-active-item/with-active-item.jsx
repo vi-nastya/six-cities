@@ -20,6 +20,7 @@ const withActiveItem = (Component) => {
       return <Component
         {...this.props}
         setActiveItem={setActiveItem}
+        activeItem = {this.state.activeItem}
         // getActiveItem={() => activeItem}
       />;
     }
