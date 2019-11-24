@@ -22,7 +22,7 @@ jest.mock(`leaflet`, () => ({
 }));
 
 it(`Main Page is rendered correctly after relaunch`, () => {
-  const tree = shallow(<MainPage offersForCity={[offers[0]]} city={`Amsterdam`} activeItem={-1} setActiveItem={jest.fn()}/>);
+  const tree = shallow(<MainPage offersForCity={[offers[0]]} offers={offers} changeCityHandler={jest.fn()} city={`Amsterdam`} activeItem={-1} setActiveItem={jest.fn()}/>);
 
   expect(toJSON(tree)).toMatchSnapshot();
 });
