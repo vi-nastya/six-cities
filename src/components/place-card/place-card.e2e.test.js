@@ -8,9 +8,9 @@ Enzyme.configure({adapter: new Adapter()});
 
 
 const hoverHandler = jest.fn();
-const welcomeScreen = shallow(<PlaceCard place={offers[0]} onHover={hoverHandler}/>);
+const welcomeScreen = shallow(<PlaceCard place={offers[0]} onHoverOn={hoverHandler} onHoverOff={jest.fn()}/>);
 
-welcomeScreen.simulate(`mouseover`);
+welcomeScreen.simulate(`mouseenter`);
 
 describe(`Test for PlaceCard hover`, () => {
   it(`PlaceCard hover handler works correctly`, () => {
@@ -18,6 +18,6 @@ describe(`Test for PlaceCard hover`, () => {
   });
 
   it(`Hover handler received the correct place data as an argument`, () => {
-    expect(hoverHandler).toBeCalledWith(offers[0]);
+    expect(hoverHandler).toBeCalledWith();
   });
 });

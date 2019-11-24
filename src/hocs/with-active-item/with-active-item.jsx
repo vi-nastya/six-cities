@@ -12,7 +12,7 @@ const withActiveItem = (Component) => {
 
 
     render() {
-      const activeItem = this.state;
+      const activeItem = this.state.activeItem;
       const setActiveItem = (newActiveItem) => {
         this.setState({activeItem: newActiveItem});
       };

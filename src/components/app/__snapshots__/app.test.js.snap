@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App is rendered correctly after relaunch 1`] = `
-<Connect(MainPage)
+<Connect(WithActiveItem)
   places={
     Array [
       Object {

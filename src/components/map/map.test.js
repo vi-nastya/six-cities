@@ -17,7 +17,7 @@ jest.mock(`leaflet`, () => ({
 }));
 
 it(`Map component is rendered correctly after relaunch`, () => {
-  const tree = renderer.create(<Map points={[]}/>).toJSON();
+  const tree = renderer.create(<Map points={[]} activePoint={-1}/>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

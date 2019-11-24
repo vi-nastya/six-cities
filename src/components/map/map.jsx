@@ -23,7 +23,7 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {points = [], activePoint} = this.props;
+    const {points = []} = this.props;
 
     this._map = leaflet.map(`map`, {
       center: CITY,

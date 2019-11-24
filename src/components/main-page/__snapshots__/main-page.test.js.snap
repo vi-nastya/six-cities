@@ -187,7 +187,7 @@ exports[`Main Page is rendered correctly after relaunch 1`] = `
                 </li>
               </ul>
             </form>
-            <WithActiveItem
+            <PlacesList
               places={
                 Array [
                   Object {
@@ -206,6 +206,7 @@ exports[`Main Page is rendered correctly after relaunch 1`] = `
                   },
                 ]
               }
+              setActiveItem={[MockFunction]}
             />
           </section>
           <div
@@ -215,6 +216,7 @@ exports[`Main Page is rendered correctly after relaunch 1`] = `
               className="cities__map map"
             >
               <Map
+                activePoint={-1}
                 points={
                   Array [
                     Array [
