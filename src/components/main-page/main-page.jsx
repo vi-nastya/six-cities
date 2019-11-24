@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {ActionCreator} from "../../reducer";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
@@ -8,7 +9,7 @@ import {compose} from "recompose";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
 const MainPage = (props) => {
-  const {city, offersForCity, activeItem, setActiveItem} = props;
+  const {city, offers, offersForCity, activeItem, setActiveItem, changeCityHandler} = props;
 
   return <section className="welcome">
     <div style={{display: `none`}}>
@@ -52,7 +53,11 @@ const MainPage = (props) => {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CitiesList/>
+          <CitiesList
+            activeCity={city}
+            changeCityHandler={(newCity) => changeCityHandler(newCity, offers)}
+            cities={[...new Set(offers.map((offer) => offer.city))]}
+          />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
@@ -91,18 +96,28 @@ const MainPage = (props) => {
 MainPage.propTypes = {
   city: PropTypes.string.isRequired,
   offersForCity: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   activeItem: PropTypes.number.isRequired,
   setActiveItem: PropTypes.func.isRequired,
+  changeCityHandler: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
-  offersForCity: state.offersForCity
+  offersForCity: state.offersForCity,
+  offers: state.offers,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCityHandler: (city, offers) => {
+    dispatch(ActionCreator.changeCity(city));
+    dispatch(ActionCreator.getOffers(offers, city));
+  }
 });
 
 export {MainPage};
 
 export default compose(
-    connect(mapStateToProps),
+    connect(mapStateToProps, mapDispatchToProps),
     withActiveItem
 )(MainPage);
