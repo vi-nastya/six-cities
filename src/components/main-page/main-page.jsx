@@ -10,7 +10,7 @@ import {compose} from "recompose";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
 const getUniqueCities = (offers) => {
-  return _.uniqBy(offers, `name`);
+  return _.uniqBy(offers.map((offer) => offer.city), `name`);
 };
 
 const MainPage = (props) => {
