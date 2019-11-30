@@ -56,7 +56,7 @@ const MainPage = (props) => {
           <CitiesList
             activeCity={city}
             changeCityHandler={(newCity) => changeCityHandler(newCity, offers)}
-            cities={[...new Set(offers.map((offer) => offer.city))]}
+            cities={[...new Set(offers.map((offer) => offer.city.name))]}
           />
         </div>
         <div className="cities">
@@ -83,7 +83,7 @@ const MainPage = (props) => {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map points={offersForCity.map((offer) => offer.coordinates)} activePoint={activeItem}/>
+                <Map points={offersForCity.map((offer) => [offer.location.latitude, offer.location.longitude])} activePoint={activeItem}/>
               </section>
             </div>
           </div>
