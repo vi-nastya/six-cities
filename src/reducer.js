@@ -1,11 +1,11 @@
 import {convertApiToApp} from './utils';
 
 const getOffersForCity = (offersList, city) => {
-  return offersList.filter((offer) => offer.city.name === city);
+  return offersList.filter((offer) => offer.city.name === city.name);
 };
 
 const initialState = {
-  city: ``,
+  city: null,
   offers: [],
   offersForCity: [],
 };
@@ -53,8 +53,8 @@ const reducer = (state = initialState, action) => {
       const offersData = action.payload.map(convertApiToApp);
       return Object.assign({}, state, {
         offers: offersData,
-        city: offersData[0].city.name, // TODO: replace with random city
-        offersForCity: getOffersForCity(offersData, offersData[0].city.name)
+        city: offersData[0].city, // TODO: replace with random city
+        offersForCity: getOffersForCity(offersData, offersData[0].city)
       });
   }
 
