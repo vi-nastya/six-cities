@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import _ from "lodash";
 import {ActionCreator} from "../../reducer";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
@@ -7,6 +8,10 @@ import CitiesList from "../cities-list/cities-list.jsx";
 import {connect} from "react-redux";
 import {compose} from "recompose";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
+
+const getUniqueCities = (offers) => {
+  return _.uniqBy(offers.map((offer) => offer.city), `name`);
+};
 
 const MainPage = (props) => {
   const {city, offers, offersForCity, activeItem, setActiveItem, changeCityHandler} = props;
@@ -56,14 +61,14 @@ const MainPage = (props) => {
           <CitiesList
             activeCity={city}
             changeCityHandler={(newCity) => changeCityHandler(newCity, offers)}
-            cities={[...new Set(offers.map((offer) => offer.city))]}
+            cities={getUniqueCities(offers)}
           />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersForCity.length} places to stay in {city}</b>
+              <b className="places__found">{offersForCity.length} places to stay in {city.name}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -83,7 +88,7 @@ const MainPage = (props) => {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map points={offersForCity.map((offer) => offer.coordinates)} activePoint={activeItem}/>
+                <Map points={offersForCity.map((offer) => [offer.location.latitude, offer.location.longitude])} activePoint={activeItem} city={[city.location.latitude, city.location.longitude]}/>
               </section>
             </div>
           </div>
@@ -94,7 +99,7 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  city: PropTypes.string.isRequired,
+  city: PropTypes.object.isRequired,
   offersForCity: PropTypes.arrayOf(PropTypes.object).isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   activeItem: PropTypes.number.isRequired,

@@ -1,15 +1,13 @@
-import {offers} from './mocks/offers';
+import {convertApiToApp} from './utils';
 
 const getOffersForCity = (offersList, city) => {
-  return offersList.filter((offer) => offer.city === city);
+  return offersList.filter((offer) => offer.city.name === city.name);
 };
 
-const INITIAL_CITY = offers[0].city;
-
 const initialState = {
-  city: INITIAL_CITY,
-  offers,
-  offersForCity: getOffersForCity(offers, INITIAL_CITY),
+  city: null,
+  offers: [],
+  offersForCity: [],
 };
 
 const ActionCreator = {
@@ -23,7 +21,22 @@ const ActionCreator = {
       type: `GET_OFFERS`,
       payload: offersForCity
     };
+  },
+  loadOffers: (offers) => {
+    return {
+      type: `LOAD_OFFERS`,
+      payload: offers,
+    };
   }
+};
+
+const Operation = {
+  loadOffers: () => (dispatch, _getState, api) => {
+    return api.get(`/hotels`)
+      .then((response) => {
+        dispatch(ActionCreator.loadOffers(response.data));
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,10 +49,17 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         offersForCity: action.payload
       });
+    case `LOAD_OFFERS`:
+      const offersData = action.payload.map(convertApiToApp);
+      return Object.assign({}, state, {
+        offers: offersData,
+        city: offersData[0].city, // TODO: replace with random city
+        offersForCity: getOffersForCity(offersData, offersData[0].city)
+      });
   }
 
   return state;
 };
 
-export {ActionCreator, reducer, getOffersForCity};
+export {ActionCreator, Operation, reducer, getOffersForCity};
 

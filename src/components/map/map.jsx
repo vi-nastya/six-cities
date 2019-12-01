@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import leaflet from "leaflet";
 
 const ZOOM = 12;
-const CITY = [52.38333, 4.9];
 const ICON = leaflet.icon({
   iconUrl: `img/pin.svg`,
   iconSize: [30, 30]
@@ -23,16 +22,16 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {points = []} = this.props;
+    const {points = [], city} = this.props;
 
     this._map = leaflet.map(`map`, {
-      center: CITY,
+      center: city,
       zoom: ZOOM,
       zoomControl: false,
       marker: true
     });
 
-    this._map.setView(CITY, ZOOM);
+    this._map.setView(city, ZOOM);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -72,7 +71,8 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   points: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
-  activePoint: PropTypes.number.isRequired
+  activePoint: PropTypes.number.isRequired,
+  city: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default Map;

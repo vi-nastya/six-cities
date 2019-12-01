@@ -5,59 +5,95 @@ exports[`App is rendered correctly after relaunch 1`] = `
   places={
     Array [
       Object {
-        "city": "Amsterdam",
-        "coordinates": Array [
-          52.3909553943508,
-          4.85309666406198,
+        "city": Object {
+          "location": Object {
+            "latitude": 52.3909553943508,
+            "longitude": 4.929309666406198,
+          },
+          "name": "Amsterdam",
+        },
+        "images": Array [
+          "",
         ],
-        "isBookmarked": true,
+        "isFavorite": true,
         "isPremium": false,
-        "name": "Wood and stone place",
+        "location": Object {
+          "latitude": 52.3909553943508,
+          "longitude": 4.85309666406198,
+        },
         "picture": "img/apartment-01.jpg",
         "price": 80,
         "priceText": "night",
+        "title": "Wood and stone place",
         "type": "Private room",
       },
       Object {
-        "city": "Amsterdam",
-        "coordinates": Array [
-          52.369553943508,
-          4.85309666406198,
+        "city": Object {
+          "location": Object {
+            "latitude": 52.3909553943508,
+            "longitude": 4.929309666406198,
+          },
+          "name": "Amsterdam",
+        },
+        "images": Array [
+          "",
         ],
-        "isBookmarked": false,
+        "isFavorite": false,
         "isPremium": true,
-        "name": "Beautiful & luxurious apartment at great location",
+        "location": Object {
+          "latitude": 52.369553943508,
+          "longitude": 4.85309666406198,
+        },
         "picture": "img/apartment-02.jpg",
         "price": 120,
         "priceText": "night",
+        "title": "Beautiful & luxurious apartment at great location",
         "type": "Apartment",
       },
       Object {
-        "city": "Amsterdam",
-        "coordinates": Array [
-          52.3909553943508,
-          4.929309666406198,
+        "city": Object {
+          "location": Object {
+            "latitude": 52.3909553943508,
+            "longitude": 4.929309666406198,
+          },
+          "name": "Amsterdam",
+        },
+        "images": Array [
+          "",
         ],
-        "isBookmarked": true,
+        "isFavorite": true,
         "isPremium": true,
-        "name": "Nice, cozy, warm big bed apartment",
+        "location": Object {
+          "latitude": 52.3909553943508,
+          "longitude": 4.929309666406198,
+        },
         "picture": "img/apartment-03.jpg",
         "price": 180,
         "priceText": "night",
+        "title": "Nice, cozy, warm big bed apartment",
         "type": "Apartment",
       },
       Object {
-        "city": "Moscow",
-        "coordinates": Array [
-          52.3809553943508,
-          4.939309666406198,
+        "city": Object {
+          "location": Object {
+            "latitude": 52.3809553943508,
+            "longitude": 4.939309666406198,
+          },
+          "name": "Moscow",
+        },
+        "images": Array [
+          "",
         ],
-        "isBookmarked": false,
+        "isFavorite": false,
         "isPremium": false,
-        "name": "Wood and stone place",
+        "location": Object {
+          "latitude": 52.3809553943508,
+          "longitude": 4.939309666406198,
+        },
         "picture": "https://picsum.photos/260/200",
         "price": 90,
         "priceText": "night",
+        "title": "Wood and stone place",
         "type": "Private room",
       },
     ]
