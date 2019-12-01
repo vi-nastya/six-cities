@@ -28,7 +28,7 @@ exports[`Place Card is rendered correctly after relaunch 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/apartment-01.jpg"
+        src=""
         width="260"
       />
     </a>
@@ -51,8 +51,7 @@ exports[`Place Card is rendered correctly after relaunch 1`] = `
         <span
           className="place-card__price-text"
         >
-          / 
-          night
+          / night
         </span>
       </div>
       <button

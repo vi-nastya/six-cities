@@ -111,12 +111,32 @@ exports[`Main Page is rendered correctly after relaunch 1`] = `
         className="tabs"
       >
         <CitiesList
-          activeCity="Amsterdam"
+          activeCity={
+            Object {
+              "location": Object {
+                "latitude": 52.3909553943508,
+                "longitude": 4.929309666406198,
+              },
+              "name": "Amsterdam",
+            }
+          }
           changeCityHandler={[Function]}
           cities={
             Array [
-              "Amsterdam",
-              "Moscow",
+              Object {
+                "location": Object {
+                  "latitude": 52.3909553943508,
+                  "longitude": 4.929309666406198,
+                },
+                "name": "Amsterdam",
+              },
+              Object {
+                "location": Object {
+                  "latitude": 52.3809553943508,
+                  "longitude": 4.939309666406198,
+                },
+                "name": "Moscow",
+              },
             ]
           }
         />
@@ -200,17 +220,26 @@ exports[`Main Page is rendered correctly after relaunch 1`] = `
               places={
                 Array [
                   Object {
-                    "city": "Amsterdam",
-                    "coordinates": Array [
-                      52.3909553943508,
-                      4.85309666406198,
+                    "city": Object {
+                      "location": Object {
+                        "latitude": 52.3909553943508,
+                        "longitude": 4.929309666406198,
+                      },
+                      "name": "Amsterdam",
+                    },
+                    "images": Array [
+                      "",
                     ],
-                    "isBookmarked": true,
+                    "isFavorite": true,
                     "isPremium": false,
-                    "name": "Wood and stone place",
+                    "location": Object {
+                      "latitude": 52.3909553943508,
+                      "longitude": 4.85309666406198,
+                    },
                     "picture": "img/apartment-01.jpg",
                     "price": 80,
                     "priceText": "night",
+                    "title": "Wood and stone place",
                     "type": "Private room",
                   },
                 ]
@@ -226,6 +255,12 @@ exports[`Main Page is rendered correctly after relaunch 1`] = `
             >
               <Map
                 activePoint={-1}
+                city={
+                  Array [
+                    52.3909553943508,
+                    4.929309666406198,
+                  ]
+                }
                 points={
                   Array [
                     Array [
