@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import _ from "lodash";
 import {ActionCreator} from "../../reducer";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";

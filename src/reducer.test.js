@@ -9,15 +9,6 @@ describe(`Action creators work correctly`, () => {
       payload: {name: `Moscow`},
     });
   });
-  it(`GET_OFFERS works correctly`, () => {
-    expect(ActionCreator.getOffers([
-      {name: `1`, city: {name: `Moscow`}},
-      {name: `2`, city: {name: `Moscow`}},
-      {name: `3`, city: {name: `Montreal`}}], {name: `Montreal`})).toEqual({
-      type: `GET_OFFERS`,
-      payload: [{name: `3`, city: {name: `Montreal`}}],
-    });
-  });
 });
 
 
@@ -46,27 +37,6 @@ describe(`Reducer works correctly`, () => {
         {name: `2`, city: {name: `Moscow`}},
         {name: `3`, city: {name: `Montreal`}}],
       offersForCity: [{name: `3`, city: {name: `Montreal`}}]
-    });
-  });
-  it(`Reducer should get offers for a given city`, () => {
-    expect(reducer({
-      city: {name: `Moscow`},
-      offers: [{name: `1`, city: {name: `Moscow`}},
-        {name: `2`, city: {name: `Moscow`}},
-        {name: `3`, city: {name: `Montreal`}}],
-      offersForCity: []
-
-    }, {
-      type: `GET_OFFERS`,
-      payload: [{name: `1`, city: {name: `Moscow`}},
-        {name: `2`, city: {name: `Moscow`}}],
-    })).toEqual({
-      city: {name: `Moscow`},
-      offers: [{name: `1`, city: {name: `Moscow`}},
-        {name: `2`, city: {name: `Moscow`}},
-        {name: `3`, city: {name: `Montreal`}}],
-      offersForCity: [{name: `1`, city: {name: `Moscow`}},
-        {name: `2`, city: {name: `Moscow`}}]
     });
   });
 });
