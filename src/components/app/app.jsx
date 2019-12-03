@@ -1,13 +1,25 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
 import MainPage from '../main-page/main-page.jsx';
+import SignInScreen from "../sign-in/sign-in.jsx";
 
-const App = () => {
+const App = (props) => {
+  const {isAuthorizationRequired} = props;
+  if (isAuthorizationRequired) {
+    return <SignInScreen/>;
+  }
   return <MainPage/>;
 };
 
 App.propTypes = {
-  // places: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  isAuthorizationRequired: state.isAuthorizationRequired,
+});
+
+export {App};
+
+export default connect(mapStateToProps)(App);

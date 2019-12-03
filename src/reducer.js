@@ -4,6 +4,7 @@ const initialState = {
   city: {name: ``, location: {latitude: 0, longitude: 0}},
   offers: [],
   offersForCity: [],
+  isAuthorizationRequired: true,
 };
 
 const ActionCreator = {
