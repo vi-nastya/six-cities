@@ -1,14 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import MainPage from '../main-page/main-page.jsx';
 
-const App = (props) => {
-  const places = props.places;
-  return <MainPage places={places}/>;
+const App = () => {
+  return <MainPage/>;
 };
 
 App.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // places: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default App;

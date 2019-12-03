@@ -22,15 +22,14 @@ const init = () => {
       )
   );
   /* eslint-enable */
-  store.dispatch(Operation.loadOffers()).then(() => {
-    const offers = store.getState().offers;
-    ReactDOM.render(
-        <Provider store={store}>
-          <App places={offers}/>
-        </Provider>,
-        document.getElementById(`root`)
-    );
-  });
+  store.dispatch(Operation.loadOffers());
+
+  ReactDOM.render(
+      <Provider store={store}>
+        <App/>
+      </Provider>,
+      document.getElementById(`root`)
+  );
 };
 
 init();
