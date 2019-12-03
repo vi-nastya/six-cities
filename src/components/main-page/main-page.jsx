@@ -8,13 +8,10 @@ import CitiesList from "../cities-list/cities-list.jsx";
 import {connect} from "react-redux";
 import {compose} from "recompose";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
-
-const getUniqueCities = (offers) => {
-  return _.uniqBy(offers.map((offer) => offer.city), `name`);
-};
+import {getCitiesList, getOffersForCity} from "../../selectors/selectors";
 
 const MainPage = (props) => {
-  const {city, offers, offersForCity, activeItem, setActiveItem, changeCityHandler} = props;
+  const {city, offers, offersForCity, citiesList, activeItem, setActiveItem, changeCityHandler} = props;
 
   return <section className="welcome">
     <div style={{display: `none`}}>
@@ -61,7 +58,7 @@ const MainPage = (props) => {
           <CitiesList
             activeCity={city}
             changeCityHandler={(newCity) => changeCityHandler(newCity, offers)}
-            cities={getUniqueCities(offers)}
+            cities={citiesList}
           />
         </div>
         <div className="cities">
@@ -101,6 +98,7 @@ const MainPage = (props) => {
 MainPage.propTypes = {
   city: PropTypes.object.isRequired,
   offersForCity: PropTypes.arrayOf(PropTypes.object).isRequired,
+  citiesList: PropTypes.arrayOf(PropTypes.object).isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired,
   activeItem: PropTypes.number.isRequired,
   setActiveItem: PropTypes.func.isRequired,
@@ -109,7 +107,8 @@ MainPage.propTypes = {
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   city: state.city,
-  offersForCity: state.offersForCity,
+  offersForCity: getOffersForCity(state),
+  citiesList: getCitiesList(state),
   offers: state.offers,
 });
 
