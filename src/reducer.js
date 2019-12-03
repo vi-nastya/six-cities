@@ -1,7 +1,7 @@
 import {convertApiToApp} from './utils';
 
 const initialState = {
-  city: null,
+  city: {name: ``, location: {latitude: 0, longitude: 0}},
   offers: [],
   offersForCity: [],
 };

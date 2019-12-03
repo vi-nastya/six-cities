@@ -56,7 +56,7 @@ const MainPage = (props) => {
         <div className="tabs">
           <CitiesList
             activeCity={city}
-            changeCityHandler={(newCity) => changeCityHandler(newCity, offers)}
+            changeCityHandler={(newCity) => changeCityHandler(newCity)}
             cities={citiesList}
           />
         </div>
@@ -112,9 +112,8 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCityHandler: (city, offers) => {
+  changeCityHandler: (city) => {
     dispatch(ActionCreator.changeCity(city));
-    dispatch(ActionCreator.getOffers(offers, city));
   }
 });
 
