@@ -5,6 +5,7 @@ const initialState = {
   offers: [],
   offersForCity: [],
   isAuthorizationRequired: true,
+  user: null,
 };
 
 const ActionCreator = {
@@ -12,12 +13,18 @@ const ActionCreator = {
     type: `CHANGE_CITY`,
     payload: newCity
   }),
-  loadOffers: (offers) => {
-    return {
-      type: `LOAD_OFFERS`,
-      payload: offers,
-    };
-  }
+  loadOffers: (offers) => ({
+    type: `LOAD_OFFERS`,
+    payload: offers,
+  }),
+  requireAuthorization: (flag) => ({
+    type: `REQUIRE_AUTHORIZATION`,
+    payload: flag,
+  }),
+  saveUser: (userData) => ({
+    type: `SAVE_USER`,
+    payload: userData,
+  }),
 };
 
 const Operation = {
@@ -27,6 +34,13 @@ const Operation = {
         dispatch(ActionCreator.loadOffers(response.data));
       });
   },
+  login: (email, password) => (dispatch, _getState, api) => {
+    return api.post(`\login`, {email, password})
+      .then((response) => {
+        dispatch(ActionCreator.requireAuthorization(false));
+        dispatch(ActionCreator.saveUser(response.data));
+      });
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -40,6 +54,14 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         offers: offersData,
         city: offersData[0].city, // TODO: replace with random city
+      });
+    case `REQUIRE_AUTHORIZATION`:
+      return Object.assign({}, state, {
+        isAuthorizationRequired: action.payload,
+      });
+    case `SAVE_USER`:
+      return Object.assign({}, state, {
+        user: action.payload,
       });
   }
 
