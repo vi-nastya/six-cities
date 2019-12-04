@@ -10,7 +10,7 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import {getCitiesList, getOffersForCity} from "../../selectors/selectors";
 
 const MainPage = (props) => {
-  const {city, offers, offersForCity, citiesList, activeItem, setActiveItem, changeCityHandler} = props;
+  const {city, offersForCity, citiesList, activeItem, setActiveItem, changeCityHandler} = props;
 
   return <section className="welcome">
     <div style={{display: `none`}}>
