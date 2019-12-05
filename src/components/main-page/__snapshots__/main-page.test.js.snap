@@ -166,7 +166,8 @@ exports[`Main Page is rendered correctly after relaunch 1`] = `
                       "name": "Amsterdam",
                     },
                     "images": Array [
-                      "",
+                      "img/1.png",
+                      "img/2.png",
                     ],
                     "isFavorite": true,
                     "isPremium": false,

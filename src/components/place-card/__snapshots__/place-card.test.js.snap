@@ -28,7 +28,7 @@ exports[`Place Card is rendered correctly after relaunch 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
-        src=""
+        src="img/1.png"
         width="260"
       />
     </a>

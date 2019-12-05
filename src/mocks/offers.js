@@ -9,7 +9,7 @@ export const offers = [
     picture: `img/apartment-01.jpg`,
     isPremium: false,
     isFavorite: true,
-    images: [``]
+    images: [`img/1.png`, `img/2.png`]
   },
   {
     title: `Beautiful & luxurious apartment at great location`,
