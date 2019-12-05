@@ -1,9 +1,13 @@
 import React from "react";
-import renderer from "react-test-renderer";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import toJSON from "enzyme-to-json";
 import SignInForm from "./sign-in-form";
 
-it(`Signin form is rendered correctly after relaunch`, () => {
-  const tree = renderer.create(<SignInForm onFormSubmit={jest.fn()}/>).toJSON();
+Enzyme.configure({adapter: new Adapter()});
 
-  expect(tree).toMatchSnapshot();
+it(`Signin form is rendered correctly after relaunch`, () => {
+  const tree = shallow(<SignInForm onFormSubmit={jest.fn()}/>);
+
+  expect(toJSON(tree)).toMatchSnapshot();
 });
