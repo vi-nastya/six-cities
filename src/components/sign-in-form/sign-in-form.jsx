@@ -62,7 +62,12 @@ class SignInForm extends PureComponent {
     const {onFormSubmit} = this.props;
     // TODO: add validation - check if both fields are not empty + regexp for email
     const formData = this._getDataFromForm(evt);
-    onFormSubmit(formData.email, formData.password);
+    const formValidation = this._validateFormData(formData);
+    if (formValidation.email && formValidation.password) {
+      onFormSubmit(formData.email, formData.password);
+    } else {
+      alert(`Incorrect form values!`); // TODO: add more descriptive error messages
+    }
   }
 
   _getDataFromForm(evt) {
@@ -72,6 +77,21 @@ class SignInForm extends PureComponent {
       formFields[entry[0]] = entry[1];
     }
     return formFields;
+  }
+
+  _validateFormData(formData) {
+    let validPassword = false;
+    let validEmail = false;
+    if (formData.password.length) {
+      validPassword = true;
+    }
+    if ((formData.email.length && (/\S+@\S+\.\S+/.test(formData.email)))) {
+      validEmail = true;
+    }
+    return {
+      email: validEmail,
+      password: validPassword
+    };
   }
 }
 
