@@ -35,7 +35,7 @@ const Operation = {
       });
   },
   login: (email, password) => (dispatch, _getState, api) => {
-    return api.post(`\login`, {email, password})
+    return api.post(`/login`, {email, password})
       .then((response) => {
         dispatch(ActionCreator.requireAuthorization(false));
         dispatch(ActionCreator.saveUser(response.data));
