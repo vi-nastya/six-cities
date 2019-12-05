@@ -8,7 +8,7 @@ export const createAPI = (dispatch) => {
   });
 
   const onSuccess = (response) => response;
-  const onFail = (error) => error;
+  const onFail = (error) => dispatch(error);
 
   api.interceptors.response.use(onSuccess, onFail);
 
