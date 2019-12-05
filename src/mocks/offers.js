@@ -9,7 +9,17 @@ export const offers = [
     picture: `img/apartment-01.jpg`,
     isPremium: false,
     isFavorite: true,
-    images: [`img/1.png`, `img/2.png`]
+    images: [`img/1.png`, `img/2.png`],
+    bedrooms: 2,
+    rating: 4,
+    maxAdults: 2,
+    goods: [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+    host: {
+      id: 3,
+      isЗro: true,
+      name: `Angelina`,
+      avatarUrl: `img/1.png`
+    },
   },
   {
     title: `Beautiful & luxurious apartment at great location`,
