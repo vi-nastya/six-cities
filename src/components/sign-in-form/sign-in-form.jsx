@@ -35,7 +35,7 @@ class SignInForm extends PureComponent {
               <form className="login__form form" action="#" method="post" onSubmit={this._formSubmitHandler}>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>
-                  <input className="login__input form__input" type="email" name="email" placeholder="Email" required=""/>
+                  <input className="login__input form__input" type="email" name="email" placeholder="Email" required onChange={this._onEmailInputChange}/>
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">Password</label>
@@ -60,14 +60,8 @@ class SignInForm extends PureComponent {
   _formSubmitHandler(evt) {
     evt.preventDefault();
     const {onFormSubmit} = this.props;
-    // TODO: add validation - check if both fields are not empty + regexp for email
     const formData = this._getDataFromForm(evt);
-    const formValidation = this._validateFormData(formData);
-    if (formValidation.email && formValidation.password) {
-      onFormSubmit(formData.email, formData.password);
-    } else {
-      alert(`Incorrect form values!`); // TODO: add more descriptive error messages
-    }
+    onFormSubmit(formData.email, formData.password);
   }
 
   _getDataFromForm(evt) {
@@ -79,19 +73,12 @@ class SignInForm extends PureComponent {
     return formFields;
   }
 
-  _validateFormData(formData) {
-    let validPassword = false;
-    let validEmail = false;
-    if (formData.password.length) {
-      validPassword = true;
+  _onEmailInputChange(evt) {
+    if (!(/\S+@\S+\.\S+/.test(evt.target.value))) {
+      evt.target.setCustomValidity(`Invalid email`);
+    } else {
+      evt.target.setCustomValidity(``);
     }
-    if ((formData.email.length && (/\S+@\S+\.\S+/.test(formData.email)))) {
-      validEmail = true;
-    }
-    return {
-      email: validEmail,
-      password: validPassword
-    };
   }
 }
 
