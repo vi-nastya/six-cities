@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 
-class SignInScreen extends PureComponent {
+class SignInForm extends PureComponent {
   constructor() {
     super();
 
@@ -59,10 +59,10 @@ class SignInScreen extends PureComponent {
 
   _formSubmitHandler(evt) {
     evt.preventDefault();
-    const {loginHandler} = this.props;
+    const {onFormSubmit} = this.props;
     // TODO: add validation - check if both fields are not empty + regexp for email
     const formData = this._getDataFromForm(evt);
-    loginHandler(formData.email, formData.password);
+    onFormSubmit(formData.email, formData.password);
   }
 
   _getDataFromForm(evt) {
@@ -75,8 +75,8 @@ class SignInScreen extends PureComponent {
   }
 }
 
-SignInScreen.propTypes = {
-  loginHandler: PropTypes.func.isRequired,
+SignInForm.propTypes = {
+  onFormSubmit: PropTypes.func.isRequired,
 };
 
-export default SignInScreen;
+export default SignInForm;
