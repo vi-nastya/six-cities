@@ -5,7 +5,12 @@ export const convertAppToApi = (AppPlaceData) => {
     city: AppPlaceData.city,
     description: AppPlaceData.description,
     goods: AppPlaceData.goods,
-    host: AppPlaceData.host,
+    host: {
+      id: AppPlaceData.host.id,
+      name: AppPlaceData.host.name,
+      isPro: AppPlaceData.host.is_pro,
+      avatarUrl: AppPlaceData.host.avatar_url,
+    },
     id: AppPlaceData.id,
     images: AppPlaceData.images,
     is_favorite: AppPlaceData.isFavorite,

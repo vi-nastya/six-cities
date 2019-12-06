@@ -1,13 +1,11 @@
 import {convertApiToApp} from './utils';
 
-const getOffersForCity = (offersList, city) => {
-  return offersList.filter((offer) => offer.city.name === city.name);
-};
-
 const initialState = {
-  city: null,
+  city: {name: ``, location: {latitude: 0, longitude: 0}},
   offers: [],
   offersForCity: [],
+  isAuthorizationRequired: true,
+  user: null,
 };
 
 const ActionCreator = {
@@ -15,19 +13,18 @@ const ActionCreator = {
     type: `CHANGE_CITY`,
     payload: newCity
   }),
-  getOffers: (offersList, city) => {
-    const offersForCity = getOffersForCity(offersList, city);
-    return {
-      type: `GET_OFFERS`,
-      payload: offersForCity
-    };
-  },
-  loadOffers: (offers) => {
-    return {
-      type: `LOAD_OFFERS`,
-      payload: offers,
-    };
-  }
+  loadOffers: (offers) => ({
+    type: `LOAD_OFFERS`,
+    payload: offers,
+  }),
+  requireAuthorization: (flag) => ({
+    type: `REQUIRE_AUTHORIZATION`,
+    payload: flag,
+  }),
+  saveUser: (userData) => ({
+    type: `SAVE_USER`,
+    payload: userData,
+  }),
 };
 
 const Operation = {
@@ -37,6 +34,13 @@ const Operation = {
         dispatch(ActionCreator.loadOffers(response.data));
       });
   },
+  login: (email, password) => (dispatch, _getState, api) => {
+    return api.post(`/login`, {email, password})
+      .then((response) => {
+        dispatch(ActionCreator.requireAuthorization(false));
+        dispatch(ActionCreator.saveUser(response.data));
+      });
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -45,21 +49,24 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         city: action.payload
       });
-    case `GET_OFFERS`:
-      return Object.assign({}, state, {
-        offersForCity: action.payload
-      });
     case `LOAD_OFFERS`:
       const offersData = action.payload.map(convertApiToApp);
       return Object.assign({}, state, {
         offers: offersData,
         city: offersData[0].city, // TODO: replace with random city
-        offersForCity: getOffersForCity(offersData, offersData[0].city)
+      });
+    case `REQUIRE_AUTHORIZATION`:
+      return Object.assign({}, state, {
+        isAuthorizationRequired: action.payload,
+      });
+    case `SAVE_USER`:
+      return Object.assign({}, state, {
+        user: action.payload,
       });
   }
 
   return state;
 };
 
-export {ActionCreator, Operation, reducer, getOffersForCity};
+export {ActionCreator, Operation, reducer};
 

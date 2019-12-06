@@ -2,8 +2,7 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import toJSON from "enzyme-to-json";
-import App from "./app";
-import {offers} from "../../mocks/offers";
+import {App} from "./app";
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -22,7 +21,7 @@ jest.mock(`leaflet`, () => ({
 }));
 
 it(`App is rendered correctly after relaunch`, () => {
-  const tree = shallow(<App places={offers}/>);
+  const tree = shallow(<App isAuthorizationRequired={true} login={jest.fn()}/>);
 
   expect((toJSON(tree))).toMatchSnapshot();
 });
