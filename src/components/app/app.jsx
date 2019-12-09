@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import {Switch, Route} from "react-router-dom";
 import PropTypes from "prop-types";
 import MainPage from '../main-page/main-page.jsx';
 import SignInForm from "../sign-in-form/sign-in-form.jsx";
@@ -7,10 +8,14 @@ import {Operation} from "../../reducer";
 
 const App = (props) => {
   const {isAuthorizationRequired, login} = props;
-  if (isAuthorizationRequired) {
-    return <SignInForm onFormSubmit={login}/>;
-  }
-  return <MainPage/>;
+  // if (isAuthorizationRequired) {
+  //   return <SignInForm onFormSubmit={login}/>;
+  // }
+  // return <MainPage/>;
+  return <Switch>
+    <Route path="/" component={MainPage} exact />
+    <Route path="/login" render={() => <SignInForm onFormSubmit={login}/>} exact />
+  </Switch>;
 };
 
 App.propTypes = {
