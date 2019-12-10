@@ -1,6 +1,8 @@
 import {createSelector} from 'reselect';
 import _ from "lodash";
 
+const MAX_NEARBY_PLACES = 3;
+
 const getCity = (state) => state.city;
 const getOffers = (state) => state.offers;
 
@@ -16,6 +18,15 @@ export const getOfferById = (offerId) => {
       [getOffers],
       (offers) => {
         return offers[offers.findIndex((offer) => offer.id === offerId)];
+      }
+  );
+};
+
+export const getNearbyPlaces = (offerId) => {
+  return createSelector(
+      [getOffersForCity],
+      (offers) => {
+        return offers.filter((offer) => offer.id !== offerId).slice(0, MAX_NEARBY_PLACES);
       }
   );
 };
