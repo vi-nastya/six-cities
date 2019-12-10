@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const PlaceCard = (props) => {
   const {place, onHoverOn, onHoverOff} = props;
@@ -34,7 +35,7 @@ const PlaceCard = (props) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#">{title}</a>
+        <Link to={`/offer/${place.id}`}>{title}</Link>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>
@@ -44,6 +45,7 @@ const PlaceCard = (props) => {
 
 PlaceCard.propTypes = {
   place: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
