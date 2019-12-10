@@ -1,4 +1,4 @@
-import {convertApiToApp} from './utils';
+import {convertApiToApp, convertCommentApiToApp} from './utils';
 
 const initialState = {
   city: {name: ``, location: {latitude: 0, longitude: 0}},
@@ -6,6 +6,7 @@ const initialState = {
   offersForCity: [],
   isAuthorizationRequired: true,
   user: null,
+  comments: [],
 };
 
 const ActionCreator = {
@@ -29,6 +30,10 @@ const ActionCreator = {
     type: `SAVE_USER`,
     payload: userData,
   }),
+  loadComments: (commentsData) => ({
+    type: `LOAD_COMMENTS`,
+    payload: commentsData,
+  })
 };
 
 const Operation = {
@@ -52,6 +57,12 @@ const Operation = {
         dispatch(ActionCreator.updateFavoriteStatus(response.data));
       });
   },
+  loadComments: (offerId) => (dispatch, _getState, api) => {
+    return api.get(`/comments/${offerId}`)
+      .then((response) => {
+        dispatch(ActionCreator.loadComments(response.data));
+      });
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -81,6 +92,10 @@ const reducer = (state = initialState, action) => {
           convertApiToApp(action.payload),
           ...state.offers.slice(action.payload.id)
         ]
+      });
+    case `LOAD_COMMENTS`:
+      return Object.assign({}, state, {
+        comments: action.payload.map(convertCommentApiToApp),
       });
   }
 

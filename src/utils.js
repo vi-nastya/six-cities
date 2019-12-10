@@ -47,3 +47,17 @@ export const convertApiToApp = (ApiPlaceData) => {
   };
 };
 
+export const convertCommentApiToApp = (ApiCommentData) => {
+  return {
+    comment: ApiCommentData.comment,
+    date: ApiCommentData.date,
+    id: ApiCommentData.id,
+    rating: ApiCommentData.rating,
+    user: {
+      avatarUrl: ApiCommentData.user.avatar_url,
+      id: ApiCommentData.user.id,
+      isPro: ApiCommentData.user.is_pro,
+      name: ApiCommentData.user.name
+    },
+  };
+};
