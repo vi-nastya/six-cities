@@ -17,6 +17,10 @@ const ActionCreator = {
     type: `LOAD_OFFERS`,
     payload: offers,
   }),
+  updateFavoriteStatus: (offerData) => ({
+    type: `UPDATE_FAVORITE_STATUS`,
+    payload: offerData,
+  }),
   requireAuthorization: (flag) => ({
     type: `REQUIRE_AUTHORIZATION`,
     payload: flag,
@@ -40,7 +44,14 @@ const Operation = {
         dispatch(ActionCreator.requireAuthorization(false));
         dispatch(ActionCreator.saveUser(response.data));
       });
-  }
+  },
+  updateFavoriteStatus: (offerData) => (dispatch, _getState, api) => {
+    const newStatus = offerData.isFavorite ? 0 : 1;
+    return api.post(`/favorite/:` + toString(offerData.id) + `/:` + toString(newStatus))
+      .then((response) => {
+        dispatch(ActionCreator.updateFavoriteStatus(response));
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -62,6 +73,14 @@ const reducer = (state = initialState, action) => {
     case `SAVE_USER`:
       return Object.assign({}, state, {
         user: action.payload,
+      });
+    case `UPDATE_FAVORITE_STATUS`:
+      return Object.assign({}, state, {
+        offers: [
+          ...state.offers.slice(0, action.payload.id - 1),
+          action.payload,
+          ...state.offers.slice(action.payload.id)
+        ]
       });
   }
 

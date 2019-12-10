@@ -11,6 +11,15 @@ export const getCitiesList = createSelector(
     }
 );
 
+export const getOfferById = (offerId) => {
+  return createSelector(
+      [getOffers],
+      (offers) => {
+        return offers[offers.findIndex((offer) => offer.id === offerId)];
+      }
+  );
+};
+
 export const getOffersForCity = createSelector(
     [getOffers, getCity],
     (offers, city) => {

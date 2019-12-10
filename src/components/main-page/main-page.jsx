@@ -12,7 +12,6 @@ import Header from "../header/header.jsx";
 
 const MainPage = (props) => {
   const {city, offersForCity, citiesList, activeItem, setActiveItem, changeCityHandler} = props;
-
   return <section className="welcome">
     <div style={{display: `none`}}>
       <svg xmlns="http://www.w3.org/2000/svg">
