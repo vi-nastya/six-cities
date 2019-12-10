@@ -8,7 +8,7 @@ import {Operation} from "../../reducer";
 import {getOfferById} from "../../selectors/selectors";
 
 const PlaceDetails = (props) => {
-  const {placeData} = props;
+  const {placeData, changeFavoriteHandler} = props;
   if (!placeData) {
     return <h2>Loading</h2>;
   }
@@ -47,7 +47,8 @@ const PlaceDetails = (props) => {
                 <h1 className="property__name">
                   {placeData.title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button className={`property__bookmark-button button ${placeData.isFavorite ? `property__bookmark-button--active` : ``}`}
+                  type="button" onClick={() => changeFavoriteHandler(placeData)}>
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -221,6 +222,7 @@ const PlaceDetails = (props) => {
 
 PlaceDetails.propTypes = {
   placeData: PropTypes.object.isRequired,
+  changeFavoriteHandler: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {

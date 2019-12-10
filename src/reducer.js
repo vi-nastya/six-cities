@@ -47,9 +47,9 @@ const Operation = {
   },
   updateFavoriteStatus: (offerData) => (dispatch, _getState, api) => {
     const newStatus = offerData.isFavorite ? 0 : 1;
-    return api.post(`/favorite/:` + toString(offerData.id) + `/:` + toString(newStatus))
+    return api.post(`/favorite/` + offerData.id.toString() + `/` + newStatus.toString())
       .then((response) => {
-        dispatch(ActionCreator.updateFavoriteStatus(response));
+        dispatch(ActionCreator.updateFavoriteStatus(response.data));
       });
   },
 };
@@ -78,7 +78,7 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         offers: [
           ...state.offers.slice(0, action.payload.id - 1),
-          action.payload,
+          convertApiToApp(action.payload),
           ...state.offers.slice(action.payload.id)
         ]
       });
