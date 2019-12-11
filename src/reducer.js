@@ -7,6 +7,7 @@ const initialState = {
   isAuthorizationRequired: true,
   user: null,
   comments: [],
+  favoriteOffers: [],
 };
 
 const ActionCreator = {
@@ -33,7 +34,11 @@ const ActionCreator = {
   loadComments: (commentsData) => ({
     type: `LOAD_COMMENTS`,
     payload: commentsData,
-  })
+  }),
+  loadFavorites: (favoritesData) => ({
+    type: `LOAD_COMMENTS`,
+    payload: favoritesData,
+  }),
 };
 
 const Operation = {
@@ -61,6 +66,12 @@ const Operation = {
     return api.get(`/comments/${offerId}`)
       .then((response) => {
         dispatch(ActionCreator.loadComments(response.data));
+      });
+  },
+  loadFavorites: () => (dispatch, _getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        dispatch(ActionCreator.loadFavorites(response.data));
       });
   }
 };
@@ -96,6 +107,11 @@ const reducer = (state = initialState, action) => {
     case `LOAD_COMMENTS`:
       return Object.assign({}, state, {
         comments: action.payload.map(convertCommentApiToApp),
+      });
+    case `LOAD_FAVORITES`:
+      const formattedFavoritesData = action.payload.map(convertApiToApp);
+      return Object.assign({}, state, {
+        favoriteOffers: formattedFavoritesData
       });
   }
 

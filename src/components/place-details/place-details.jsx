@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 import ReviewForm from "../review-form/review-form.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
-import PlaceCard from "../place-card/place-card.jsx"
+import PlaceCard from "../place-card/place-card.jsx";
 import {connect} from "react-redux";
 import {Operation} from "../../reducer";
 import {getOfferById, getNearbyPlaces} from "../../selectors/selectors";
