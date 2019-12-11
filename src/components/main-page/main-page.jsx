@@ -8,8 +8,11 @@ import Sorting from "../sorting/sorting.jsx";
 import {connect} from "react-redux";
 import {compose} from "recompose";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
+import withSorting from "../../hocs/with-sorting/with-sorting.jsx";
 import {getCitiesList, getOffersForCity} from "../../selectors/selectors";
 import Header from "../header/header.jsx";
+
+const SortingWrapped = withSorting(Sorting);
 
 const MainPage = (props) => {
   const {city, offersForCity, citiesList, activeItem, setActiveItem, changeCityHandler} = props;
@@ -45,7 +48,7 @@ const MainPage = (props) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offersForCity.length} places to stay in {city.name}</b>
-              <Sorting/>
+              <SortingWrapped/>
               <PlacesList places={offersForCity} setActiveItem={setActiveItem}/>
             </section>
             <div className="cities__right-section">
