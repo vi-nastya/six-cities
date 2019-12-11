@@ -1,4 +1,6 @@
-import {convertApiToApp} from './utils';
+import {convertApiToApp, convertCommentApiToApp} from './utils';
+
+import {SORT_TYPES} from "./components/sorting/sorting.jsx";
 
 const initialState = {
   city: {name: ``, location: {latitude: 0, longitude: 0}},
@@ -6,6 +8,9 @@ const initialState = {
   offersForCity: [],
   isAuthorizationRequired: true,
   user: null,
+  comments: [],
+  favoriteOffers: [],
+  sortType: SORT_TYPES[0],
 };
 
 const ActionCreator = {
@@ -17,6 +22,10 @@ const ActionCreator = {
     type: `LOAD_OFFERS`,
     payload: offers,
   }),
+  updateFavoriteStatus: (offerData) => ({
+    type: `UPDATE_FAVORITE_STATUS`,
+    payload: offerData,
+  }),
   requireAuthorization: (flag) => ({
     type: `REQUIRE_AUTHORIZATION`,
     payload: flag,
@@ -24,6 +33,18 @@ const ActionCreator = {
   saveUser: (userData) => ({
     type: `SAVE_USER`,
     payload: userData,
+  }),
+  loadComments: (commentsData) => ({
+    type: `LOAD_COMMENTS`,
+    payload: commentsData,
+  }),
+  loadFavorites: (favoritesData) => ({
+    type: `LOAD_FAVORITES`,
+    payload: favoritesData,
+  }),
+  changeSortType: (sortType) => ({
+    type: `CHANGE_SORT`,
+    payload: sortType,
   }),
 };
 
@@ -40,6 +61,25 @@ const Operation = {
         dispatch(ActionCreator.requireAuthorization(false));
         dispatch(ActionCreator.saveUser(response.data));
       });
+  },
+  updateFavoriteStatus: (offerData) => (dispatch, _getState, api) => {
+    const newStatus = offerData.isFavorite ? 0 : 1;
+    return api.post(`/favorite/` + offerData.id.toString() + `/` + newStatus.toString())
+      .then((response) => {
+        dispatch(ActionCreator.updateFavoriteStatus(response.data));
+      });
+  },
+  loadComments: (offerId) => (dispatch, _getState, api) => {
+    return api.get(`/comments/${offerId}`)
+      .then((response) => {
+        dispatch(ActionCreator.loadComments(response.data));
+      });
+  },
+  loadFavorites: () => (dispatch, _getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        dispatch(ActionCreator.loadFavorites(response.data));
+      });
   }
 };
 
@@ -49,12 +89,17 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         city: action.payload
       });
-    case `LOAD_OFFERS`:
+    case `CHANGE_SORT`:
+      return Object.assign({}, state, {
+        sortType: action.payload
+      });
+    case `LOAD_OFFERS`: {
       const offersData = action.payload.map(convertApiToApp);
       return Object.assign({}, state, {
         offers: offersData,
         city: offersData[0].city, // TODO: replace with random city
       });
+    }
     case `REQUIRE_AUTHORIZATION`:
       return Object.assign({}, state, {
         isAuthorizationRequired: action.payload,
@@ -63,6 +108,24 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         user: action.payload,
       });
+    case `UPDATE_FAVORITE_STATUS`:
+      return Object.assign({}, state, {
+        offers: [
+          ...state.offers.slice(0, action.payload.id - 1),
+          convertApiToApp(action.payload),
+          ...state.offers.slice(action.payload.id)
+        ]
+      });
+    case `LOAD_COMMENTS`:
+      return Object.assign({}, state, {
+        comments: action.payload.map(convertCommentApiToApp),
+      });
+    case `LOAD_FAVORITES`: {
+      const formattedFavoritesData = action.payload.map(convertApiToApp);
+      return Object.assign({}, state, {
+        favoriteOffers: formattedFavoritesData
+      });
+    }
   }
 
   return state;

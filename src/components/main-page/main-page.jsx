@@ -4,15 +4,18 @@ import {ActionCreator} from "../../reducer";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
+import Sorting from "../sorting/sorting.jsx";
 import {connect} from "react-redux";
 import {compose} from "recompose";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
+import withSorting from "../../hocs/with-sorting/with-sorting.jsx";
 import {getCitiesList, getOffersForCity} from "../../selectors/selectors";
 import Header from "../header/header.jsx";
 
-const MainPage = (props) => {
-  const {city, offersForCity, citiesList, activeItem, setActiveItem, changeCityHandler} = props;
+const SortingWrapped = withSorting(Sorting);
 
+const MainPage = (props) => {
+  const {city, offersForCity, citiesList, activeItem, setActiveItem, changeCityHandler, changeSortingHandler, sortType} = props;
   return <section className="welcome">
     <div style={{display: `none`}}>
       <svg xmlns="http://www.w3.org/2000/svg">
@@ -45,21 +48,7 @@ const MainPage = (props) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offersForCity.length} places to stay in {city.name}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex="0">
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                  <li className="places__option" tabIndex="0">Price: low to high</li>
-                  <li className="places__option" tabIndex="0">Price: high to low</li>
-                  <li className="places__option" tabIndex="0">Top rated first</li>
-                </ul>
-              </form>
+              <SortingWrapped changeSortingHandler={(newSortType) => changeSortingHandler(newSortType)} sortType={sortType}/>
               <PlacesList places={offersForCity} setActiveItem={setActiveItem}/>
             </section>
             <div className="cities__right-section">
@@ -82,6 +71,11 @@ MainPage.propTypes = {
   activeItem: PropTypes.number.isRequired,
   setActiveItem: PropTypes.func.isRequired,
   changeCityHandler: PropTypes.func.isRequired,
+  changeSortingHandler: PropTypes.func.isRequired,
+  sortType: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+  }),
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -89,11 +83,15 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   offersForCity: getOffersForCity(state),
   citiesList: getCitiesList(state),
   offers: state.offers,
+  sortType: state.sortType,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeCityHandler: (city) => {
     dispatch(ActionCreator.changeCity(city));
+  },
+  changeSortingHandler: (sortType) => {
+    dispatch(ActionCreator.changeSortType(sortType));
   }
 });
 
