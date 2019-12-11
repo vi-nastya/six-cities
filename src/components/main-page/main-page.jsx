@@ -15,7 +15,7 @@ import Header from "../header/header.jsx";
 const SortingWrapped = withSorting(Sorting);
 
 const MainPage = (props) => {
-  const {city, offersForCity, citiesList, activeItem, setActiveItem, changeCityHandler} = props;
+  const {city, offersForCity, citiesList, activeItem, setActiveItem, changeCityHandler, changeSortingHandler, sortType} = props;
   return <section className="welcome">
     <div style={{display: `none`}}>
       <svg xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +48,7 @@ const MainPage = (props) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offersForCity.length} places to stay in {city.name}</b>
-              <SortingWrapped/>
+              <SortingWrapped changeSortingHandler={(newSortType) => changeSortingHandler(newSortType)} sortType={sortType}/>
               <PlacesList places={offersForCity} setActiveItem={setActiveItem}/>
             </section>
             <div className="cities__right-section">
@@ -71,6 +71,11 @@ MainPage.propTypes = {
   activeItem: PropTypes.number.isRequired,
   setActiveItem: PropTypes.func.isRequired,
   changeCityHandler: PropTypes.func.isRequired,
+  changeSortingHandler: PropTypes.func.isRequired,
+  sortType: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+  }),
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -78,11 +83,15 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   offersForCity: getOffersForCity(state),
   citiesList: getCitiesList(state),
   offers: state.offers,
+  sortType: state.sortType,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeCityHandler: (city) => {
     dispatch(ActionCreator.changeCity(city));
+  },
+  changeSortingHandler: (sortType) => {
+    dispatch(ActionCreator.changeSortType(sortType));
   }
 });
 

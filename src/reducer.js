@@ -1,5 +1,7 @@
 import {convertApiToApp, convertCommentApiToApp} from './utils';
 
+import {SORT_TYPES} from "./components/sorting/sorting.jsx";
+
 const initialState = {
   city: {name: ``, location: {latitude: 0, longitude: 0}},
   offers: [],
@@ -8,6 +10,7 @@ const initialState = {
   user: null,
   comments: [],
   favoriteOffers: [],
+  sortType: SORT_TYPES[0],
 };
 
 const ActionCreator = {
@@ -38,6 +41,10 @@ const ActionCreator = {
   loadFavorites: (favoritesData) => ({
     type: `LOAD_FAVORITES`,
     payload: favoritesData,
+  }),
+  changeSortType: (sortType) => ({
+    type: `CHANGE_SORT`,
+    payload: sortType,
   }),
 };
 
@@ -81,6 +88,10 @@ const reducer = (state = initialState, action) => {
     case `CHANGE_CITY`:
       return Object.assign({}, state, {
         city: action.payload
+      });
+    case `CHANGE_SORT`:
+      return Object.assign({}, state, {
+        sortType: action.payload
       });
     case `LOAD_OFFERS`: {
       const offersData = action.payload.map(convertApiToApp);

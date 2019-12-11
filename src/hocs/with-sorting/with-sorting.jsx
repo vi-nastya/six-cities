@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
 import {SORT_TYPES} from "../../components/sorting/sorting.jsx";
 
 const withSorting = (Component) => {
@@ -7,7 +8,7 @@ const withSorting = (Component) => {
       super(props);
 
       this.state = {
-        activeSortType: SORT_TYPES[0],
+        activeSortType: this.props.sortType,
         isOpen: false,
       };
 
@@ -34,11 +35,18 @@ const withSorting = (Component) => {
       const clickedTypeText = evt.target.textContent;
       const newSortType = SORT_TYPES.find((sortType) => sortType.text === clickedTypeText);
       this.setState({isOpen: false, activeSortType: newSortType});
+      this.props.changeSortingHandler(newSortType);
     }
 
   }
 
-  WithSorting.propTypes = {};
+  WithSorting.propTypes = {
+    changeSortingHandler: PropTypes.func.isRequired,
+    sortType: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+    }),
+  };
 
   return WithSorting;
 };
