@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 
 const withPrivateRoute = (Component) => {
   const WithPrivateRoute = (props) => {
-    const {isAuthenticated, redirectRoute} = props;
-    return isAuthenticated ? <Component {...props}/> : <Redirect to={redirectRoute}/>;
+    const {hasAccess, redirectRoute} = props;
+    return hasAccess ? <Component {...props}/> : <Redirect to={redirectRoute}/>;
   };
 
   WithPrivateRoute.propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
+    hasAccess: PropTypes.bool.isRequired,
     redirectRoute: PropTypes.string.isRequired,
   };
 
