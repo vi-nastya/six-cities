@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 const PlaceCard = (props) => {
-  const {place, onHoverOn, onHoverOff} = props;
+  const {place, onHoverOn, onHoverOff, cardClass} = props;
   const {title, type, price, images, isPremium, isFavorite} = place;
 
-  return <article className="cities__place-card place-card" onMouseEnter={() => onHoverOn()} onMouseLeave={() => onHoverOff()}>
+  return <article className={`${cardClass} place-card`} onMouseEnter={() => onHoverOn()} onMouseLeave={() => onHoverOff()}>
     <div className="place-card__mark" style={!isPremium ? {display: `none`} : {}}>
       <span>Premium</span>
     </div>
@@ -53,8 +53,9 @@ PlaceCard.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     isFavorite: PropTypes.bool.isRequired,
   }).isRequired,
-  onHoverOn: PropTypes.func.isRequired,
-  onHoverOff: PropTypes.func.isRequired,
+  onHoverOn: PropTypes.func,
+  onHoverOff: PropTypes.func,
+  cardClass: PropTypes.string.isRequired,
 };
 
 export default PlaceCard;
