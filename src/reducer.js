@@ -36,7 +36,7 @@ const ActionCreator = {
     payload: commentsData,
   }),
   loadFavorites: (favoritesData) => ({
-    type: `LOAD_COMMENTS`,
+    type: `LOAD_FAVORITES`,
     payload: favoritesData,
   }),
 };
@@ -82,12 +82,13 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         city: action.payload
       });
-    case `LOAD_OFFERS`:
+    case `LOAD_OFFERS`: {
       const offersData = action.payload.map(convertApiToApp);
       return Object.assign({}, state, {
         offers: offersData,
         city: offersData[0].city, // TODO: replace with random city
       });
+    }
     case `REQUIRE_AUTHORIZATION`:
       return Object.assign({}, state, {
         isAuthorizationRequired: action.payload,
@@ -108,11 +109,12 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         comments: action.payload.map(convertCommentApiToApp),
       });
-    case `LOAD_FAVORITES`:
+    case `LOAD_FAVORITES`: {
       const formattedFavoritesData = action.payload.map(convertApiToApp);
       return Object.assign({}, state, {
         favoriteOffers: formattedFavoritesData
       });
+    }
   }
 
   return state;
