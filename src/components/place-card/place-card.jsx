@@ -6,7 +6,7 @@ const PlaceCard = (props) => {
   const {place, onHoverOn, onHoverOff, cardClass} = props;
   const {title, type, price, images, isPremium, isFavorite} = place;
 
-  return <article className={`${cardClass} place-card`} onMouseEnter={() => onHoverOn()} onMouseLeave={() => onHoverOff()}>
+  return <article className={`${cardClass} place-card`} onMouseEnter={onHoverOn ? () => onHoverOn() : null} onMouseLeave={onHoverOff ? () => onHoverOff() : null}>
     <div className="place-card__mark" style={!isPremium ? {display: `none`} : {}}>
       <span>Premium</span>
     </div>
