@@ -1,7 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App is rendered correctly after relaunch 1`] = `
-<SignInForm
-  onFormSubmit={[MockFunction]}
-/>
+<Fragment>
+  <Switch>
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(WithActiveItem)",
+          "type": [Function],
+        }
+      }
+      exact={true}
+      path="/"
+    />
+    <Route
+      exact={true}
+      path="/login"
+      render={[Function]}
+    />
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(PlaceDetails)",
+          "type": [Function],
+        }
+      }
+      exact={true}
+      path="/offer/:id"
+    />
+    <Route
+      exact={true}
+      path="/favorites"
+      render={[Function]}
+    />
+  </Switch>
+</Fragment>
 `;

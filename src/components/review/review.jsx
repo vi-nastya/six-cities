@@ -27,7 +27,7 @@ const Review = (props) => {
       <p className="reviews__text">
         {reviewData.comment}
       </p>
-<time className="reviews__time" dateTime="2019-04-24">{formatDate(reviewData.date)}</time>
+      <time className="reviews__time" dateTime="2019-04-24">{formatDate(reviewData.date)}</time>
     </div>
   </li>;
 };
