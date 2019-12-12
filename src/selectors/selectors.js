@@ -30,23 +30,10 @@ export const getCitiesList = createSelector(
     }
 );
 
-export const getOfferById = (offerId) => {
-  return createSelector(
-      [getOffers],
-      (offers) => {
-        return offers[offers.findIndex((offer) => offer.id === offerId)];
-      }
-  );
-};
-
-export const getNearbyPlaces = (offerId) => {
-  return createSelector(
-      [getOffersForCity],
-      (offers) => {
-        return offers.filter((offer) => offer.id !== offerId).slice(0, MAX_NEARBY_PLACES);
-      }
-  );
-};
+export const getOfferById = (state, offerId) => state.offers.find((offer) => offer.id === parseInt(offerId, 10));
+export const getNearbyPlaces = (state, offerId) => state.offers
+  .filter((offer) => offer.id !== parseInt(offerId, 10))
+  .slice(0, MAX_NEARBY_PLACES);
 
 export const getOffersForCity = createSelector(
     [getOffers, getCity, getSortType],

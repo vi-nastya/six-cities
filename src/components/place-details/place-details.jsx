@@ -169,9 +169,9 @@ PlaceDetails.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
-    placeData: getOfferById(parseInt(ownProps.match.params.id, 10))(state),
+    placeData: getOfferById(state, ownProps.match.params.id),
     reviews: state.comments,
-    nearbyPlaces: getNearbyPlaces(parseInt(ownProps.match.params.id, 10))(state),
+    nearbyPlaces: getNearbyPlaces(state, ownProps.match.params.id),
     isAuthorizationRequired: state.isAuthorizationRequired,
   });
 };
