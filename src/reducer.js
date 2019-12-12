@@ -2,6 +2,8 @@ import {convertApiToApp, convertCommentApiToApp} from './utils';
 
 import {SORT_TYPES} from "./components/sorting/sorting.jsx";
 
+const SUCCESS_STATUS = 200;
+
 const initialState = {
   city: {name: ``, location: {latitude: 0, longitude: 0}},
   offers: [],
@@ -75,11 +77,32 @@ const Operation = {
         dispatch(ActionCreator.loadComments(response.data));
       });
   },
+  addComment: (offerId, commentData, resetForm) => (dispatch, _getState, api) => {
+    return api.post(`/comments/${offerId}`, commentData)
+      .then((response) => {
+        if (response.status === SUCCESS_STATUS) {
+          dispatch(ActionCreator.loadComments(response.data));
+          resetForm();
+        }
+      });
+  },
   loadFavorites: () => (dispatch, _getState, api) => {
     return api.get(`/favorite`)
       .then((response) => {
         dispatch(ActionCreator.loadFavorites(response.data));
       });
+  },
+  checkAuth: () => {
+    return (dispatch, _getState, api) => {
+      return api
+        .get(`/login`)
+        .then((response) => {
+          if (response.status === SUCCESS_STATUS) {
+            dispatch(ActionCreator.requireAuthorization(false));
+            dispatch(ActionCreator.saveUser(response.data));
+          }
+        });
+    };
   }
 };
 

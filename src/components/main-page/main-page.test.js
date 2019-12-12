@@ -1,28 +1,27 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import toJSON from "enzyme-to-json";
+import renderer from "react-test-renderer";
 import {MainPage} from "./main-page";
 import {offers} from "../../mocks/offers";
 
-Enzyme.configure({adapter: new Adapter()});
-
-jest.mock(`leaflet`, () => ({
-  icon: jest.fn(),
-  map: jest.fn().mockReturnValue({
-    setView: jest.fn(),
-    remove: jest.fn()
-  }),
-  tileLayer: jest.fn().mockReturnValue({
-    addTo: jest.fn()
-  }),
-  marker: jest.fn().mockReturnValue({
-    addTo: jest.fn()
-  }),
+jest.mock(`../header/header`, () => jest.fn().mockReturnValue(null));
+jest.mock(`../map/map`, () => `Map`);
+jest.mock(`react-router-dom`, () => ({
+  Link: () => null
 }));
 
-it(`Main Page is rendered correctly after relaunch`, () => {
-  const tree = shallow(<MainPage citiesList={[{name: `Moscow`}]} offersForCity={[offers[0]]} offers={offers} changeCityHandler={jest.fn()} city={offers[0].city} activeItem={-1} setActiveItem={jest.fn()}/>);
 
-  expect(toJSON(tree)).toMatchSnapshot();
+it(`ReviewForm component is rendered correctly after relaunch`, () => {
+  const tree = renderer.create(<MainPage
+    city={offers[0].city}
+    offersForCity={offers}
+    citiesList={[offers[0].city]}
+    offers={offers}
+    activeItem={-1}
+    setActiveItem={jest.fn()}
+    changeCityHandler={jest.fn()}
+    changeSortingHandler={jest.fn()}
+    sortType={{name: `DEFAULT`, text: `Popular`}}
+  />).toJSON();
+
+  expect(tree).toMatchSnapshot();
 });

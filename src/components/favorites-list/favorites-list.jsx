@@ -46,7 +46,7 @@ class FavoritesList extends PureComponent {
                       </div>
                       <div className="favorites__places">
                         {placesGroup.offersList.map((placeData, placeIndex) =>
-                          <PlaceCard cardClass={`favorites__card`} place={placeData} key={`favorite-place-${index}-${placeIndex}`}/>
+                          <PlaceCard cardClass={`favorites__card`} imageClass={`favorites__image-wrapper`} place={placeData} key={`favorite-place-${index}-${placeIndex}`}/>
                         )}
                       </div>
                     </li>

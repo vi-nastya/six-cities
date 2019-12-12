@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 
 const PlaceCard = (props) => {
-  const {place, onHoverOn, onHoverOff, cardClass} = props;
-  const {title, type, price, images, isPremium, isFavorite} = place;
+  const {place, onHoverOn, onHoverOff, cardClass, imageClass} = props;
+  const {title, type, price, images, rating, isPremium, isFavorite} = place;
 
   return <article className={`${cardClass} place-card`} onMouseEnter={onHoverOn ? () => onHoverOn() : null} onMouseLeave={onHoverOff ? () => onHoverOff() : null}>
     <div className="place-card__mark" style={!isPremium ? {display: `none`} : {}}>
       <span>Premium</span>
     </div>
-    <div className="cities__image-wrapper place-card__image-wrapper">
+    <div className={`${imageClass} place-card__image-wrapper`}>
       <a href="#">
         <img className="place-card__image" src={images[0]} width="260" height="200" alt="Place image"/>
       </a>
@@ -30,7 +30,7 @@ const PlaceCard = (props) => {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: `100%`}}></span>
+          <span style={{width: `${Math.round(rating) * 20}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
@@ -52,10 +52,12 @@ PlaceCard.propTypes = {
     images: PropTypes.array.isRequired,
     isPremium: PropTypes.bool.isRequired,
     isFavorite: PropTypes.bool.isRequired,
-  }).isRequired,
+    rating: PropTypes.number.isRequired,
+  }),
   onHoverOn: PropTypes.func,
   onHoverOff: PropTypes.func,
   cardClass: PropTypes.string.isRequired,
+  imageClass: PropTypes.string.isRequired,
 };
 
 export default PlaceCard;

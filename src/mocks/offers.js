@@ -1,5 +1,6 @@
 export const offers = [
   {
+    id: 0,
     title: `Wood and stone place`,
     price: 80,
     city: {name: `Amsterdam`, location: {latitude: 52.3909553943508, longitude: 4.929309666406198}},
@@ -22,6 +23,7 @@ export const offers = [
     },
   },
   {
+    id: 1,
     title: `Beautiful & luxurious apartment at great location`,
     price: 120,
     city: {name: `Amsterdam`, location: {latitude: 52.3909553943508, longitude: 4.929309666406198}},
@@ -31,9 +33,11 @@ export const offers = [
     picture: `img/apartment-02.jpg`,
     isPremium: true,
     isFavorite: false,
+    rating: 3.6,
     images: [``]
   },
   {
+    id: 2,
     title: `Nice, cozy, warm big bed apartment`,
     price: 180,
     city: {name: `Amsterdam`, location: {latitude: 52.3909553943508, longitude: 4.929309666406198}},
@@ -43,9 +47,11 @@ export const offers = [
     picture: `img/apartment-03.jpg`,
     isPremium: true,
     isFavorite: true,
-    images: [``]
+    images: [``],
+    rating: 2,
   },
   {
+    id: 3,
     title: `Wood and stone place`,
     price: 90,
     city: {name: `Moscow`, location: {latitude: 52.3809553943508, longitude: 4.939309666406198}},
@@ -55,6 +61,7 @@ export const offers = [
     picture: `https://picsum.photos/260/200`,
     isPremium: false,
     isFavorite: false,
-    images: [``]
+    images: [``],
+    rating: 4.8,
   },
 ];

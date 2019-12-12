@@ -8,7 +8,12 @@ Enzyme.configure({adapter: new Adapter()});
 
 
 const hoverHandler = jest.fn();
-const welcomeScreen = shallow(<PlaceCard place={offers[0]} onHoverOn={hoverHandler} onHoverOff={jest.fn()}/>);
+const welcomeScreen = shallow(<PlaceCard
+  place={offers[0]}
+  onHoverOn={hoverHandler}
+  onHoverOff={jest.fn()}
+  cardClass={`cities__place-card`}
+  imageClass={`cities__image-wrapper`}/>);
 
 welcomeScreen.simulate(`mouseenter`);
 

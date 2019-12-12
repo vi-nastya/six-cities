@@ -7,7 +7,10 @@ import PlaceCard from "../place-card/place-card.jsx";
 import {connect} from "react-redux";
 import {Operation} from "../../reducer";
 import {getOfferById, getNearbyPlaces} from "../../selectors/selectors";
+import withReviewSubmit from "../../hocs/with-review-submit/with-review-submit.jsx";
+import Map from "../map/map.jsx";
 
+const ReviewFormWrapped = withReviewSubmit(ReviewForm);
 class PlaceDetails extends PureComponent {
   constructor(props) {
     super(props);
@@ -18,8 +21,13 @@ class PlaceDetails extends PureComponent {
     onLoadComments(match.params.id);
   }
 
+  componentDidUpdate() {
+    const {match, onLoadComments} = this.props;
+    onLoadComments(match.params.id);
+  }
+
   render() {
-    const {placeData, changeFavoriteHandler, reviews, nearbyPlaces} = this.props;
+    const {placeData, changeFavoriteHandler, reviews, nearbyPlaces, isAuthorizationRequired, onFormSubmit} = this.props;
     if (!placeData) {
       return <h2>Loading</h2>;
     }
@@ -68,7 +76,7 @@ class PlaceDetails extends PureComponent {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: `96%`}}></span>
+                    <span style={{width: `${Math.round(placeData.rating) * 20}%`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value">{placeData.rating}</span>
@@ -102,7 +110,7 @@ class PlaceDetails extends PureComponent {
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
                     <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src={placeData.host.avatarUrl} width="74" height="74" alt="Host avatar"/>
+                      <img className="property__avatar user__avatar" src={`/${placeData.host.avatarUrl}`} width="74" height="74" alt="Host avatar"/>
                     </div>
                     <span className="property__user-name">
                       {placeData.host.name}
@@ -118,17 +126,22 @@ class PlaceDetails extends PureComponent {
                 <section className="property__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                   {reviews.length > 0 ? <ReviewsList reviewsData={reviews}/> : ``}
-                  <ReviewForm />
+                  {!isAuthorizationRequired && <ReviewFormWrapped onFormSubmit={(commentData, resetForm) => onFormSubmit(placeData.id, commentData, resetForm)}/>}
                 </section>
               </div>
             </div>
-            <section className="property__map map"></section>
+            <section className="property__map map">
+              <Map points={[placeData].concat(nearbyPlaces).map((offer) => [offer.location.latitude, offer.location.longitude])} activePoint={0} city={[placeData.city.location.latitude, placeData.city.location.longitude]}/>
+            </section>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                {nearbyPlaces.map((place, index) => <PlaceCard place={place} cardClass={`near-places__card`} key={`nearby-place-${index}`}/>)}
+                {nearbyPlaces.map((place, index) => <PlaceCard place={place}
+                  cardClass={`near-places__card`}
+                  imageClass={`near-places__image-wrapper`}
+                  key={`nearby-place-${index}`}/>)}
               </div>
             </section>
           </div>
@@ -140,7 +153,7 @@ class PlaceDetails extends PureComponent {
 
 
 PlaceDetails.propTypes = {
-  placeData: PropTypes.object.isRequired,
+  placeData: PropTypes.object,
   changeFavoriteHandler: PropTypes.func.isRequired,
   onLoadComments: PropTypes.func.isRequired,
   match: PropTypes.shape({
@@ -150,13 +163,16 @@ PlaceDetails.propTypes = {
   }),
   reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
   nearbyPlaces: PropTypes.array.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
-    placeData: getOfferById(parseInt(ownProps.match.params.id, 10))(state),
+    placeData: getOfferById(state, ownProps.match.params.id),
     reviews: state.comments,
-    nearbyPlaces: getNearbyPlaces(parseInt(ownProps.match.params.id, 10))(state),
+    nearbyPlaces: getNearbyPlaces(state, ownProps.match.params.id),
+    isAuthorizationRequired: state.isAuthorizationRequired,
   });
 };
 
@@ -166,7 +182,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onLoadComments: (offerId) => {
     dispatch(Operation.loadComments(offerId));
-  }
+  },
+  onFormSubmit: (offerId, commentData, resetForm) => {
+    dispatch(Operation.addComment(offerId, commentData, resetForm));
+  },
 });
 
 export {PlaceDetails};

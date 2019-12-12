@@ -12,20 +12,7 @@ exports[`Header is rendered correctly after relaunch 1`] = `
     >
       <div
         className="header__left"
-      >
-        <a
-          className="header__logo-link"
-          href="main.html"
-        >
-          <img
-            alt="6 cities logo"
-            className="header__logo"
-            height="41"
-            src="img/logo.svg"
-            width="81"
-          />
-        </a>
-      </div>
+      />
       <nav
         className="header__nav"
       >
@@ -34,21 +21,7 @@ exports[`Header is rendered correctly after relaunch 1`] = `
         >
           <li
             className="header__nav-item user"
-          >
-            <a
-              className="header__nav-link header__nav-link--profile"
-              href="#"
-            >
-              <div
-                className="header__avatar-wrapper user__avatar-wrapper"
-              />
-              <span
-                className="header__user-name user__name"
-              >
-                user@mail.ru
-              </span>
-            </a>
-          </li>
+          />
         </ul>
       </nav>
     </div>
