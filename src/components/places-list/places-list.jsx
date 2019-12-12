@@ -17,6 +17,7 @@ class PlacesList extends PureComponent {
       {places.map((place, index) => <PlaceCard
         place={place}
         cardClass={`cities__place-card`}
+        imageClass={`cities__image-wrapper`}
         onHoverOn={() => {
           setActiveItem(index);
         }}

@@ -133,7 +133,10 @@ class PlaceDetails extends PureComponent {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                {nearbyPlaces.map((place, index) => <PlaceCard place={place} cardClass={`near-places__card`} key={`nearby-place-${index}`}/>)}
+                {nearbyPlaces.map((place, index) => <PlaceCard place={place}
+                  cardClass={`near-places__card`}
+                  imageClass={`near-places__image-wrapper`}
+                  key={`nearby-place-${index}`}/>)}
               </div>
             </section>
           </div>
