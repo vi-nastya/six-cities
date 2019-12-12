@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 const PlaceCard = (props) => {
   const {place, onHoverOn, onHoverOff, cardClass} = props;
-  const {title, type, price, images, isPremium, isFavorite} = place;
+  const {title, type, price, images, rating, isPremium, isFavorite} = place;
 
   return <article className={`${cardClass} place-card`} onMouseEnter={onHoverOn ? () => onHoverOn() : null} onMouseLeave={onHoverOff ? () => onHoverOff() : null}>
     <div className="place-card__mark" style={!isPremium ? {display: `none`} : {}}>
@@ -30,7 +30,7 @@ const PlaceCard = (props) => {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: `100%`}}></span>
+          <span style={{width: `${Math.round(rating) * 20}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
@@ -52,7 +52,8 @@ PlaceCard.propTypes = {
     images: PropTypes.array.isRequired,
     isPremium: PropTypes.bool.isRequired,
     isFavorite: PropTypes.bool.isRequired,
-  }).isRequired,
+    rating: PropTypes.number.isRequired,
+  }),
   onHoverOn: PropTypes.func,
   onHoverOff: PropTypes.func,
   cardClass: PropTypes.string.isRequired,
