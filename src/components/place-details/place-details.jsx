@@ -19,7 +19,7 @@ class PlaceDetails extends PureComponent {
   }
 
   render() {
-    const {placeData, changeFavoriteHandler, reviews, nearbyPlaces, isAuthorizationRequired} = this.props;
+    const {placeData, changeFavoriteHandler, reviews, nearbyPlaces, isAuthorizationRequired, onFormSubmit} = this.props;
     if (!placeData) {
       return <h2>Loading</h2>;
     }
@@ -118,7 +118,7 @@ class PlaceDetails extends PureComponent {
                 <section className="property__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                   {reviews.length > 0 ? <ReviewsList reviewsData={reviews}/> : ``}
-                  {!isAuthorizationRequired && <ReviewForm />}
+                  {!isAuthorizationRequired && <ReviewForm onFormSubmit={(commentData) => onFormSubmit(placeData.id, commentData)}/>}
                 </section>
               </div>
             </div>
@@ -140,7 +140,7 @@ class PlaceDetails extends PureComponent {
 
 
 PlaceDetails.propTypes = {
-  placeData: PropTypes.object.isRequired,
+  placeData: PropTypes.object,
   changeFavoriteHandler: PropTypes.func.isRequired,
   onLoadComments: PropTypes.func.isRequired,
   match: PropTypes.shape({
@@ -151,6 +151,7 @@ PlaceDetails.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
   nearbyPlaces: PropTypes.array.isRequired,
   isAuthorizationRequired: PropTypes.bool.isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -168,7 +169,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onLoadComments: (offerId) => {
     dispatch(Operation.loadComments(offerId));
-  }
+  },
+  onFormSubmit: (offerId, commentData) => {
+    dispatch(Operation.addComment(offerId, commentData));
+  },
 });
 
 export {PlaceDetails};
