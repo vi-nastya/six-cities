@@ -48,7 +48,9 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    this.updateMarkers(this.props.points);
+    const {points, city} = this.props;
+    this.updateMarkers(points);
+    this._map.setView(city, ZOOM);
   }
 
   render() {

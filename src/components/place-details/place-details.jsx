@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {Operation} from "../../reducer";
 import {getOfferById, getNearbyPlaces} from "../../selectors/selectors";
 import withReviewSubmit from "../../hocs/with-review-submit/with-review-submit.jsx";
+import Map from "../map/map.jsx";
 
 const ReviewFormWrapped = withReviewSubmit(ReviewForm);
 class PlaceDetails extends PureComponent {
@@ -124,7 +125,9 @@ class PlaceDetails extends PureComponent {
                 </section>
               </div>
             </div>
-            <section className="property__map map"></section>
+            <section className="property__map map">
+              <Map points={[placeData].concat(nearbyPlaces).map((offer) => [offer.location.latitude, offer.location.longitude])} activePoint={0} city={[placeData.city.location.latitude, placeData.city.location.longitude]}/>
+            </section>
           </section>
           <div className="container">
             <section className="near-places places">

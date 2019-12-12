@@ -14,7 +14,7 @@ class PlacesList extends PureComponent {
     } = this.props;
 
     return <div className="cities__places-list places__list tabs__content">
-                ${places.map((place, index) => <PlaceCard
+      {places.map((place, index) => <PlaceCard
         place={place}
         cardClass={`cities__place-card`}
         onHoverOn={() => {
