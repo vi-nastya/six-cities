@@ -80,6 +80,18 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.loadFavorites(response.data));
       });
+  },
+  checkAuth: () => {
+    return (dispatch, _getState, api) => {
+      return api
+        .get(`/login`)
+        .then((response) => {
+          if (response.status === 200) {
+            dispatch(ActionCreator.requireAuthorization(false));
+            dispatch(ActionCreator.saveUser(response.data));
+          }
+        });
+    };
   }
 };
 

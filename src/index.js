@@ -24,6 +24,7 @@ const init = () => {
   );
   /* eslint-enable */
   store.dispatch(Operation.loadOffers());
+  store.dispatch(Operation.checkAuth());
 
   ReactDOM.render(
       <Provider store={store}>
