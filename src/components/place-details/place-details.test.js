@@ -1,14 +1,19 @@
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import toJSON from "enzyme-to-json";
-import PlaceDetails from "./place-details";
+import renderer from "react-test-renderer";
+import {PlaceDetails} from "./place-details";
 import {offers} from "../../mocks/offers";
+import {reviews} from "../../mocks/reviews";
 
-Enzyme.configure({adapter: new Adapter()});
+it(`PlaceDetails component is rendered correctly after relaunch`, () => {
+  const tree = renderer.create(<PlaceDetails
+    placeData={offers[0]}
+    changeFavoriteHandler={jest.fn()}
+    onLoadComments={jest.fn()}
+    match={{params: {id: 1}}}
+    reviews={reviews}
+    nearbyPlaces={[offers[1]]}
+    onFormSubmit={jest.fn()}
+    isAuthorizationRequired={true}/>).toJSON();
 
-it(`Place Details is rendered correctly after relaunch`, () => {
-  const tree = shallow(<PlaceDetails placeData={offers[0]}/>);
-
-  expect(toJSON(tree)).toMatchSnapshot();
+  expect(tree).toMatchSnapshot();
 });
