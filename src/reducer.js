@@ -75,10 +75,11 @@ const Operation = {
         dispatch(ActionCreator.loadComments(response.data));
       });
   },
-  addComment: (offerId, commentData) => (dispatch, _getState, api) => {
+  addComment: (offerId, commentData, resetForm) => (dispatch, _getState, api) => {
     return api.post(`/comments/${offerId}`, commentData)
       .then((response) => {
         dispatch(ActionCreator.loadComments(response.data));
+        resetForm();
       });
   },
   loadFavorites: () => (dispatch, _getState, api) => {

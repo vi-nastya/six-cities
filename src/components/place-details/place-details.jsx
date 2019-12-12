@@ -7,7 +7,9 @@ import PlaceCard from "../place-card/place-card.jsx";
 import {connect} from "react-redux";
 import {Operation} from "../../reducer";
 import {getOfferById, getNearbyPlaces} from "../../selectors/selectors";
+import withReviewSubmit from "../../hocs/with-review-submit/with-review-submit.jsx";
 
+const ReviewFormWrapped = withReviewSubmit(ReviewForm);
 class PlaceDetails extends PureComponent {
   constructor(props) {
     super(props);
@@ -102,7 +104,7 @@ class PlaceDetails extends PureComponent {
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
                     <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="property__avatar user__avatar" src={placeData.host.avatarUrl} width="74" height="74" alt="Host avatar"/>
+                      <img className="property__avatar user__avatar" src={`../${placeData.host.avatarUrl}`} width="74" height="74" alt="Host avatar"/>
                     </div>
                     <span className="property__user-name">
                       {placeData.host.name}
@@ -118,7 +120,7 @@ class PlaceDetails extends PureComponent {
                 <section className="property__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                   {reviews.length > 0 ? <ReviewsList reviewsData={reviews}/> : ``}
-                  {!isAuthorizationRequired && <ReviewForm onFormSubmit={(commentData) => onFormSubmit(placeData.id, commentData)}/>}
+                  {!isAuthorizationRequired && <ReviewFormWrapped onFormSubmit={(commentData, resetForm) => onFormSubmit(placeData.id, commentData, resetForm)}/>}
                 </section>
               </div>
             </div>
@@ -170,8 +172,8 @@ const mapDispatchToProps = (dispatch) => ({
   onLoadComments: (offerId) => {
     dispatch(Operation.loadComments(offerId));
   },
-  onFormSubmit: (offerId, commentData) => {
-    dispatch(Operation.addComment(offerId, commentData));
+  onFormSubmit: (offerId, commentData, resetForm) => {
+    dispatch(Operation.addComment(offerId, commentData, resetForm));
   },
 });
 
