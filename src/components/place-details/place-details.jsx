@@ -19,7 +19,7 @@ class PlaceDetails extends PureComponent {
   }
 
   render() {
-    const {placeData, changeFavoriteHandler, reviews, nearbyPlaces} = this.props;
+    const {placeData, changeFavoriteHandler, reviews, nearbyPlaces, isAuthorizationRequired} = this.props;
     if (!placeData) {
       return <h2>Loading</h2>;
     }
@@ -118,7 +118,7 @@ class PlaceDetails extends PureComponent {
                 <section className="property__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                   {reviews.length > 0 ? <ReviewsList reviewsData={reviews}/> : ``}
-                  <ReviewForm />
+                  {!isAuthorizationRequired && <ReviewForm />}
                 </section>
               </div>
             </div>
@@ -150,6 +150,7 @@ PlaceDetails.propTypes = {
   }),
   reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
   nearbyPlaces: PropTypes.array.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -157,6 +158,7 @@ const mapStateToProps = (state, ownProps) => {
     placeData: getOfferById(parseInt(ownProps.match.params.id, 10))(state),
     reviews: state.comments,
     nearbyPlaces: getNearbyPlaces(parseInt(ownProps.match.params.id, 10))(state),
+    isAuthorizationRequired: state.isAuthorizationRequired,
   });
 };
 
