@@ -21,6 +21,11 @@ class PlaceDetails extends PureComponent {
     onLoadComments(match.params.id);
   }
 
+  componentDidUpdate() {
+    const {match, onLoadComments} = this.props;
+    onLoadComments(match.params.id);
+  }
+
   render() {
     const {placeData, changeFavoriteHandler, reviews, nearbyPlaces, isAuthorizationRequired, onFormSubmit} = this.props;
     if (!placeData) {

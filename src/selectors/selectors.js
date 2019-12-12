@@ -58,7 +58,7 @@ export const getOffersForCity = createSelector(
 export const getGroupedFavoriteOffers = createSelector(
     [getFavoriteOffers],
     (offers) => {
-      let groupedOffers = {};
+      const groupedOffers = {};
       for (let i = 0; i < offers.length; i++) {
         const currentCity = offers[i].city.name;
         if (groupedOffers[currentCity] !== undefined) {
@@ -67,10 +67,8 @@ export const getGroupedFavoriteOffers = createSelector(
           groupedOffers[currentCity] = [offers[i]];
         }
       }
-      let groupedOffersArray = [];
-      for (let [city, offersList] of Object.entries(groupedOffers)) {
-        groupedOffersArray.push({city, offersList});
-      }
+      const groupedOffersArray = Object.entries(groupedOffers)
+      .map(([city, offersList]) => ({city, offersList}));
       return groupedOffersArray;
     }
 );
