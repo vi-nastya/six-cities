@@ -6,7 +6,7 @@ jest.mock(`react-router-dom`, () => ({
   Link: () => null
 }));
 
-jest.mock(`../header/header`, () => null);
+jest.mock(`../header/header`, () => jest.fn().mockReturnValue(null));
 
 it(`SignInForm component is rendered correctly after relaunch`, () => {
   const tree = renderer.create(<SignInForm onFormSubmit={jest.fn()}/>).toJSON();
