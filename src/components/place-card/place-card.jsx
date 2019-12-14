@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {offerPropTypes} from "../../props-types-validation";
 import {Link} from "react-router-dom";
 
 const PlaceCard = (props) => {
@@ -44,16 +45,7 @@ const PlaceCard = (props) => {
 
 
 PlaceCard.propTypes = {
-  place: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    images: PropTypes.array.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-  }),
+  place: offerPropTypes,
   onHoverOn: PropTypes.func,
   onHoverOff: PropTypes.func,
   cardClass: PropTypes.string.isRequired,

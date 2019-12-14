@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {UserActionCreator} from "../../reducer/user-reducer/user-reducer";
+import {offerPropTypes, cityPropTypes} from "../../props-types-validation";
 import {DataActionCreator} from "../../reducer/data-reducer/data-reducer";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
@@ -65,10 +65,10 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  city: PropTypes.object.isRequired,
-  offersForCity: PropTypes.arrayOf(PropTypes.object).isRequired,
-  citiesList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  city: cityPropTypes,
+  offersForCity: PropTypes.arrayOf(offerPropTypes),
+  citiesList: PropTypes.arrayOf(cityPropTypes),
+  offers: PropTypes.arrayOf(offerPropTypes),
   activeItem: PropTypes.number.isRequired,
   setActiveItem: PropTypes.func.isRequired,
   changeCityHandler: PropTypes.func.isRequired,

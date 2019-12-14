@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import {reviewPropTypes} from "../../props-types-validation";
 
 const formatDate = (date) => {
   const curDate = new Date(date);
@@ -33,7 +33,7 @@ const Review = (props) => {
 };
 
 Review.propTypes = {
-  reviewData: PropTypes.object.isRequired,
+  reviewData: reviewPropTypes.isRequired,
 };
 
 

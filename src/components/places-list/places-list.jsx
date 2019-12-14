@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {offerPropTypes} from "../../props-types-validation";
 import PlaceCard from "../place-card/place-card.jsx";
 
 class PlacesList extends PureComponent {
@@ -30,7 +31,7 @@ class PlacesList extends PureComponent {
 }
 
 PlacesList.propTypes = {
-  places: PropTypes.arrayOf(PropTypes.object).isRequired,
+  places: PropTypes.arrayOf(offerPropTypes).isRequired,
   setActiveItem: PropTypes.func.isRequired,
 };
 

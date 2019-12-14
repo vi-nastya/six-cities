@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {cityPropTypes} from "../../props-types-validation";
 
 const CitiesList = (props) => {
   const {cities, activeCity, changeCityHandler} = props;
@@ -19,9 +20,9 @@ const CitiesList = (props) => {
 };
 
 CitiesList.propTypes = {
-  activeCity: PropTypes.object.isRequired,
+  activeCity: cityPropTypes,
   changeCityHandler: PropTypes.func.isRequired,
-  cities: PropTypes.arrayOf(PropTypes.object).isRequired,
+  cities: PropTypes.arrayOf(cityPropTypes).isRequired,
 };
 
 export {CitiesList};

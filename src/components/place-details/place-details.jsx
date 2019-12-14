@@ -1,12 +1,12 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {offerPropTypes, reviewPropTypes} from "../../props-types-validation";
 import Header from "../header/header.jsx";
 import ReviewForm from "../review-form/review-form.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import PlaceCard from "../place-card/place-card.jsx";
 import {connect} from "react-redux";
 import {DataOperation} from "../../reducer/data-reducer/data-reducer";
-import {UserOperation} from "../../reducer/user-reducer/user-reducer";
 import {getOfferById, getNearbyPlaces} from "../../selectors/selectors";
 import withReviewSubmit from "../../hocs/with-review-submit/with-review-submit.jsx";
 import Map from "../map/map.jsx";
@@ -154,7 +154,7 @@ class PlaceDetails extends PureComponent {
 
 
 PlaceDetails.propTypes = {
-  placeData: PropTypes.object,
+  placeData: offerPropTypes,
   changeFavoriteHandler: PropTypes.func.isRequired,
   onLoadComments: PropTypes.func.isRequired,
   match: PropTypes.shape({
@@ -162,8 +162,8 @@ PlaceDetails.propTypes = {
       id: PropTypes.string.isRequired,
     })
   }),
-  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
-  nearbyPlaces: PropTypes.array.isRequired,
+  reviews: PropTypes.arrayOf(reviewPropTypes),
+  nearbyPlaces: PropTypes.arrayOf(offerPropTypes),
   isAuthorizationRequired: PropTypes.bool.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
 };

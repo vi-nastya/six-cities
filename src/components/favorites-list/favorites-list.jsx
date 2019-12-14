@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {offerPropTypes} from "../../props-types-validation";
 import {connect} from "react-redux";
 import {DataOperation} from "../../reducer/data-reducer/data-reducer";
 import {getGroupedFavoriteOffers} from "../../selectors/selectors";
@@ -96,7 +97,10 @@ class FavoritesList extends PureComponent {
 }
 
 FavoritesList.propTypes = {
-  favoritesData: PropTypes.array.isRequired,
+  favoritesData: PropTypes.arrayOf(PropTypes.shape({
+    city: PropTypes.string,
+    offersList: PropTypes.arrayOf(offerPropTypes),
+  })),
   onLoadFavorites: PropTypes.func.isRequired,
 };
 
