@@ -146,6 +146,7 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
   >
     <p
       className="reviews__help"
+      style={Object {}}
     >
       To submit review please make sure to set 
       <span
@@ -163,7 +164,6 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
     </p>
     <button
       className="reviews__submit form__submit button"
-      disabled={false}
       type="submit"
     >
       Submit

@@ -33,6 +33,9 @@ const UserOperation = {
             dispatch(UserActionCreator.requireAuthorization(false));
             dispatch(UserActionCreator.saveUser(response.data));
           }
+        }).catch(() => {
+          dispatch(UserActionCreator.requireAuthorization(true));
+          dispatch(UserActionCreator.saveUser(null));
         });
     };
   }

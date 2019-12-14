@@ -12,6 +12,7 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import withSorting from "../../hocs/with-sorting/with-sorting.jsx";
 import {getCitiesList, getOffersForCity} from "../../selectors/selectors";
 import Header from "../header/header.jsx";
+import MainEmpty from "../main-empty/main-empty.jsx";
 
 const SortingWrapped = withSorting(Sorting);
 
@@ -34,32 +35,32 @@ const MainPage = (props) => {
 
     <div className="page page--gray page--main">
       <Header/>
-
-      <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <CitiesList
-            activeCity={city}
-            changeCityHandler={(newCity) => changeCityHandler(newCity)}
-            cities={citiesList}
-          />
-        </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersForCity.length} places to stay in {city.name}</b>
-              <SortingWrapped changeSortingHandler={(newSortType) => changeSortingHandler(newSortType)} sortType={sortType}/>
-              <PlacesList places={offersForCity} setActiveItem={setActiveItem}/>
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map points={offersForCity.map((offer) => [offer.location.latitude, offer.location.longitude])} activePoint={activeItem} city={[city.location.latitude, city.location.longitude]}/>
+      {offersForCity.length ?
+        <main className="page__main page__main--index">
+          <h1 className="visually-hidden">Cities</h1>
+          <div className="tabs">
+            <CitiesList
+              activeCity={city}
+              changeCityHandler={(newCity) => changeCityHandler(newCity)}
+              cities={citiesList}
+            />
+          </div>
+          <div className="cities">
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{offersForCity.length} places to stay in {city.name}</b>
+                <SortingWrapped changeSortingHandler={(newSortType) => changeSortingHandler(newSortType)} sortType={sortType}/>
+                <PlacesList places={offersForCity} setActiveItem={setActiveItem}/>
               </section>
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  <Map points={offersForCity.map((offer) => [offer.location.latitude, offer.location.longitude])} activePoint={activeItem} city={[city.location.latitude, city.location.longitude]}/>
+                </section>
+              </div>
             </div>
           </div>
-        </div>
-      </main>
+        </main> : <MainEmpty/>}
     </div>
   </section>;
 };

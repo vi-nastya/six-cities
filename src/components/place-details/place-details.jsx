@@ -28,7 +28,14 @@ class PlaceDetails extends PureComponent {
   }
 
   render() {
-    const {placeData, changeFavoriteHandler, reviews, nearbyPlaces, isAuthorizationRequired, onFormSubmit} = this.props;
+    const {placeData,
+      changeFavoriteHandler,
+      reviews,
+      nearbyPlaces,
+      isAuthorizationRequired,
+      onFormSubmit,
+      isSendingReview,
+      reviewSendingError} = this.props;
     if (!placeData) {
       return <h2>Loading</h2>;
     }
@@ -127,7 +134,11 @@ class PlaceDetails extends PureComponent {
                 <section className="property__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                   {reviews.length > 0 ? <ReviewsList reviewsData={reviews}/> : ``}
-                  {!isAuthorizationRequired && <ReviewFormWrapped onFormSubmit={(commentData, resetForm) => onFormSubmit(placeData.id, commentData, resetForm)}/>}
+                  {!isAuthorizationRequired && <ReviewFormWrapped
+                    onFormSubmit={(commentData, resetForm) => onFormSubmit(placeData.id, commentData, resetForm)}
+                    isSendingReview={isSendingReview}
+                    reviewSendingError={reviewSendingError}
+                  />}
                 </section>
               </div>
             </div>
@@ -166,6 +177,8 @@ PlaceDetails.propTypes = {
   nearbyPlaces: PropTypes.arrayOf(offerPropTypes),
   isAuthorizationRequired: PropTypes.bool.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
+  isSendingReview: PropTypes.bool.isRequired,
+  reviewSendingError: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -174,6 +187,8 @@ const mapStateToProps = (state, ownProps) => {
     reviews: state.data.comments,
     nearbyPlaces: getNearbyPlaces(state, ownProps.match.params.id),
     isAuthorizationRequired: state.user.isAuthorizationRequired,
+    isSendingReview: state.data.isSendingReview,
+    reviewSendingError: state.data.reviewSendingError,
   });
 };
 

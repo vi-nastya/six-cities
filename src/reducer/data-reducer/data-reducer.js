@@ -11,6 +11,8 @@ const initialState = {
   comments: [],
   favoriteOffers: [],
   sortType: SORT_TYPES[0],
+  isSendingReview: false,
+  reviewSendingError: false,
 };
 
 const DataActionCreator = {
@@ -38,6 +40,14 @@ const DataActionCreator = {
     type: `CHANGE_SORT`,
     payload: sortType,
   }),
+  updateSendingReviewStatus: (newStatus) => ({
+    type: `UPDATE_SENDING_REVIEW_STATUS`,
+    payload: newStatus,
+  }),
+  updateReviewErrorStatus: (newStatus) => ({
+    type: `UPDATE_REVIEW_ERROR_STATUS`,
+    payload: newStatus,
+  })
 };
 
 const DataOperation = {
@@ -61,12 +71,17 @@ const DataOperation = {
       });
   },
   addComment: (offerId, commentData, resetForm) => (dispatch, _getState, api) => {
+    dispatch(DataActionCreator.updateSendingReviewStatus(true));
     return api.post(`/comments/${offerId}`, commentData)
       .then((response) => {
         if (response.status === SUCCESS_STATUS) {
           dispatch(DataActionCreator.loadComments(response.data));
+          dispatch(DataActionCreator.updateReviewErrorStatus(false));
           resetForm();
+        } else {
+          dispatch(DataActionCreator.updateReviewErrorStatus(true));
         }
+        dispatch(DataActionCreator.updateSendingReviewStatus(false));
       });
   },
   loadFavorites: () => (dispatch, _getState, api) => {
@@ -112,6 +127,14 @@ const dataReducer = (state = initialState, action) => {
         favoriteOffers: formattedFavoritesData
       });
     }
+    case `UPDATE_SENDING_REVIEW_STATUS`:
+      return Object.assign({}, state, {
+        isSendingReview: action.payload,
+      });
+    case `UPDATE_REVIEW_ERROR_STATUS`:
+      return Object.assign({}, state, {
+        reviewSendingError: action.payload,
+      });
   }
 
   return state;

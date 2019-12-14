@@ -10,7 +10,7 @@ jest.mock(`react-router-dom`, () => ({
 }));
 
 
-it(`ReviewForm component is rendered correctly after relaunch`, () => {
+it(`MainPage component is rendered correctly after relaunch`, () => {
   const tree = renderer.create(<MainPage
     city={offers[0].city}
     offersForCity={offers}
