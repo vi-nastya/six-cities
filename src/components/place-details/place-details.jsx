@@ -5,7 +5,8 @@ import ReviewForm from "../review-form/review-form.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import PlaceCard from "../place-card/place-card.jsx";
 import {connect} from "react-redux";
-import {Operation} from "../../reducer";
+import {DataOperation} from "../../reducer/data-reducer/data-reducer";
+import {UserOperation} from "../../reducer/user-reducer/user-reducer";
 import {getOfferById, getNearbyPlaces} from "../../selectors/selectors";
 import withReviewSubmit from "../../hocs/with-review-submit/with-review-submit.jsx";
 import Map from "../map/map.jsx";
@@ -170,21 +171,21 @@ PlaceDetails.propTypes = {
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
     placeData: getOfferById(state, ownProps.match.params.id),
-    reviews: state.comments,
+    reviews: state.data.comments,
     nearbyPlaces: getNearbyPlaces(state, ownProps.match.params.id),
-    isAuthorizationRequired: state.isAuthorizationRequired,
+    isAuthorizationRequired: state.user.isAuthorizationRequired,
   });
 };
 
 const mapDispatchToProps = (dispatch) => ({
   changeFavoriteHandler: (placeData) => {
-    dispatch(Operation.updateFavoriteStatus(placeData));
+    dispatch(DataOperation.updateFavoriteStatus(placeData));
   },
   onLoadComments: (offerId) => {
-    dispatch(Operation.loadComments(offerId));
+    dispatch(DataOperation.loadComments(offerId));
   },
   onFormSubmit: (offerId, commentData, resetForm) => {
-    dispatch(Operation.addComment(offerId, commentData, resetForm));
+    dispatch(DataOperation.addComment(offerId, commentData, resetForm));
   },
 });
 

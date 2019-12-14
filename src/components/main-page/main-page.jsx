@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {ActionCreator} from "../../reducer";
+import {UserActionCreator} from "../../reducer/user-reducer/user-reducer";
+import {DataActionCreator} from "../../reducer/data-reducer/data-reducer";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
@@ -79,19 +80,19 @@ MainPage.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  city: state.city,
+  city: state.data.city,
   offersForCity: getOffersForCity(state),
   citiesList: getCitiesList(state),
-  offers: state.offers,
-  sortType: state.sortType,
+  offers: state.data.offers,
+  sortType: state.data.sortType,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeCityHandler: (city) => {
-    dispatch(ActionCreator.changeCity(city));
+    dispatch(DataActionCreator.changeCity(city));
   },
   changeSortingHandler: (sortType) => {
-    dispatch(ActionCreator.changeSortType(sortType));
+    dispatch(DataActionCreator.changeSortType(sortType));
   }
 });
 

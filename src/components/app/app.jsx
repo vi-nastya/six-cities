@@ -6,7 +6,7 @@ import MainPage from '../main-page/main-page.jsx';
 import SignInForm from "../sign-in-form/sign-in-form.jsx";
 import PlaceDetails from "../place-details/place-details.jsx";
 import FavoritesList from "../favorites-list/favorites-list.jsx";
-import {Operation} from "../../reducer";
+import {UserOperation} from "../../reducer/user-reducer/user-reducer";
 import withPrivateRoute from "../../hocs/with-private-route/with-private-route.jsx";
 
 const App = (props) => {
@@ -29,12 +29,12 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  isAuthorizationRequired: state.isAuthorizationRequired,
+  isAuthorizationRequired: state.user.isAuthorizationRequired,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   login: (email, password) => {
-    dispatch(Operation.login(email, password));
+    dispatch(UserOperation.login(email, password));
   }
 });
 

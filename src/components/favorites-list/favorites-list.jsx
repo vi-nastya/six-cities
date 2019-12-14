@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {Operation} from "../../reducer";
+import {DataOperation} from "../../reducer/data-reducer/data-reducer";
 import {getGroupedFavoriteOffers} from "../../selectors/selectors";
 import PlaceCard from "../place-card/place-card.jsx";
 import Header from "../header/header.jsx";
@@ -108,7 +108,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadFavorites: () => {
-    dispatch(Operation.loadFavorites());
+    dispatch(DataOperation.loadFavorites());
   }
 });
 
