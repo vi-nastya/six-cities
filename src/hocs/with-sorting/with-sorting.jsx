@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {SORT_TYPES} from "../../components/sorting/sorting.jsx";
+import {SORT_TYPES} from "../../constants";
 
 const withSorting = (Component) => {
   class WithSorting extends PureComponent {

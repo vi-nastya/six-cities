@@ -1,11 +1,13 @@
 import {convertApiToApp, convertCommentApiToApp} from '../../utils';
 
-import {SORT_TYPES} from "../../components/sorting/sorting.jsx";
+import {SORT_TYPES} from "../../constants";
 
 const SUCCESS_STATUS = 200;
 
+const EMPTY_CITY = {name: ``, location: {latitude: 0, longitude: 0}};
+
 const initialState = {
-  city: {name: ``, location: {latitude: 0, longitude: 0}},
+  city: EMPTY_CITY,
   offers: [],
   offersForCity: [],
   comments: [],
@@ -106,7 +108,7 @@ const dataReducer = (state = initialState, action) => {
       const offersData = action.payload.map(convertApiToApp);
       return Object.assign({}, state, {
         offers: offersData,
-        city: offersData[0].city, // TODO: replace with random city
+        city: offersData[0] ? offersData[0].city : EMPTY_CITY, // TODO: replace with random city
       });
     }
     case `UPDATE_FAVORITE_STATUS`:

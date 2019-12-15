@@ -1,24 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-export const SORT_TYPES = [
-  {
-    name: `DEFAULT`,
-    text: `Popular`
-  },
-  {
-    name: `PRICE_ASC`,
-    text: `Price: low to high`
-  },
-  {
-    name: `PRICE_DESC`,
-    text: `Price: high to low`
-  },
-  {
-    name: `RATING`,
-    text: `Top rated first`
-  },
-];
+import {SORT_TYPES} from "../../constants";
 
 const Sorting = (props) => {
   const {isOpen, activeSortType, toggleSortListHandler, sortTypeClickHandler} = props;

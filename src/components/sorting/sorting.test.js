@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Sorting, {SORT_TYPES} from "./sorting";
+import Sorting from "./sorting";
+import {SORT_TYPES} from "../../constants";
 
 it(`Sorting component is rendered correctly after relaunch`, () => {
   const tree = renderer.create(<Sorting isOpen={true}

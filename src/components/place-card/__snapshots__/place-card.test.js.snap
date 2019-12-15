@@ -46,7 +46,7 @@ exports[`Place Card is rendered correctly after relaunch 1`] = `
           className="place-card__price-value"
         >
           €
-          80
+          120
         </b>
         <span
           className="place-card__price-text"
@@ -55,7 +55,7 @@ exports[`Place Card is rendered correctly after relaunch 1`] = `
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button place-card__bookmark-button--active"
+        className="place-card__bookmark-button button"
         type="button"
       >
         <svg
@@ -83,7 +83,7 @@ exports[`Place Card is rendered correctly after relaunch 1`] = `
         <span
           style={
             Object {
-              "width": "80%",
+              "width": "100%",
             }
           }
         />
@@ -100,7 +100,7 @@ exports[`Place Card is rendered correctly after relaunch 1`] = `
     <p
       className="place-card__type"
     >
-      Private room
+      apartment
     </p>
   </div>
 </article>

@@ -94,10 +94,10 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
               <h1
                 className="property__name"
               >
-                Wood and stone place
+                Beautiful & luxurious studio at great location
               </h1>
               <button
-                className="property__bookmark-button button property__bookmark-button--active"
+                className="property__bookmark-button button "
                 onClick={[Function]}
                 type="button"
               >
@@ -126,7 +126,7 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
                 <span
                   style={
                     Object {
-                      "width": "80%",
+                      "width": "100%",
                     }
                   }
                 />
@@ -139,7 +139,7 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
               <span
                 className="property__rating-value rating__value"
               >
-                4
+                4.8
               </span>
             </div>
             <ul
@@ -148,19 +148,19 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
               <li
                 className="property__feature property__feature--entire"
               >
-                Private room
+                apartment
               </li>
               <li
                 className="property__feature property__feature--bedrooms"
               >
-                2
+                3
                  Bedrooms
               </li>
               <li
                 className="property__feature property__feature--adults"
               >
                 Max 
-                2
+                4
                  adults
               </li>
             </ul>
@@ -171,7 +171,7 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
                 className="property__price-value"
               >
                 €
-                80
+                120
               </b>
               <span
                 className="property__price-text"
@@ -247,7 +247,7 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
                 <span
                   className="property__user-name"
                 >
-                  Angelina
+                  Max
                 </span>
                 
               </div>
@@ -256,7 +256,9 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
               >
                 <p
                   className="property__text"
-                />
+                >
+                  A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
+                </p>
               </div>
             </div>
             <section
@@ -269,71 +271,12 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
                 <span
                   className="reviews__amount"
                 >
-                  2
+                  1
                 </span>
               </h2>
               <ul
                 className="reviews__list"
               >
-                <li
-                  className="reviews__item"
-                >
-                  <div
-                    className="reviews__user user"
-                  >
-                    <div
-                      className="reviews__avatar-wrapper user__avatar-wrapper"
-                    >
-                      <img
-                        alt="Reviews avatar"
-                        className="reviews__avatar user__avatar"
-                        height="54"
-                        src="img/2.png"
-                        width="54"
-                      />
-                    </div>
-                    <span
-                      className="reviews__user-name"
-                    >
-                      Mark
-                    </span>
-                  </div>
-                  <div
-                    className="reviews__info"
-                  >
-                    <div
-                      className="reviews__rating rating"
-                    >
-                      <div
-                        className="reviews__stars rating__stars"
-                      >
-                        <span
-                          style={
-                            Object {
-                              "width": "40%",
-                            }
-                          }
-                        />
-                        <span
-                          className="visually-hidden"
-                        >
-                          Rating
-                        </span>
-                      </div>
-                    </div>
-                    <p
-                      className="reviews__text"
-                    >
-                      A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.
-                    </p>
-                    <time
-                      className="reviews__time"
-                      dateTime="2019-04-24"
-                    >
-                      May 2019
-                    </time>
-                  </div>
-                </li>
                 <li
                   className="reviews__item"
                 >
@@ -404,19 +347,19 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
             activePoint={0}
             city={
               Array [
-                52.3909553943508,
-                4.929309666406198,
+                52,
+                4.5,
               ]
             }
             points={
               Array [
                 Array [
-                  52.3909553943508,
-                  4.85309666406198,
+                  56,
+                  3,
                 ],
                 Array [
-                  52.369553943508,
-                  4.85309666406198,
+                  52,
+                  30,
                 ],
               ]
             }
@@ -444,7 +387,11 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
             >
               <div
                 className="place-card__mark"
-                style={Object {}}
+                style={
+                  Object {
+                    "display": "none",
+                  }
+                }
               >
                 <span>
                   Premium
@@ -460,7 +407,7 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src=""
+                    src="img/1.png"
                     width="260"
                   />
                 </a>
@@ -478,7 +425,7 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      120
+                      1
                     </b>
                     <span
                       className="place-card__price-text"
@@ -487,7 +434,7 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button"
+                    className="place-card__bookmark-button button place-card__bookmark-button--active"
                     type="button"
                   >
                     <svg
@@ -532,7 +479,7 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
                 <p
                   className="place-card__type"
                 >
-                  Apartment
+                  apartment
                 </p>
               </div>
             </article>
