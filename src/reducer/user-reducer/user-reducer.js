@@ -1,5 +1,5 @@
 import {convertAuthApiToApp} from '../../utils';
-import {SUCCESS_CODE} from "../../constants";
+import {SUCCESS_CODE, ActionType} from "../../constants";
 
 const initialState = {
   isAuthorizationRequired: true,
@@ -8,11 +8,11 @@ const initialState = {
 
 const UserActionCreator = {
   requireAuthorization: (flag) => ({
-    type: `REQUIRE_AUTHORIZATION`,
+    type: ActionType.REQUIRE_AUTHORIZATION,
     payload: flag,
   }),
   saveUser: (userData) => ({
-    type: `SAVE_USER`,
+    type: ActionType.SAVE_USER,
     payload: userData,
   }),
 };
@@ -46,11 +46,11 @@ const UserOperation = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case `REQUIRE_AUTHORIZATION`:
+    case ActionType.REQUIRE_AUTHORIZATION:
       return Object.assign({}, state, {
         isAuthorizationRequired: action.payload,
       });
-    case `SAVE_USER`:
+    case ActionType.SAVE_USER:
       return Object.assign({}, state, {
         user: convertAuthApiToApp(action.payload),
       });

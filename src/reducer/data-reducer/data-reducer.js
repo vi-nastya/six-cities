@@ -1,5 +1,5 @@
 import {convertApiToApp, convertCommentApiToApp, getRandomNumber} from '../../utils';
-import {SORT_TYPES, SUCCESS_CODE} from "../../constants";
+import {SORT_TYPES, SUCCESS_CODE, ActionType} from "../../constants";
 
 const EMPTY_CITY = {name: ``, location: {latitude: 0, longitude: 0}};
 
@@ -16,35 +16,35 @@ const initialState = {
 
 const DataActionCreator = {
   changeCity: (newCity) => ({
-    type: `CHANGE_CITY`,
+    type: ActionType.CHANGE_CITY,
     payload: newCity
   }),
   loadOffers: (offers) => ({
-    type: `LOAD_OFFERS`,
+    type: ActionType.LOAD_OFFERS,
     payload: offers,
   }),
   updateFavoriteStatus: (offerData) => ({
-    type: `UPDATE_FAVORITE_STATUS`,
+    type: ActionType.UPDATE_FAVORITE_STATUS,
     payload: offerData,
   }),
   loadComments: (commentsData) => ({
-    type: `LOAD_COMMENTS`,
+    type: ActionType.LOAD_COMMENTS,
     payload: commentsData,
   }),
   loadFavorites: (favoritesData) => ({
-    type: `LOAD_FAVORITES`,
+    type: ActionType.LOAD_FAVORITES,
     payload: favoritesData,
   }),
   changeSortType: (sortType) => ({
-    type: `CHANGE_SORT`,
+    type: ActionType.CHANGE_SORT,
     payload: sortType,
   }),
   updateSendingReviewStatus: (newStatus) => ({
-    type: `UPDATE_SENDING_REVIEW_STATUS`,
+    type: ActionType.UPDATE_SENDING_REVIEW_STATUS,
     payload: newStatus,
   }),
   updateReviewErrorStatus: (newStatus) => ({
-    type: `UPDATE_REVIEW_ERROR_STATUS`,
+    type: ActionType.UPDATE_REVIEW_ERROR_STATUS,
     payload: newStatus,
   })
 };
@@ -93,15 +93,15 @@ const DataOperation = {
 
 const dataReducer = (state = initialState, action) => {
   switch (action.type) {
-    case `CHANGE_CITY`:
+    case ActionType.CHANGE_CITY:
       return Object.assign({}, state, {
         city: action.payload
       });
-    case `CHANGE_SORT`:
+    case ActionType.CHANGE_SORT:
       return Object.assign({}, state, {
         sortType: action.payload
       });
-    case `LOAD_OFFERS`: {
+    case ActionType.LOAD_OFFERS: {
       const offersData = action.payload.map(convertApiToApp);
       const newCity = offersData.length ? offersData[getRandomNumber(offersData.length)].city : EMPTY_CITY;
       return Object.assign({}, state, {
@@ -109,25 +109,25 @@ const dataReducer = (state = initialState, action) => {
         city: newCity
       });
     }
-    case `UPDATE_FAVORITE_STATUS`:
+    case ActionType.UPDATE_FAVORITE_STATUS:
       return Object.assign({}, state, {
         offers: state.offers.map((offer) => offer.id === action.payload.id ? convertApiToApp(action.payload) : offer)
       });
-    case `LOAD_COMMENTS`:
+    case ActionType.LOAD_COMMENTS:
       return Object.assign({}, state, {
         comments: action.payload.map(convertCommentApiToApp),
       });
-    case `LOAD_FAVORITES`: {
+    case ActionType.LOAD_FAVORITES: {
       const formattedFavoritesData = action.payload.map(convertApiToApp);
       return Object.assign({}, state, {
         favoriteOffers: formattedFavoritesData
       });
     }
-    case `UPDATE_SENDING_REVIEW_STATUS`:
+    case ActionType.UPDATE_SENDING_REVIEW_STATUS:
       return Object.assign({}, state, {
         isSendingReview: action.payload,
       });
-    case `UPDATE_REVIEW_ERROR_STATUS`:
+    case ActionType.UPDATE_REVIEW_ERROR_STATUS:
       return Object.assign({}, state, {
         reviewSendingError: action.payload,
       });
