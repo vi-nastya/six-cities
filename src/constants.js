@@ -12,7 +12,7 @@ export const ActionType = {
 };
 export const RATING_LABELS = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
 export const MAX_RATING = 5;
-export const RATING_PERCENT = 100;
+export const RATING_PERCENT = 20;
 
 export const MAX_NEARBY_PLACES = 3;
 

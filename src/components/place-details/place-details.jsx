@@ -10,7 +10,7 @@ import {DataOperation} from "../../reducer/data-reducer/data-reducer";
 import {getOfferById, getNearbyPlaces, getOffersForCity} from "../../selectors/selectors";
 import withReviewSubmit from "../../hocs/with-review-submit/with-review-submit.jsx";
 import Map from "../map/map.jsx";
-import {MAX_RATING, RATING_PERCENT, PlaceCardType} from "../../constants";
+import {RATING_PERCENT, PlaceCardType} from "../../constants";
 
 const ReviewFormWrapped = withReviewSubmit(ReviewForm);
 class PlaceDetails extends PureComponent {
@@ -87,7 +87,7 @@ class PlaceDetails extends PureComponent {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: `${Math.round(placeData.rating / MAX_RATING * RATING_PERCENT)}%`}}></span>
+                    <span style={{width: `${Math.round(placeData.rating) * RATING_PERCENT}%`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value">{placeData.rating}</span>

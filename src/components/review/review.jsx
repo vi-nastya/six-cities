@@ -1,5 +1,6 @@
 import React from "react";
 import {reviewPropTypes} from "../../props-types-validation";
+import {RATING_PERCENT} from "../../constants";
 
 const formatDate = (date) => {
   const curDate = new Date(date);
@@ -20,7 +21,7 @@ const Review = (props) => {
     <div className="reviews__info">
       <div className="reviews__rating rating">
         <div className="reviews__stars rating__stars">
-          <span style={{width: `${Math.round(reviewData.rating) * 20}%`}}></span>
+          <span style={{width: `${Math.round(reviewData.rating) * RATING_PERCENT}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>

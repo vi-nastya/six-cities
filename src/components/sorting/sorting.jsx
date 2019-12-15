@@ -3,16 +3,16 @@ import PropTypes from "prop-types";
 import {SORT_TYPES} from "../../constants";
 
 const Sorting = (props) => {
-  const {isOpen, activeSortType, toggleSortListHandler, sortTypeClickHandler} = props;
+  const {isOpen, activeSortType, onSortToggle, onSortChange} = props;
   return <form className="places__sorting" action="#" method="get">
     <span className="places__sorting-caption">Sort by </span>
-    <span className="places__sorting-type" tabIndex="0" onClick={toggleSortListHandler}>
+    <span className="places__sorting-type" tabIndex="0" onClick={onSortToggle}>
       {activeSortType.text}
       <svg className="places__sorting-arrow" width="7" height="4">
         <use xlinkHref="#icon-arrow-select"></use>
       </svg>
     </span>
-    <ul className={`places__options places__options--custom ${isOpen ? `places__options--opened` : ``}`} onClick={sortTypeClickHandler}>
+    <ul className={`places__options places__options--custom ${isOpen ? `places__options--opened` : ``}`} onClick={onSortChange}>
       {SORT_TYPES.map((sortType, index) =>
         <li key={`sort-type-${index}`}
           className={`places__option ${sortType.name === activeSortType ? `places__option--active` : ``}`}
@@ -31,8 +31,8 @@ Sorting.propTypes = {
     name: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
   }),
-  toggleSortListHandler: PropTypes.func.isRequired,
-  sortTypeClickHandler: PropTypes.func.isRequired,
+  onSortToggle: PropTypes.func.isRequired,
+  onSortChange: PropTypes.func.isRequired,
 };
 
 export default Sorting;

@@ -17,7 +17,7 @@ import MainEmpty from "../main-empty/main-empty.jsx";
 const SortingWrapped = withSorting(Sorting);
 
 const MainPage = (props) => {
-  const {city, offersForCity, citiesList, activeItem, setActiveItem, changeCityHandler, changeSortingHandler, sortType} = props;
+  const {city, offersForCity, citiesList, activeItem, setActiveItem, onCityChange, onSortTypeChange, sortType} = props;
   return <section className="welcome">
     <div style={{display: `none`}}>
       <svg xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +41,7 @@ const MainPage = (props) => {
           <div className="tabs">
             <CitiesList
               activeCity={city}
-              changeCityHandler={(newCity) => changeCityHandler(newCity)}
+              onCityChange={(newCity) => onCityChange(newCity)}
               cities={citiesList}
             />
           </div>
@@ -50,7 +50,7 @@ const MainPage = (props) => {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{offersForCity.length} places to stay in {city.name}</b>
-                <SortingWrapped changeSortingHandler={(newSortType) => changeSortingHandler(newSortType)} sortType={sortType}/>
+                <SortingWrapped onSortTypeChange={(newSortType) => onSortTypeChange(newSortType)} sortType={sortType}/>
                 <PlacesList places={offersForCity} setActiveItem={setActiveItem}/>
               </section>
               <div className="cities__right-section">
@@ -72,8 +72,8 @@ MainPage.propTypes = {
   offers: PropTypes.arrayOf(offerPropTypes),
   activeItem: PropTypes.number.isRequired,
   setActiveItem: PropTypes.func.isRequired,
-  changeCityHandler: PropTypes.func.isRequired,
-  changeSortingHandler: PropTypes.func.isRequired,
+  onCityChange: PropTypes.func.isRequired,
+  onSortTypeChange: PropTypes.func.isRequired,
   sortType: PropTypes.shape({
     name: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
@@ -89,10 +89,10 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCityHandler: (city) => {
+  onCityChange: (city) => {
     dispatch(DataActionCreator.changeCity(city));
   },
-  changeSortingHandler: (sortType) => {
+  onSortTypeChange: (sortType) => {
     dispatch(DataActionCreator.changeSortType(sortType));
   }
 });

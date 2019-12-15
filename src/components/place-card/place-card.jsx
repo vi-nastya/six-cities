@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {offerPropTypes} from "../../props-types-validation";
 import {Link} from "react-router-dom";
-import {MAX_RATING, RATING_PERCENT} from "../../constants";
+import {RATING_PERCENT} from "../../constants";
 
 const PlaceCard = (props) => {
   const {place, onHoverOn, onHoverOff, cardType} = props;
@@ -32,7 +32,7 @@ const PlaceCard = (props) => {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: `${Math.round(rating / MAX_RATING * RATING_PERCENT)}%`}}></span>
+          <span style={{width: `${Math.round(rating) * RATING_PERCENT}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
