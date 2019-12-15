@@ -1,3 +1,4 @@
+import leaflet from "leaflet";
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   LOAD_OFFERS: `LOAD_OFFERS`,
@@ -55,3 +56,12 @@ export const SORT_TYPES = [
   },
 ];
 
+export const MAP_ZOOM = 12;
+export const MAP_ICON = leaflet.icon({
+  iconUrl: `img/pin.svg`,
+  iconSize: [30, 30]
+});
+export const MAP_ICON_ACTIVE = leaflet.icon({
+  iconUrl: `img/pin-active.svg`,
+  iconSize: [30, 30]
+});
