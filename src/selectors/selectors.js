@@ -32,7 +32,7 @@ export const getCitiesList = createSelector(
 
 export const getOfferById = (state, offerId) => state.data.offers.find((offer) => offer.id === parseInt(offerId, 10));
 
-export const getNearbyPlaces = (state, offerId) => state.data.offers
+export const getNearbyPlaces = (offers, offerId) => offers
   .filter((offer) => offer.id !== parseInt(offerId, 10))
   .slice(0, MAX_NEARBY_PLACES);
 

@@ -7,7 +7,7 @@ import ReviewsList from "../reviews-list/reviews-list.jsx";
 import PlaceCard from "../place-card/place-card.jsx";
 import {connect} from "react-redux";
 import {DataOperation} from "../../reducer/data-reducer/data-reducer";
-import {getOfferById, getNearbyPlaces} from "../../selectors/selectors";
+import {getOfferById, getNearbyPlaces, getOffersForCity} from "../../selectors/selectors";
 import withReviewSubmit from "../../hocs/with-review-submit/with-review-submit.jsx";
 import Map from "../map/map.jsx";
 
@@ -187,7 +187,7 @@ const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
     placeData: getOfferById(state, ownProps.match.params.id),
     reviews: state.data.comments,
-    nearbyPlaces: getNearbyPlaces(state, ownProps.match.params.id),
+    nearbyPlaces: getNearbyPlaces(getOffersForCity(state), ownProps.match.params.id),
     isAuthorizationRequired: state.user.isAuthorizationRequired,
     isSendingReview: state.data.isSendingReview,
     reviewSendingError: state.data.reviewSendingError,
