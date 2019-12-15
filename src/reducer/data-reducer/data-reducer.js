@@ -111,11 +111,7 @@ const dataReducer = (state = initialState, action) => {
     }
     case `UPDATE_FAVORITE_STATUS`:
       return Object.assign({}, state, {
-        offers: [
-          ...state.offers.slice(0, action.payload.id - 1),
-          convertApiToApp(action.payload),
-          ...state.offers.slice(action.payload.id)
-        ]
+        offers: state.offers.map((offer) => offer.id === action.payload.id ? convertApiToApp(action.payload) : offer)
       });
     case `LOAD_COMMENTS`:
       return Object.assign({}, state, {
