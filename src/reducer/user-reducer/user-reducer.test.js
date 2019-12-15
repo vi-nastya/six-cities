@@ -1,6 +1,6 @@
 import {userReducer, UserOperation} from "./user-reducer";
 import {ActionType} from "../../constants";
-import {MOCK_USER, MOCK_USER_SERVER} from "../../mocks";
+import {MOCK_AUTH, MOCK_AUTH_SERVER} from "../../mocks";
 import {createAPI} from "../../api";
 import MockAdapter from "axios-mock-adapter";
 
@@ -16,10 +16,10 @@ describe(`User reducer works correctly`, () => {
   it(`Reducer correctly updates user data`, () => {
     expect(userReducer(initialStoreState, {
       type: ActionType.SAVE_USER,
-      payload: MOCK_USER_SERVER
+      payload: MOCK_AUTH_SERVER
     })).toEqual({
       isAuthorizationRequired: true,
-      user: MOCK_USER
+      user: MOCK_AUTH
     });
   });
   it(`Reducer correctly updates auth flag`, () => {
@@ -42,7 +42,7 @@ describe(`API calls work correctly`, () => {
 
     apiMock
       .onPost(`/login`)
-      .reply(200, MOCK_USER_SERVER);
+      .reply(200, MOCK_AUTH_SERVER);
 
     return loginCaller(dispatch, jest.fn(), api)
       .then(() => {
@@ -53,7 +53,7 @@ describe(`API calls work correctly`, () => {
         });
         expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.SAVE_USER,
-          payload: MOCK_USER_SERVER,
+          payload: MOCK_AUTH_SERVER,
         });
       });
   });

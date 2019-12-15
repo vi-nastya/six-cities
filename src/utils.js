@@ -7,6 +7,16 @@ export const convertUserApiToApp = (ApiUserData) => {
   };
 };
 
+export const convertAuthApiToApp = (ApiUserData) => {
+  return {
+    avatarUrl: ApiUserData.avatar_url,
+    email: ApiUserData.email,
+    id: ApiUserData.id,
+    isPro: ApiUserData.is_pro,
+    name: ApiUserData.name
+  };
+};
+
 export const convertCommentApiToApp = (ApiCommentData) => {
   return {
     comment: ApiCommentData.comment,

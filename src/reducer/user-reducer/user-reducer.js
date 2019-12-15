@@ -1,4 +1,4 @@
-import {convertUserApiToApp} from '../../utils';
+import {convertAuthApiToApp} from '../../utils';
 import {SUCCESS_CODE} from "../../constants";
 
 const initialState = {
@@ -52,7 +52,7 @@ const userReducer = (state = initialState, action) => {
       });
     case `SAVE_USER`:
       return Object.assign({}, state, {
-        user: convertUserApiToApp(action.payload),
+        user: convertAuthApiToApp(action.payload),
       });
   }
 

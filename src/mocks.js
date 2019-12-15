@@ -191,7 +191,25 @@ export const MOCK_REVIEWS = [{
   date: `2019-05-08T14:13:56.569Z`
 }];
 
+export const MOCK_AUTH = {
+  id: 4,
+  isPro: false,
+  name: `Max`,
+  email: `max@test.com`,
+  avatarUrl: `img/1.png`
+};
+
+
 /* eslint-disable camelcase */
+export const MOCK_AUTH_SERVER = {
+  id: 4,
+  is_pro: false,
+  name: `Max`,
+  email: `max@test.com`,
+  avatar_url: `img/1.png`
+};
+
+
 export const MOCK_USER_SERVER = {
   id: 4,
   is_pro: false,
