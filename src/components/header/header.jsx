@@ -37,7 +37,7 @@ Header.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  userEmail: state.user ? state.user.email : ``,
+  userEmail: state.user.user ? state.user.user.email : ``,
 });
 
 

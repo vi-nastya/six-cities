@@ -6,17 +6,17 @@ import MainPage from '../main-page/main-page.jsx';
 import SignInForm from "../sign-in-form/sign-in-form.jsx";
 import PlaceDetails from "../place-details/place-details.jsx";
 import FavoritesList from "../favorites-list/favorites-list.jsx";
-import {Operation} from "../../reducer";
+import {UserOperation} from "../../reducer/user-reducer/user-reducer";
 import withPrivateRoute from "../../hocs/with-private-route/with-private-route.jsx";
 
 const App = (props) => {
-  const {isAuthorizationRequired, login} = props;
+  const {isAuthorizationRequired, onLogin} = props;
   const FavoritesListWrapped = withPrivateRoute(FavoritesList);
   const SignInFormWrapped = withPrivateRoute(SignInForm);
   return <React.Fragment>
     <Switch>
       <Route path="/" component={MainPage} exact />
-      <Route path="/login" render={() => <SignInFormWrapped onFormSubmit={login} hasAccess={isAuthorizationRequired} redirectRoute="/"/>} exact />
+      <Route path="/login" render={() => <SignInFormWrapped onFormSubmit={onLogin} hasAccess={isAuthorizationRequired} redirectRoute="/"/>} exact />
       <Route path="/offer/:id" component={PlaceDetails} exact />
       <Route path="/favorites" render={() => <FavoritesListWrapped hasAccess={!isAuthorizationRequired} redirectRoute="/login"/>} exact />
     </Switch>
@@ -25,16 +25,16 @@ const App = (props) => {
 
 App.propTypes = {
   isAuthorizationRequired: PropTypes.bool.isRequired,
-  login: PropTypes.func.isRequired,
+  onLogin: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  isAuthorizationRequired: state.isAuthorizationRequired,
+  isAuthorizationRequired: state.user.isAuthorizationRequired,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (email, password) => {
-    dispatch(Operation.login(email, password));
+  onLogin: (email, password) => {
+    dispatch(UserOperation.login(email, password));
   }
 });
 

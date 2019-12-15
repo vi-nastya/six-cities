@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {reviewPropTypes} from "../../props-types-validation";
 import Review from "../review/review.jsx";
 
 const MAX_REVIEWS_NUMBER = 10;
@@ -17,7 +18,7 @@ const ReviewsList = (props) => {
 };
 
 ReviewsList.propTypes = {
-  reviewsData: PropTypes.array.isRequired,
+  reviewsData: PropTypes.arrayOf(reviewPropTypes).isRequired,
 };
 
 export default ReviewsList;

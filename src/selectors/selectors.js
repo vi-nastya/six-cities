@@ -1,7 +1,6 @@
 import {createSelector} from 'reselect';
 import _ from "lodash";
-
-const MAX_NEARBY_PLACES = 3;
+import {MAX_NEARBY_PLACES} from "../constants";
 
 const sortOffers = (offers, sortType) => {
   switch (sortType) {
@@ -17,10 +16,10 @@ const sortOffers = (offers, sortType) => {
   return offers;
 };
 
-const getCity = (state) => state.city;
-const getOffers = (state) => state.offers;
-const getFavoriteOffers = (state) => state.favoriteOffers;
-const getSortType = (state) => state.sortType;
+const getCity = (state) => state.data.city;
+const getOffers = (state) => state.data.offers;
+const getFavoriteOffers = (state) => state.data.favoriteOffers;
+const getSortType = (state) => state.data.sortType;
 
 
 export const getCitiesList = createSelector(
@@ -30,8 +29,9 @@ export const getCitiesList = createSelector(
     }
 );
 
-export const getOfferById = (state, offerId) => state.offers.find((offer) => offer.id === parseInt(offerId, 10));
-export const getNearbyPlaces = (state, offerId) => state.offers
+export const getOfferById = (state, offerId) => state.data.offers.find((offer) => offer.id === parseInt(offerId, 10));
+
+export const getNearbyPlaces = (offers, offerId) => offers
   .filter((offer) => offer.id !== parseInt(offerId, 10))
   .slice(0, MAX_NEARBY_PLACES);
 

@@ -1,16 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {offerPropTypes} from "../../props-types-validation";
 import {Link} from "react-router-dom";
+import {RATING_PERCENT} from "../../constants";
 
 const PlaceCard = (props) => {
-  const {place, onHoverOn, onHoverOff, cardClass, imageClass} = props;
+  const {place, onHoverOn, onHoverOff, cardType} = props;
   const {title, type, price, images, rating, isPremium, isFavorite} = place;
 
-  return <article className={`${cardClass} place-card`} onMouseEnter={onHoverOn ? () => onHoverOn() : null} onMouseLeave={onHoverOff ? () => onHoverOff() : null}>
+  return <article className={`${cardType.cardClass} place-card`} onMouseEnter={onHoverOn ? () => onHoverOn() : null} onMouseLeave={onHoverOff ? () => onHoverOff() : null}>
     <div className="place-card__mark" style={!isPremium ? {display: `none`} : {}}>
       <span>Premium</span>
     </div>
-    <div className={`${imageClass} place-card__image-wrapper`}>
+    <div className={`${cardType.imageClass} place-card__image-wrapper`}>
       <a href="#">
         <img className="place-card__image" src={images[0]} width="260" height="200" alt="Place image"/>
       </a>
@@ -30,7 +32,7 @@ const PlaceCard = (props) => {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: `${Math.round(rating) * 20}%`}}></span>
+          <span style={{width: `${Math.round(rating) * RATING_PERCENT}%`}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>
@@ -44,20 +46,13 @@ const PlaceCard = (props) => {
 
 
 PlaceCard.propTypes = {
-  place: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    images: PropTypes.array.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-  }),
+  place: offerPropTypes,
   onHoverOn: PropTypes.func,
   onHoverOff: PropTypes.func,
-  cardClass: PropTypes.string.isRequired,
-  imageClass: PropTypes.string.isRequired,
+  cardType: PropTypes.shape({
+    imageClass: PropTypes.string,
+    cardClass: PropTypes.string
+  })
 };
 
 export default PlaceCard;

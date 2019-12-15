@@ -1,7 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import PlaceCard from "./place-card";
-import {offers} from "../../mocks/offers";
+import {MOCK_OFFERS} from "../../mocks";
+import {PlaceCardType} from "../../constants";
 
 jest.mock(`react-router-dom`, () => ({
   Link: () => null
@@ -10,11 +11,10 @@ jest.mock(`react-router-dom`, () => ({
 
 it(`Place Card is rendered correctly after relaunch`, () => {
   const tree = renderer.create(<PlaceCard
-    place={offers[0]}
+    place={MOCK_OFFERS[0]}
     onHoverOn={jest.fn()}
     onHoverOff={jest.fn()}
-    cardClass={`cities__place-card`}
-    imageClass={`cities__image-wrapper`}
+    cardType={PlaceCardType.MAIN_PAGE}
   />).toJSON();
 
   expect(tree).toMatchSnapshot();

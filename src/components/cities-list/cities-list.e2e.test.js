@@ -7,7 +7,7 @@ Enzyme.configure({adapter: new Adapter()});
 
 
 const clickHandler = jest.fn();
-const citiesList = shallow(<CitiesList cities={[{name: `Moscow`}]} activeCity={{name: `Moscow`}} changeCityHandler={clickHandler}/>);
+const citiesList = shallow(<CitiesList cities={[{name: `Moscow`}]} activeCity={{name: `Moscow`}} onCityChange={clickHandler}/>);
 const cityName = citiesList.find(`.locations__item`);
 cityName.simulate(`click`);
 

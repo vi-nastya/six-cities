@@ -1,30 +1,31 @@
-/* eslint-disable camelcase */
-export const convertAppToApi = (AppPlaceData) => {
+export const convertUserApiToApp = (ApiUserData) => {
   return {
-    bedrooms: AppPlaceData.bedrooms,
-    city: AppPlaceData.city,
-    description: AppPlaceData.description,
-    goods: AppPlaceData.goods,
-    host: {
-      id: AppPlaceData.host.id,
-      name: AppPlaceData.host.name,
-      is_pro: AppPlaceData.host.isPro,
-      avatar_url: AppPlaceData.host.avatarUrl,
-    },
-    id: AppPlaceData.id,
-    images: AppPlaceData.images,
-    is_favorite: AppPlaceData.isFavorite,
-    is_premium: AppPlaceData.isPremium,
-    location: AppPlaceData.location,
-    max_adults: AppPlaceData.maxAdults,
-    preview_image: AppPlaceData.previewImage,
-    price: AppPlaceData.price,
-    rating: AppPlaceData.rating,
-    title: AppPlaceData.title,
-    type: AppPlaceData.type
+    avatarUrl: ApiUserData.avatar_url,
+    id: ApiUserData.id,
+    isPro: ApiUserData.is_pro,
+    name: ApiUserData.name
   };
 };
-/* eslint-enable */
+
+export const convertAuthApiToApp = (ApiUserData) => {
+  return {
+    avatarUrl: ApiUserData.avatar_url,
+    email: ApiUserData.email,
+    id: ApiUserData.id,
+    isPro: ApiUserData.is_pro,
+    name: ApiUserData.name
+  };
+};
+
+export const convertCommentApiToApp = (ApiCommentData) => {
+  return {
+    comment: ApiCommentData.comment,
+    date: ApiCommentData.date,
+    id: ApiCommentData.id,
+    rating: ApiCommentData.rating,
+    user: convertUserApiToApp(ApiCommentData.user),
+  };
+};
 
 export const convertApiToApp = (ApiPlaceData) => {
   return {
@@ -32,12 +33,7 @@ export const convertApiToApp = (ApiPlaceData) => {
     city: ApiPlaceData.city,
     description: ApiPlaceData.description,
     goods: ApiPlaceData.goods,
-    host: {
-      id: ApiPlaceData.host.id,
-      name: ApiPlaceData.host.name,
-      isPro: ApiPlaceData.host.is_pro,
-      avatarUrl: ApiPlaceData.host.avatar_url,
-    },
+    host: convertUserApiToApp(ApiPlaceData.host),
     id: ApiPlaceData.id,
     images: ApiPlaceData.images,
     isFavorite: ApiPlaceData.is_favorite,
@@ -52,17 +48,4 @@ export const convertApiToApp = (ApiPlaceData) => {
   };
 };
 
-export const convertCommentApiToApp = (ApiCommentData) => {
-  return {
-    comment: ApiCommentData.comment,
-    date: ApiCommentData.date,
-    id: ApiCommentData.id,
-    rating: ApiCommentData.rating,
-    user: {
-      avatarUrl: ApiCommentData.user.avatar_url,
-      id: ApiCommentData.user.id,
-      isPro: ApiCommentData.user.is_pro,
-      name: ApiCommentData.user.name
-    },
-  };
-};
+export const getRandomNumber = (maxNumber) => Math.floor(Math.random() * maxNumber);

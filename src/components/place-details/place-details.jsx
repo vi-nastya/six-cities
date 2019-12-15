@@ -1,14 +1,16 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {offerPropTypes, reviewPropTypes} from "../../props-types-validation";
 import Header from "../header/header.jsx";
 import ReviewForm from "../review-form/review-form.jsx";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 import PlaceCard from "../place-card/place-card.jsx";
 import {connect} from "react-redux";
-import {Operation} from "../../reducer";
-import {getOfferById, getNearbyPlaces} from "../../selectors/selectors";
+import {DataOperation} from "../../reducer/data-reducer/data-reducer";
+import {getOfferById, getNearbyPlaces, getOffersForCity} from "../../selectors/selectors";
 import withReviewSubmit from "../../hocs/with-review-submit/with-review-submit.jsx";
 import Map from "../map/map.jsx";
+import {RATING_PERCENT, PlaceCardType} from "../../constants";
 
 const ReviewFormWrapped = withReviewSubmit(ReviewForm);
 class PlaceDetails extends PureComponent {
@@ -21,13 +23,22 @@ class PlaceDetails extends PureComponent {
     onLoadComments(match.params.id);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const {match, onLoadComments} = this.props;
-    onLoadComments(match.params.id);
+    if (prevProps.match.params.id !== match.params.id) {
+      onLoadComments(match.params.id);
+    }
   }
 
   render() {
-    const {placeData, changeFavoriteHandler, reviews, nearbyPlaces, isAuthorizationRequired, onFormSubmit} = this.props;
+    const {placeData,
+      onFavoriteChange,
+      reviews,
+      nearbyPlaces,
+      isAuthorizationRequired,
+      onFormSubmit,
+      isSendingReview,
+      reviewSendingError} = this.props;
     if (!placeData) {
       return <h2>Loading</h2>;
     }
@@ -67,7 +78,7 @@ class PlaceDetails extends PureComponent {
                     {placeData.title}
                   </h1>
                   <button className={`property__bookmark-button button ${placeData.isFavorite ? `property__bookmark-button--active` : ``}`}
-                    type="button" onClick={() => changeFavoriteHandler(placeData)}>
+                    type="button" onClick={() => onFavoriteChange(placeData)}>
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -76,7 +87,7 @@ class PlaceDetails extends PureComponent {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{width: `${Math.round(placeData.rating) * 20}%`}}></span>
+                    <span style={{width: `${Math.round(placeData.rating) * RATING_PERCENT}%`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
                   <span className="property__rating-value rating__value">{placeData.rating}</span>
@@ -126,7 +137,11 @@ class PlaceDetails extends PureComponent {
                 <section className="property__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                   {reviews.length > 0 ? <ReviewsList reviewsData={reviews}/> : ``}
-                  {!isAuthorizationRequired && <ReviewFormWrapped onFormSubmit={(commentData, resetForm) => onFormSubmit(placeData.id, commentData, resetForm)}/>}
+                  {!isAuthorizationRequired && <ReviewFormWrapped
+                    onFormSubmit={(commentData, resetForm) => onFormSubmit(placeData.id, commentData, resetForm)}
+                    isSendingReview={isSendingReview}
+                    reviewSendingError={reviewSendingError}
+                  />}
                 </section>
               </div>
             </div>
@@ -139,8 +154,7 @@ class PlaceDetails extends PureComponent {
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
                 {nearbyPlaces.map((place, index) => <PlaceCard place={place}
-                  cardClass={`near-places__card`}
-                  imageClass={`near-places__image-wrapper`}
+                  cardType={PlaceCardType.NEARBY}
                   key={`nearby-place-${index}`}/>)}
               </div>
             </section>
@@ -153,38 +167,42 @@ class PlaceDetails extends PureComponent {
 
 
 PlaceDetails.propTypes = {
-  placeData: PropTypes.object,
-  changeFavoriteHandler: PropTypes.func.isRequired,
+  placeData: offerPropTypes,
+  onFavoriteChange: PropTypes.func.isRequired,
   onLoadComments: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
     })
   }),
-  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
-  nearbyPlaces: PropTypes.array.isRequired,
+  reviews: PropTypes.arrayOf(reviewPropTypes),
+  nearbyPlaces: PropTypes.arrayOf(offerPropTypes),
   isAuthorizationRequired: PropTypes.bool.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
+  isSendingReview: PropTypes.bool.isRequired,
+  reviewSendingError: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, ownProps, {
     placeData: getOfferById(state, ownProps.match.params.id),
-    reviews: state.comments,
-    nearbyPlaces: getNearbyPlaces(state, ownProps.match.params.id),
-    isAuthorizationRequired: state.isAuthorizationRequired,
+    reviews: state.data.comments,
+    nearbyPlaces: getNearbyPlaces(getOffersForCity(state), ownProps.match.params.id),
+    isAuthorizationRequired: state.user.isAuthorizationRequired,
+    isSendingReview: state.data.isSendingReview,
+    reviewSendingError: state.data.reviewSendingError,
   });
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  changeFavoriteHandler: (placeData) => {
-    dispatch(Operation.updateFavoriteStatus(placeData));
+  onFavoriteChange: (placeData) => {
+    dispatch(DataOperation.updateFavoriteStatus(placeData));
   },
   onLoadComments: (offerId) => {
-    dispatch(Operation.loadComments(offerId));
+    dispatch(DataOperation.loadComments(offerId));
   },
   onFormSubmit: (offerId, commentData, resetForm) => {
-    dispatch(Operation.addComment(offerId, commentData, resetForm));
+    dispatch(DataOperation.addComment(offerId, commentData, resetForm));
   },
 });
 

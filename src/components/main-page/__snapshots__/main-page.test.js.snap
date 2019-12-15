@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
+exports[`MainPage component is rendered correctly after relaunch 1`] = `
 <section
   className="welcome"
 >
@@ -73,7 +73,7 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
                 href="#"
               >
                 <span>
-                  Amsterdam
+                  City1
                 </span>
               </a>
             </li>
@@ -97,9 +97,9 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
             <b
               className="places__found"
             >
-              4
+              3
                places to stay in 
-              Amsterdam
+              City1
             </b>
             <form
               action="#"
@@ -205,7 +205,110 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
                         className="place-card__price-value"
                       >
                         €
-                        80
+                        120
+                      </b>
+                      <span
+                        className="place-card__price-text"
+                      >
+                        / night
+                      </span>
+                    </div>
+                    <button
+                      className="place-card__bookmark-button button"
+                      type="button"
+                    >
+                      <svg
+                        className="place-card__bookmark-icon"
+                        height="19"
+                        width="18"
+                      >
+                        <use
+                          xlinkHref="#icon-bookmark"
+                        />
+                      </svg>
+                      <span
+                        className="visually-hidden"
+                      >
+                        To bookmarks
+                      </span>
+                    </button>
+                  </div>
+                  <div
+                    className="place-card__rating rating"
+                  >
+                    <div
+                      className="place-card__stars rating__stars"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "width": "100%",
+                          }
+                        }
+                      />
+                      <span
+                        className="visually-hidden"
+                      >
+                        Rating
+                      </span>
+                    </div>
+                  </div>
+                  <h2
+                    className="place-card__name"
+                  />
+                  <p
+                    className="place-card__type"
+                  >
+                    apartment
+                  </p>
+                </div>
+              </article>
+              <article
+                className="cities__place-card place-card"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              >
+                <div
+                  className="place-card__mark"
+                  style={
+                    Object {
+                      "display": "none",
+                    }
+                  }
+                >
+                  <span>
+                    Premium
+                  </span>
+                </div>
+                <div
+                  className="cities__image-wrapper place-card__image-wrapper"
+                >
+                  <a
+                    href="#"
+                  >
+                    <img
+                      alt="Place image"
+                      className="place-card__image"
+                      height="200"
+                      src="img/1.png"
+                      width="260"
+                    />
+                  </a>
+                </div>
+                <div
+                  className="place-card__info"
+                >
+                  <div
+                    className="place-card__price-wrapper"
+                  >
+                    <div
+                      className="place-card__price"
+                    >
+                      <b
+                        className="place-card__price-value"
+                      >
+                        €
+                        1
                       </b>
                       <span
                         className="place-card__price-text"
@@ -259,7 +362,7 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
                   <p
                     className="place-card__type"
                   >
-                    Private room
+                    apartment
                   </p>
                 </div>
               </article>
@@ -286,7 +389,7 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
                       alt="Place image"
                       className="place-card__image"
                       height="200"
-                      src=""
+                      src="img/1.png"
                       width="260"
                     />
                   </a>
@@ -341,105 +444,6 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
                       <span
                         style={
                           Object {
-                            "width": "80%",
-                          }
-                        }
-                      />
-                      <span
-                        className="visually-hidden"
-                      >
-                        Rating
-                      </span>
-                    </div>
-                  </div>
-                  <h2
-                    className="place-card__name"
-                  />
-                  <p
-                    className="place-card__type"
-                  >
-                    Apartment
-                  </p>
-                </div>
-              </article>
-              <article
-                className="cities__place-card place-card"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              >
-                <div
-                  className="place-card__mark"
-                  style={Object {}}
-                >
-                  <span>
-                    Premium
-                  </span>
-                </div>
-                <div
-                  className="cities__image-wrapper place-card__image-wrapper"
-                >
-                  <a
-                    href="#"
-                  >
-                    <img
-                      alt="Place image"
-                      className="place-card__image"
-                      height="200"
-                      src=""
-                      width="260"
-                    />
-                  </a>
-                </div>
-                <div
-                  className="place-card__info"
-                >
-                  <div
-                    className="place-card__price-wrapper"
-                  >
-                    <div
-                      className="place-card__price"
-                    >
-                      <b
-                        className="place-card__price-value"
-                      >
-                        €
-                        180
-                      </b>
-                      <span
-                        className="place-card__price-text"
-                      >
-                        / night
-                      </span>
-                    </div>
-                    <button
-                      className="place-card__bookmark-button button place-card__bookmark-button--active"
-                      type="button"
-                    >
-                      <svg
-                        className="place-card__bookmark-icon"
-                        height="19"
-                        width="18"
-                      >
-                        <use
-                          xlinkHref="#icon-bookmark"
-                        />
-                      </svg>
-                      <span
-                        className="visually-hidden"
-                      >
-                        To bookmarks
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    className="place-card__rating rating"
-                  >
-                    <div
-                      className="place-card__stars rating__stars"
-                    >
-                      <span
-                        style={
-                          Object {
                             "width": "40%",
                           }
                         }
@@ -457,110 +461,7 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
                   <p
                     className="place-card__type"
                   >
-                    Apartment
-                  </p>
-                </div>
-              </article>
-              <article
-                className="cities__place-card place-card"
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
-              >
-                <div
-                  className="place-card__mark"
-                  style={
-                    Object {
-                      "display": "none",
-                    }
-                  }
-                >
-                  <span>
-                    Premium
-                  </span>
-                </div>
-                <div
-                  className="cities__image-wrapper place-card__image-wrapper"
-                >
-                  <a
-                    href="#"
-                  >
-                    <img
-                      alt="Place image"
-                      className="place-card__image"
-                      height="200"
-                      src=""
-                      width="260"
-                    />
-                  </a>
-                </div>
-                <div
-                  className="place-card__info"
-                >
-                  <div
-                    className="place-card__price-wrapper"
-                  >
-                    <div
-                      className="place-card__price"
-                    >
-                      <b
-                        className="place-card__price-value"
-                      >
-                        €
-                        90
-                      </b>
-                      <span
-                        className="place-card__price-text"
-                      >
-                        / night
-                      </span>
-                    </div>
-                    <button
-                      className="place-card__bookmark-button button"
-                      type="button"
-                    >
-                      <svg
-                        className="place-card__bookmark-icon"
-                        height="19"
-                        width="18"
-                      >
-                        <use
-                          xlinkHref="#icon-bookmark"
-                        />
-                      </svg>
-                      <span
-                        className="visually-hidden"
-                      >
-                        To bookmarks
-                      </span>
-                    </button>
-                  </div>
-                  <div
-                    className="place-card__rating rating"
-                  >
-                    <div
-                      className="place-card__stars rating__stars"
-                    >
-                      <span
-                        style={
-                          Object {
-                            "width": "100%",
-                          }
-                        }
-                      />
-                      <span
-                        className="visually-hidden"
-                      >
-                        Rating
-                      </span>
-                    </div>
-                  </div>
-                  <h2
-                    className="place-card__name"
-                  />
-                  <p
-                    className="place-card__type"
-                  >
-                    Private room
+                    apartment
                   </p>
                 </div>
               </article>
@@ -576,27 +477,23 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
                 activePoint={-1}
                 city={
                   Array [
-                    52.3909553943508,
-                    4.929309666406198,
+                    52,
+                    4.5,
                   ]
                 }
                 points={
                   Array [
                     Array [
-                      52.3909553943508,
-                      4.85309666406198,
+                      56,
+                      3,
                     ],
                     Array [
-                      52.369553943508,
-                      4.85309666406198,
+                      52,
+                      30,
                     ],
                     Array [
-                      52.3909553943508,
-                      4.929309666406198,
-                    ],
-                    Array [
-                      52.3809553943508,
-                      4.939309666406198,
+                      56,
+                      3,
                     ],
                   ]
                 }

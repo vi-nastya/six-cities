@@ -18,6 +18,7 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
   >
     <input
       className="form__rating-input visually-hidden"
+      disabled={false}
       id="5-stars"
       name="rating"
       onChange={[MockFunction]}
@@ -41,6 +42,7 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
     </label>
     <input
       className="form__rating-input visually-hidden"
+      disabled={false}
       id="4-stars"
       name="rating"
       onChange={[MockFunction]}
@@ -64,6 +66,7 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
     </label>
     <input
       className="form__rating-input visually-hidden"
+      disabled={false}
       id="3-stars"
       name="rating"
       onChange={[MockFunction]}
@@ -87,6 +90,7 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
     </label>
     <input
       className="form__rating-input visually-hidden"
+      disabled={false}
       id="2-stars"
       name="rating"
       onChange={[MockFunction]}
@@ -110,6 +114,7 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
     </label>
     <input
       className="form__rating-input visually-hidden"
+      disabled={false}
       id="1-stars"
       name="rating"
       onChange={[MockFunction]}
@@ -134,6 +139,7 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
   </div>
   <textarea
     className="reviews__textarea form__textarea"
+    disabled={false}
     id="review"
     maxLength={300}
     minLength={50}
@@ -146,6 +152,7 @@ exports[`ReviewForm component is rendered correctly after relaunch 1`] = `
   >
     <p
       className="reviews__help"
+      style={Object {}}
     >
       To submit review please make sure to set 
       <span

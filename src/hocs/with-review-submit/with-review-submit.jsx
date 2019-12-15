@@ -1,8 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-
-const MIN_COMMENT_LENGTH = 50;
-const MAX_COMMENT_LENGTH = 300;
+import {MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH} from "../../constants";
 
 const withReviewSubmit = (Component) => {
   class WithReviewSubmit extends PureComponent {

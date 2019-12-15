@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {ActionCreator} from "../../reducer";
+import {offerPropTypes, cityPropTypes} from "../../props-types-validation";
+import {DataActionCreator} from "../../reducer/data-reducer/data-reducer";
 import PlacesList from "../places-list/places-list.jsx";
 import Map from "../map/map.jsx";
 import CitiesList from "../cities-list/cities-list.jsx";
@@ -11,11 +12,12 @@ import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import withSorting from "../../hocs/with-sorting/with-sorting.jsx";
 import {getCitiesList, getOffersForCity} from "../../selectors/selectors";
 import Header from "../header/header.jsx";
+import MainEmpty from "../main-empty/main-empty.jsx";
 
 const SortingWrapped = withSorting(Sorting);
 
 const MainPage = (props) => {
-  const {city, offersForCity, citiesList, activeItem, setActiveItem, changeCityHandler, changeSortingHandler, sortType} = props;
+  const {city, offersForCity, citiesList, activeItem, setActiveItem, onCityChange, onSortTypeChange, sortType} = props;
   return <section className="welcome">
     <div style={{display: `none`}}>
       <svg xmlns="http://www.w3.org/2000/svg">
@@ -33,45 +35,45 @@ const MainPage = (props) => {
 
     <div className="page page--gray page--main">
       <Header/>
-
-      <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <CitiesList
-            activeCity={city}
-            changeCityHandler={(newCity) => changeCityHandler(newCity)}
-            cities={citiesList}
-          />
-        </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersForCity.length} places to stay in {city.name}</b>
-              <SortingWrapped changeSortingHandler={(newSortType) => changeSortingHandler(newSortType)} sortType={sortType}/>
-              <PlacesList places={offersForCity} setActiveItem={setActiveItem}/>
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map points={offersForCity.map((offer) => [offer.location.latitude, offer.location.longitude])} activePoint={activeItem} city={[city.location.latitude, city.location.longitude]}/>
+      {offersForCity.length ?
+        <main className="page__main page__main--index">
+          <h1 className="visually-hidden">Cities</h1>
+          <div className="tabs">
+            <CitiesList
+              activeCity={city}
+              onCityChange={(newCity) => onCityChange(newCity)}
+              cities={citiesList}
+            />
+          </div>
+          <div className="cities">
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{offersForCity.length} places to stay in {city.name}</b>
+                <SortingWrapped onSortTypeChange={(newSortType) => onSortTypeChange(newSortType)} sortType={sortType}/>
+                <PlacesList places={offersForCity} setActiveItem={setActiveItem}/>
               </section>
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  <Map points={offersForCity.map((offer) => [offer.location.latitude, offer.location.longitude])} activePoint={activeItem} city={[city.location.latitude, city.location.longitude]}/>
+                </section>
+              </div>
             </div>
           </div>
-        </div>
-      </main>
+        </main> : <MainEmpty/>}
     </div>
   </section>;
 };
 
 MainPage.propTypes = {
-  city: PropTypes.object.isRequired,
-  offersForCity: PropTypes.arrayOf(PropTypes.object).isRequired,
-  citiesList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  city: cityPropTypes,
+  offersForCity: PropTypes.arrayOf(offerPropTypes),
+  citiesList: PropTypes.arrayOf(cityPropTypes),
+  offers: PropTypes.arrayOf(offerPropTypes),
   activeItem: PropTypes.number.isRequired,
   setActiveItem: PropTypes.func.isRequired,
-  changeCityHandler: PropTypes.func.isRequired,
-  changeSortingHandler: PropTypes.func.isRequired,
+  onCityChange: PropTypes.func.isRequired,
+  onSortTypeChange: PropTypes.func.isRequired,
   sortType: PropTypes.shape({
     name: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
@@ -79,19 +81,19 @@ MainPage.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  city: state.city,
+  city: state.data.city,
   offersForCity: getOffersForCity(state),
   citiesList: getCitiesList(state),
-  offers: state.offers,
-  sortType: state.sortType,
+  offers: state.data.offers,
+  sortType: state.data.sortType,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCityHandler: (city) => {
-    dispatch(ActionCreator.changeCity(city));
+  onCityChange: (city) => {
+    dispatch(DataActionCreator.changeCity(city));
   },
-  changeSortingHandler: (sortType) => {
-    dispatch(ActionCreator.changeSortType(sortType));
+  onSortTypeChange: (sortType) => {
+    dispatch(DataActionCreator.changeSortType(sortType));
   }
 });
 

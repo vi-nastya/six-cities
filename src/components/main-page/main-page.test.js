@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {MainPage} from "./main-page";
-import {offers} from "../../mocks/offers";
+import {MOCK_OFFERS} from "../../mocks";
 
 jest.mock(`../header/header`, () => jest.fn().mockReturnValue(null));
 jest.mock(`../map/map`, () => `Map`);
@@ -10,16 +10,16 @@ jest.mock(`react-router-dom`, () => ({
 }));
 
 
-it(`ReviewForm component is rendered correctly after relaunch`, () => {
+it(`MainPage component is rendered correctly after relaunch`, () => {
   const tree = renderer.create(<MainPage
-    city={offers[0].city}
-    offersForCity={offers}
-    citiesList={[offers[0].city]}
-    offers={offers}
+    city={MOCK_OFFERS[0].city}
+    offersForCity={MOCK_OFFERS}
+    citiesList={[MOCK_OFFERS[0].city]}
+    offers={MOCK_OFFERS}
     activeItem={-1}
     setActiveItem={jest.fn()}
-    changeCityHandler={jest.fn()}
-    changeSortingHandler={jest.fn()}
+    onCityChange={jest.fn()}
+    onSortTypeChange={jest.fn()}
     sortType={{name: `DEFAULT`, text: `Popular`}}
   />).toJSON();
 

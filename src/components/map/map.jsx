@@ -1,17 +1,7 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
-
-const ZOOM = 12;
-const ICON = leaflet.icon({
-  iconUrl: `img/pin.svg`,
-  iconSize: [30, 30]
-});
-const ICON_ACTIVE = leaflet.icon({
-  iconUrl: `img/pin-active.svg`,
-  iconSize: [30, 30]
-});
-
+import {MAP_ZOOM, MAP_ICON, MAP_ICON_ACTIVE} from "../../constants";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -26,12 +16,12 @@ class Map extends PureComponent {
 
     this._map = leaflet.map(`map`, {
       center: city,
-      zoom: ZOOM,
+      zoom: MAP_ZOOM,
       zoomControl: false,
       marker: true
     });
 
-    this._map.setView(city, ZOOM);
+    this._map.setView(city, MAP_ZOOM);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -50,7 +40,7 @@ class Map extends PureComponent {
   componentDidUpdate() {
     const {points, city} = this.props;
     this.updateMarkers(points);
-    this._map.setView(city, ZOOM);
+    this._map.setView(city, MAP_ZOOM);
   }
 
   render() {
@@ -63,9 +53,9 @@ class Map extends PureComponent {
     this._markers = [];
     points.forEach((point, index) => {
       if (activePoint === index) {
-        this._markers.push(leaflet.marker(point, {icon: ICON_ACTIVE}).addTo(this._map));
+        this._markers.push(leaflet.marker(point, {icon: MAP_ICON_ACTIVE}).addTo(this._map));
       } else {
-        this._markers.push(leaflet.marker(point, {icon: ICON}).addTo(this._map));
+        this._markers.push(leaflet.marker(point, {icon: MAP_ICON}).addTo(this._map));
       }
     });
   }

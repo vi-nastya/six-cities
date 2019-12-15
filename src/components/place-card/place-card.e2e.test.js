@@ -2,18 +2,18 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import PlaceCard from "./place-card";
-import {offers} from "../../mocks/offers";
+import {MOCK_OFFERS} from "../../mocks";
+import {PlaceCardType} from "../../constants";
 
 Enzyme.configure({adapter: new Adapter()});
 
 
 const hoverHandler = jest.fn();
 const welcomeScreen = shallow(<PlaceCard
-  place={offers[0]}
+  place={MOCK_OFFERS[0]}
   onHoverOn={hoverHandler}
   onHoverOff={jest.fn()}
-  cardClass={`cities__place-card`}
-  imageClass={`cities__image-wrapper`}/>);
+  cardType={PlaceCardType.MAIN_PAGE}/>);
 
 welcomeScreen.simulate(`mouseenter`);
 

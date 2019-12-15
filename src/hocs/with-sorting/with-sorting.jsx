@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
-import {SORT_TYPES} from "../../components/sorting/sorting.jsx";
+import {SORT_TYPES} from "../../constants";
 
 const withSorting = (Component) => {
   class WithSorting extends PureComponent {
@@ -22,8 +22,8 @@ const withSorting = (Component) => {
         {...this.props}
         isOpen={this.state.isOpen}
         activeSortType={this.state.activeSortType}
-        toggleSortListHandler={this._toggleSortListHandler}
-        sortTypeClickHandler = {this._sortTypeClickHandler}
+        onSortToggle={this._toggleSortListHandler}
+        onSortChange = {this._sortTypeClickHandler}
       />;
     }
 
@@ -35,13 +35,13 @@ const withSorting = (Component) => {
       const clickedTypeText = evt.target.textContent;
       const newSortType = SORT_TYPES.find((sortType) => sortType.text === clickedTypeText);
       this.setState({isOpen: false, activeSortType: newSortType});
-      this.props.changeSortingHandler(newSortType);
+      this.props.onSortTypeChange(newSortType);
     }
 
   }
 
   WithSorting.propTypes = {
-    changeSortingHandler: PropTypes.func.isRequired,
+    onSortTypeChange: PropTypes.func.isRequired,
     sortType: PropTypes.shape({
       name: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
