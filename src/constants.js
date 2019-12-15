@@ -12,6 +12,7 @@ export const ActionType = {
 };
 export const RATING_LABELS = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
 export const MAX_RATING = 5;
+export const RATING_PERCENT = 100;
 
 export const MAX_NEARBY_PLACES = 3;
 
@@ -19,6 +20,21 @@ export const MIN_COMMENT_LENGTH = 50;
 export const MAX_COMMENT_LENGTH = 300;
 
 export const SUCCESS_CODE = 200;
+
+export const PlaceCardType = {
+  FAVORITE: {
+    cardClass: `favorites__card`,
+    imageClass: `favorites__image-wrapper`
+  },
+  MAIN_PAGE: {
+    cardClass: `cities__place-card`,
+    imageClass: `cities__image-wrapper`
+  },
+  NEARBY: {
+    cardClass: `near-places__card`,
+    imageClass: `near-places__image-wrapper`
+  }
+};
 
 export const SORT_TYPES = [
   {

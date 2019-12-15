@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {offerPropTypes} from "../../props-types-validation";
 import PlaceCard from "../place-card/place-card.jsx";
+import {PlaceCardType} from "../../constants";
 
 class PlacesList extends PureComponent {
   constructor() {
@@ -17,8 +18,7 @@ class PlacesList extends PureComponent {
     return <div className="cities__places-list places__list tabs__content">
       {places.map((place, index) => <PlaceCard
         place={place}
-        cardClass={`cities__place-card`}
-        imageClass={`cities__image-wrapper`}
+        cardType={PlaceCardType.MAIN_PAGE}
         onHoverOn={() => {
           setActiveItem(index);
         }}

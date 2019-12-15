@@ -6,7 +6,7 @@ import {DataOperation} from "../../reducer/data-reducer/data-reducer";
 import {getGroupedFavoriteOffers} from "../../selectors/selectors";
 import PlaceCard from "../place-card/place-card.jsx";
 import Header from "../header/header.jsx";
-
+import {PlaceCardType} from "../../constants";
 class FavoritesList extends PureComponent {
   constructor(props) {
     super(props);
@@ -47,7 +47,7 @@ class FavoritesList extends PureComponent {
                       </div>
                       <div className="favorites__places">
                         {placesGroup.offersList.map((placeData, placeIndex) =>
-                          <PlaceCard cardClass={`favorites__card`} imageClass={`favorites__image-wrapper`} place={placeData} key={`favorite-place-${index}-${placeIndex}`}/>
+                          <PlaceCard cardType={PlaceCardType.FAVORITE} place={placeData} key={`favorite-place-${index}-${placeIndex}`}/>
                         )}
                       </div>
                     </li>
