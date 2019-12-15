@@ -1,4 +1,5 @@
-const SUCCESS_STATUS = 200;
+import {convertUserApiToApp} from '../../utils';
+import {SUCCESS_CODE} from "../../constants";
 
 const initialState = {
   isAuthorizationRequired: true,
@@ -20,8 +21,10 @@ const UserOperation = {
   login: (email, password) => (dispatch, _getState, api) => {
     return api.post(`/login`, {email, password})
       .then((response) => {
-        dispatch(UserActionCreator.requireAuthorization(false));
-        dispatch(UserActionCreator.saveUser(response.data));
+        if (response.status === SUCCESS_CODE) {
+          dispatch(UserActionCreator.requireAuthorization(false));
+          dispatch(UserActionCreator.saveUser(response.data));
+        }
       });
   },
   checkAuth: () => {
@@ -29,7 +32,7 @@ const UserOperation = {
       return api
         .get(`/login`)
         .then((response) => {
-          if (response.status === SUCCESS_STATUS) {
+          if (response.status === SUCCESS_CODE) {
             dispatch(UserActionCreator.requireAuthorization(false));
             dispatch(UserActionCreator.saveUser(response.data));
           }
@@ -49,7 +52,7 @@ const userReducer = (state = initialState, action) => {
       });
     case `SAVE_USER`:
       return Object.assign({}, state, {
-        user: action.payload,
+        user: convertUserApiToApp(action.payload),
       });
   }
 

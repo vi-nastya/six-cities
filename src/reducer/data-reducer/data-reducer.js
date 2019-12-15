@@ -1,8 +1,5 @@
 import {convertApiToApp, convertCommentApiToApp} from '../../utils';
-
-import {SORT_TYPES} from "../../constants";
-
-const SUCCESS_STATUS = 200;
+import {SORT_TYPES, SUCCESS_CODE} from "../../constants";
 
 const EMPTY_CITY = {name: ``, location: {latitude: 0, longitude: 0}};
 
@@ -76,7 +73,7 @@ const DataOperation = {
     dispatch(DataActionCreator.updateSendingReviewStatus(true));
     return api.post(`/comments/${offerId}`, commentData)
       .then((response) => {
-        if (response.status === SUCCESS_STATUS) {
+        if (response.status === SUCCESS_CODE) {
           dispatch(DataActionCreator.loadComments(response.data));
           dispatch(DataActionCreator.updateReviewErrorStatus(false));
           resetForm();

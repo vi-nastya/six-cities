@@ -4,7 +4,7 @@ import {SORT_TYPES, ActionType} from "../../constants";
 import {createAPI} from "../../api";
 import MockAdapter from "axios-mock-adapter";
 
-describe(`load data test`, () => {
+describe(`API calls work correctly`, () => {
   it(`Should make a correct API call to /offers`, function () {
     const dispatch = jest.fn();
     const api = createAPI(dispatch);

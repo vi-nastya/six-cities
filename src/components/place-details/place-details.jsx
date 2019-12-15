@@ -22,9 +22,11 @@ class PlaceDetails extends PureComponent {
     onLoadComments(match.params.id);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const {match, onLoadComments} = this.props;
-    onLoadComments(match.params.id);
+    if (prevProps.match.params.id !== match.params.id) {
+      onLoadComments(match.params.id);
+    }
   }
 
   render() {
