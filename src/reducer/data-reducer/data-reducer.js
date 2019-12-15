@@ -1,4 +1,4 @@
-import {convertApiToApp, convertCommentApiToApp} from '../../utils';
+import {convertApiToApp, convertCommentApiToApp, getRandomNumber} from '../../utils';
 import {SORT_TYPES, SUCCESS_CODE} from "../../constants";
 
 const EMPTY_CITY = {name: ``, location: {latitude: 0, longitude: 0}};
@@ -103,9 +103,10 @@ const dataReducer = (state = initialState, action) => {
       });
     case `LOAD_OFFERS`: {
       const offersData = action.payload.map(convertApiToApp);
+      const newCity = offersData.length ? offersData[getRandomNumber(offersData.length)].city : EMPTY_CITY;
       return Object.assign({}, state, {
         offers: offersData,
-        city: offersData[0] ? offersData[0].city : EMPTY_CITY, // TODO: replace with random city
+        city: newCity
       });
     }
     case `UPDATE_FAVORITE_STATUS`:
