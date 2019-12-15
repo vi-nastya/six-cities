@@ -32,7 +32,7 @@ class PlaceDetails extends PureComponent {
 
   render() {
     const {placeData,
-      changeFavoriteHandler,
+      onFavoriteChange,
       reviews,
       nearbyPlaces,
       isAuthorizationRequired,
@@ -78,7 +78,7 @@ class PlaceDetails extends PureComponent {
                     {placeData.title}
                   </h1>
                   <button className={`property__bookmark-button button ${placeData.isFavorite ? `property__bookmark-button--active` : ``}`}
-                    type="button" onClick={() => changeFavoriteHandler(placeData)}>
+                    type="button" onClick={() => onFavoriteChange(placeData)}>
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -168,7 +168,7 @@ class PlaceDetails extends PureComponent {
 
 PlaceDetails.propTypes = {
   placeData: offerPropTypes,
-  changeFavoriteHandler: PropTypes.func.isRequired,
+  onFavoriteChange: PropTypes.func.isRequired,
   onLoadComments: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -195,7 +195,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  changeFavoriteHandler: (placeData) => {
+  onFavoriteChange: (placeData) => {
     dispatch(DataOperation.updateFavoriteStatus(placeData));
   },
   onLoadComments: (offerId) => {

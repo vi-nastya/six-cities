@@ -5,11 +5,12 @@ import {createAPI} from "../../api";
 import MockAdapter from "axios-mock-adapter";
 
 describe(`API calls work correctly`, () => {
+  const api = createAPI(jest.fn());
+  const apiMock = new MockAdapter(api);
+
   it(`Should make a correct API call to /offers`, function () {
-    const dispatch = jest.fn();
-    const api = createAPI(dispatch);
-    const apiMock = new MockAdapter(api);
     const offerLoader = DataOperation.loadOffers();
+    const dispatch = jest.fn();
 
     apiMock
       .onGet(`/hotels`)
@@ -21,6 +22,74 @@ describe(`API calls work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: `LOAD_OFFERS`,
           payload: [{fake: true}],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /comments`, function () {
+    const id = 0;
+    const resetForm = jest.fn();
+    const dispatch = jest.fn();
+    const commentData = {
+      rating: 4,
+      comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`
+    };
+    const commentCreator = DataOperation.addComment(id, commentData, resetForm);
+
+    apiMock
+      .onPost(`/comments/${id}`, commentData)
+      .reply(200, MOCK_REVIEWS_SERVER);
+
+    return commentCreator(dispatch, jest.fn(), api)
+      .then(() => {
+        expect(resetForm).toHaveBeenCalled();
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.UPDATE_SENDING_REVIEW_STATUS,
+          payload: true,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.LOAD_COMMENTS,
+          payload: MOCK_REVIEWS_SERVER,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: ActionType.UPDATE_REVIEW_ERROR_STATUS,
+          payload: false,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(4, {
+          type: ActionType.UPDATE_SENDING_REVIEW_STATUS,
+          payload: false,
+        });
+      });
+  });
+
+  it(`Should handle errors while posting to /comments correctly`, function () {
+    const id = 0;
+    const resetForm = jest.fn();
+    const dispatch = jest.fn();
+    const commentData = {
+      rating: 4,
+      comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`
+    };
+    const commentCreator = DataOperation.addComment(id, commentData, resetForm);
+
+    apiMock
+      .onPost(`/comments/${id}`, commentData)
+      .reply(401, MOCK_REVIEWS_SERVER);
+
+    return commentCreator(dispatch, jest.fn(), api)
+      .then(() => {
+        expect(resetForm).not.toHaveBeenCalled();
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.UPDATE_SENDING_REVIEW_STATUS,
+          payload: true,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.UPDATE_REVIEW_ERROR_STATUS,
+          payload: true,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: ActionType.UPDATE_SENDING_REVIEW_STATUS,
+          payload: false,
         });
       });
   });

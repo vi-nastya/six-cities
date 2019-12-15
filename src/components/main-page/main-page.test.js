@@ -18,8 +18,8 @@ it(`MainPage component is rendered correctly after relaunch`, () => {
     offers={MOCK_OFFERS}
     activeItem={-1}
     setActiveItem={jest.fn()}
-    changeCityHandler={jest.fn()}
-    changeSortingHandler={jest.fn()}
+    onCityChange={jest.fn()}
+    onSortTypeChange={jest.fn()}
     sortType={{name: `DEFAULT`, text: `Popular`}}
   />).toJSON();
 

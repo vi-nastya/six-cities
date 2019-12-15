@@ -11,7 +11,7 @@ jest.mock(`react-router-dom`, () => ({
 it(`App component is rendered correctly after relaunch`, () => {
   const tree = renderer.create(<App
     isAuthorizationRequired={false}
-    login={jest.fn()}
+    onLogin={jest.fn()}
   />).toJSON();
 
   expect(tree).toMatchSnapshot();

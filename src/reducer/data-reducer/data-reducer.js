@@ -77,9 +77,10 @@ const DataOperation = {
           dispatch(DataActionCreator.loadComments(response.data));
           dispatch(DataActionCreator.updateReviewErrorStatus(false));
           resetForm();
-        } else {
-          dispatch(DataActionCreator.updateReviewErrorStatus(true));
+          dispatch(DataActionCreator.updateSendingReviewStatus(false));
         }
+      }).catch(() => {
+        dispatch(DataActionCreator.updateReviewErrorStatus(true));
         dispatch(DataActionCreator.updateSendingReviewStatus(false));
       });
   },
