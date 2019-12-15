@@ -1,11 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-const MIN_COMMENT_LENGTH = 50;
-const MAX_COMMENT_LENGTH = 300;
-
-const RATING_LABELS = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
-const MAX_RATING = 5;
+import {MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, RATING_LABELS, MAX_RATING} from "../../constants";
 
 const ReviewForm = (props) => {
   const {isValid, onInputChange, onFormSubmit, formRef, isSendingReview, reviewSendingError} = props;

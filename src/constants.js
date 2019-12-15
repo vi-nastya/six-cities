@@ -10,8 +10,13 @@ export const ActionType = {
   REQUIRE_AUTHORIZATION: `REQUIRE_AUTHORIZATION`,
   SAVE_USER: `SAVE_USER`
 };
-
+export const RATING_LABELS = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
 export const MAX_RATING = 5;
+
+export const MAX_NEARBY_PLACES = 3;
+
+export const MIN_COMMENT_LENGTH = 50;
+export const MAX_COMMENT_LENGTH = 300;
 
 export const SUCCESS_CODE = 200;
 

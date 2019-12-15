@@ -1,7 +1,6 @@
 import {createSelector} from 'reselect';
 import _ from "lodash";
-
-const MAX_NEARBY_PLACES = 3;
+import {MAX_NEARBY_PLACES} from "../constants";
 
 const sortOffers = (offers, sortType) => {
   switch (sortType) {
