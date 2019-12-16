@@ -21,17 +21,6 @@ const withReviewSubmit = (Component) => {
       this._formSubmitHandler = this._formSubmitHandler.bind(this);
     }
 
-
-    render() {
-      return <Component
-        {...this.props}
-        isValid={this.state.isValid}
-        onInputChange={this._onInputChange}
-        formRef={this._formRef}
-        onFormSubmit={this._formSubmitHandler}
-      />;
-    }
-
     _onInputChange(evt) {
       const fieldName = evt.target.name;
       const fieldValue = evt.target.value;
@@ -71,6 +60,15 @@ const withReviewSubmit = (Component) => {
       onFormSubmit(newCommentData, this._resetForm);
     }
 
+    render() {
+      return <Component
+        {...this.props}
+        isValid={this.state.isValid}
+        onInputChange={this._onInputChange}
+        formRef={this._formRef}
+        onFormSubmit={this._formSubmitHandler}
+      />;
+    }
   }
 
   WithReviewSubmit.propTypes = {

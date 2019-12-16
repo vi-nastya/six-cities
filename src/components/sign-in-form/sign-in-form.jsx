@@ -9,6 +9,30 @@ class SignInForm extends PureComponent {
     this._formSubmitHandler = this._formSubmitHandler.bind(this);
   }
 
+  _formSubmitHandler(evt) {
+    evt.preventDefault();
+    const {onFormSubmit} = this.props;
+    const formData = this._getDataFromForm(evt);
+    onFormSubmit(formData.email, formData.password);
+  }
+
+  _getDataFromForm(evt) {
+    const formData = new FormData(evt.target);
+    const formFields = {};
+    for (let entry of formData.entries()) {
+      formFields[entry[0]] = entry[1];
+    }
+    return formFields;
+  }
+
+  _onEmailInputChange(evt) {
+    if (!(/\S+@\S+\.\S+/.test(evt.target.value))) {
+      evt.target.setCustomValidity(`Invalid email`);
+    } else {
+      evt.target.setCustomValidity(``);
+    }
+  }
+
   render() {
     return <div>
       <div style={{display: `none`}}>
@@ -55,30 +79,6 @@ class SignInForm extends PureComponent {
         </main>
       </div>
     </div>;
-  }
-
-  _formSubmitHandler(evt) {
-    evt.preventDefault();
-    const {onFormSubmit} = this.props;
-    const formData = this._getDataFromForm(evt);
-    onFormSubmit(formData.email, formData.password);
-  }
-
-  _getDataFromForm(evt) {
-    const formData = new FormData(evt.target);
-    const formFields = {};
-    for (let entry of formData.entries()) {
-      formFields[entry[0]] = entry[1];
-    }
-    return formFields;
-  }
-
-  _onEmailInputChange(evt) {
-    if (!(/\S+@\S+\.\S+/.test(evt.target.value))) {
-      evt.target.setCustomValidity(`Invalid email`);
-    } else {
-      evt.target.setCustomValidity(``);
-    }
   }
 }
 

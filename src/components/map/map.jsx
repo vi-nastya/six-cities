@@ -43,10 +43,6 @@ class Map extends PureComponent {
     this._map.setView(city, MAP_ZOOM);
   }
 
-  render() {
-    return <div id="map" style={{height: 100 + `%`}}></div>;
-  }
-
   updateMarkers(points) {
     const activePoint = this.props.activePoint;
     this._markers.forEach((marker) => this._map.removeLayer(marker));
@@ -58,6 +54,10 @@ class Map extends PureComponent {
         this._markers.push(leaflet.marker(point, {icon: MAP_ICON}).addTo(this._map));
       }
     });
+  }
+
+  render() {
+    return <div id="map" style={{height: 100 + `%`}}></div>;
   }
 }
 

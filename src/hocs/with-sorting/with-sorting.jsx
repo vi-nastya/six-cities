@@ -16,17 +16,6 @@ const withSorting = (Component) => {
       this._sortTypeClickHandler = this._sortTypeClickHandler.bind(this);
     }
 
-
-    render() {
-      return <Component
-        {...this.props}
-        isOpen={this.state.isOpen}
-        activeSortType={this.state.activeSortType}
-        onSortToggle={this._toggleSortListHandler}
-        onSortChange = {this._sortTypeClickHandler}
-      />;
-    }
-
     _toggleSortListHandler() {
       this.setState({isOpen: this.state.isOpen ? false : true});
     }
@@ -38,6 +27,15 @@ const withSorting = (Component) => {
       this.props.onSortTypeChange(newSortType);
     }
 
+    render() {
+      return <Component
+        {...this.props}
+        isOpen={this.state.isOpen}
+        activeSortType={this.state.activeSortType}
+        onSortToggle={this._toggleSortListHandler}
+        onSortChange = {this._sortTypeClickHandler}
+      />;
+    }
   }
 
   WithSorting.propTypes = {
