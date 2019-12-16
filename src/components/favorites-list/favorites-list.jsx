@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {offerPropTypes} from "../../props-types-validation";
 import {connect} from "react-redux";
@@ -57,9 +58,9 @@ class FavoritesList extends PureComponent {
             </div>
           </main>
           <footer className="footer container">
-            <a className="footer__logo-link" href="main.html">
+            <Link className="footer__logo-link" to="/">
               <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-            </a>
+            </Link>
           </footer>
         </div>
       </div>;
@@ -87,9 +88,9 @@ class FavoritesList extends PureComponent {
           </div>
         </main>
         <footer className="footer">
-          <a className="footer__logo-link" href="main.html">
+          <Link className="footer__logo-link" to="/">
             <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-          </a>
+          </Link>
         </footer>
       </div>
     </div>;
