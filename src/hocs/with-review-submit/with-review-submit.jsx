@@ -18,7 +18,7 @@ const withReviewSubmit = (Component) => {
       this._onInputChange = this._onInputChange.bind(this);
       this._validateForm = this._validateForm.bind(this);
       this._resetForm = this._resetForm.bind(this);
-      this._formSubmitHandler = this._formSubmitHandler.bind(this);
+      this._handleFormSubmit = this._handleFormSubmit.bind(this);
     }
 
     _onInputChange(evt) {
@@ -48,7 +48,7 @@ const withReviewSubmit = (Component) => {
       this._formRef.current.reset();
     }
 
-    _formSubmitHandler(evt) {
+    _handleFormSubmit(evt) {
       evt.preventDefault();
       const {onFormSubmit} = this.props;
 
@@ -66,7 +66,7 @@ const withReviewSubmit = (Component) => {
         isValid={this.state.isValid}
         onInputChange={this._onInputChange}
         formRef={this._formRef}
-        onFormSubmit={this._formSubmitHandler}
+        onFormSubmit={this._handleFormSubmit}
       />;
     }
   }

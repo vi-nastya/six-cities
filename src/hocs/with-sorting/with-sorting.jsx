@@ -12,15 +12,15 @@ const withSorting = (Component) => {
         isOpen: false,
       };
 
-      this._toggleSortListHandler = this._toggleSortListHandler.bind(this);
-      this._sortTypeClickHandler = this._sortTypeClickHandler.bind(this);
+      this._handleToggleSortList = this._handleToggleSortList.bind(this);
+      this._handleSortTypeClick = this._handleSortTypeClick.bind(this);
     }
 
-    _toggleSortListHandler() {
+    _handleToggleSortList() {
       this.setState({isOpen: this.state.isOpen ? false : true});
     }
 
-    _sortTypeClickHandler(evt) {
+    _handleSortTypeClick(evt) {
       const clickedTypeText = evt.target.textContent;
       const newSortType = SORT_TYPES.find((sortType) => sortType.text === clickedTypeText);
       this.setState({isOpen: false, activeSortType: newSortType});
@@ -32,8 +32,8 @@ const withSorting = (Component) => {
         {...this.props}
         isOpen={this.state.isOpen}
         activeSortType={this.state.activeSortType}
-        onSortToggle={this._toggleSortListHandler}
-        onSortChange = {this._sortTypeClickHandler}
+        onSortToggle={this._handleToggleSortList}
+        onSortChange = {this._handleSortTypeClick}
       />;
     }
   }
