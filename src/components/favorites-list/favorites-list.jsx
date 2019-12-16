@@ -41,9 +41,7 @@ class FavoritesList extends PureComponent {
                     <li className="favorites__locations-items" key={`favorites-city-${index}`}>
                       <div className="favorites__locations locations locations--current">
                         <div className="locations__item">
-                          <a className="locations__item-link" href="#">
-                            <span>{placesGroup.city}</span>
-                          </a>
+                          <span className="locations__item-link">{placesGroup.city}</span>
                         </div>
                       </div>
                       <div className="favorites__places">

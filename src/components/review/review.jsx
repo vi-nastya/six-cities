@@ -3,10 +3,10 @@ import {reviewPropTypes} from "../../props-types-validation";
 import {RATING_PERCENT} from "../../constants";
 
 const formatDate = (date) => {
-  const curDate = new Date(date);
-  const curMonth = curDate.toLocaleString(`en-us`, {month: `long`});
-  const curYear = curDate.getFullYear();
-  return `${curMonth} ${curYear}`;
+  const currentDate = new Date(date);
+  const currentMonth = currentDate.toLocaleString(`en-us`, {month: `long`});
+  const currentYear = currentDate.getFullYear();
+  return `${currentMonth} ${currentYear}`;
 };
 
 const Review = (props) => {
