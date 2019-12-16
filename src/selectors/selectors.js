@@ -7,11 +7,11 @@ const sortOffers = (offers, sortType) => {
     case `DEFAULT`:
       return offers;
     case `PRICE_ASC`:
-      return offers.sort((offer1, offer2) => (offer1.price > offer2.price) ? 1 : -1);
+      return _.cloneDeep(offers).sort((offer1, offer2) => (offer1.price > offer2.price) ? 1 : -1);
     case `PRICE_DESC`:
-      return offers.sort((offer1, offer2) => (offer1.price < offer2.price) ? 1 : -1);
+      return _.cloneDeep(offers).sort((offer1, offer2) => (offer1.price < offer2.price) ? 1 : -1);
     case `RATING`:
-      return offers.sort((offer1, offer2) => (offer1.rating < offer2.rating) ? 1 : -1);
+      return _.cloneDeep(offers).sort((offer1, offer2) => (offer1.rating < offer2.rating) ? 1 : -1);
   }
   return offers;
 };

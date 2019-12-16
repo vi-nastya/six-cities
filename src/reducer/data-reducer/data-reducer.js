@@ -87,7 +87,9 @@ const DataOperation = {
   loadFavorites: () => (dispatch, _getState, api) => {
     return api.get(`/favorite`)
       .then((response) => {
-        dispatch(DataActionCreator.loadFavorites(response.data));
+        if (response && response.status === SUCCESS_CODE) {
+          dispatch(DataActionCreator.loadFavorites(response.data));
+        }
       });
   }
 };

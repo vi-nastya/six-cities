@@ -24,7 +24,13 @@ const UserOperation = {
         if (response.status === SUCCESS_CODE) {
           dispatch(UserActionCreator.requireAuthorization(false));
           dispatch(UserActionCreator.saveUser(response.data));
+        } else {
+          dispatch(UserActionCreator.requireAuthorization(true));
+          dispatch(UserActionCreator.saveUser(null));
         }
+      }).catch(() => {
+        dispatch(UserActionCreator.requireAuthorization(true));
+        dispatch(UserActionCreator.saveUser(null));
       });
   },
   checkAuth: () => {
@@ -32,9 +38,12 @@ const UserOperation = {
       return api
         .get(`/login`)
         .then((response) => {
-          if (response.status === SUCCESS_CODE) {
+          if (response && (response.status === SUCCESS_CODE)) {
             dispatch(UserActionCreator.requireAuthorization(false));
             dispatch(UserActionCreator.saveUser(response.data));
+          } else {
+            dispatch(UserActionCreator.requireAuthorization(true));
+            dispatch(UserActionCreator.saveUser(null));
           }
         }).catch(() => {
           dispatch(UserActionCreator.requireAuthorization(true));
@@ -52,7 +61,7 @@ const userReducer = (state = initialState, action) => {
       });
     case ActionType.SAVE_USER:
       return Object.assign({}, state, {
-        user: convertAuthApiToApp(action.payload),
+        user: action.payload ? convertAuthApiToApp(action.payload) : null,
       });
   }
 

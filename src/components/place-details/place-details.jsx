@@ -16,6 +16,8 @@ const ReviewFormWrapped = withReviewSubmit(ReviewForm);
 class PlaceDetails extends PureComponent {
   constructor(props) {
     super(props);
+
+    this._handleFavoriteChange = this._handleFavoriteChange.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +30,15 @@ class PlaceDetails extends PureComponent {
     if (prevProps.match.params.id !== match.params.id) {
       onLoadComments(match.params.id);
       window.scrollTo(0, 0);
+    }
+  }
+
+  _handleFavoriteChange() {
+    const {isAuthorizationRequired, placeData, onFavoriteChange} = this.props;
+    if (isAuthorizationRequired) {
+      this.props.history.push(`/login`);
+    } else {
+      onFavoriteChange(placeData);
     }
   }
 
@@ -79,7 +90,7 @@ class PlaceDetails extends PureComponent {
                     {placeData.title}
                   </h1>
                   <button className={`property__bookmark-button button ${placeData.isFavorite ? `property__bookmark-button--active` : ``}`}
-                    type="button" onClick={() => onFavoriteChange(placeData)}>
+                    type="button" onClick={this._handleFavoriteChange}>
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
