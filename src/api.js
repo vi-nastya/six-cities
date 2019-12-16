@@ -12,6 +12,7 @@ export const createAPI = (handleLoginError) => {
     if (error.response.status === 401) {
       handleLoginError();
     }
+    return error;
   };
 
   api.interceptors.response.use(onSuccess, onFail);

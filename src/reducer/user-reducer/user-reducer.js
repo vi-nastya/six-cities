@@ -28,9 +28,6 @@ const UserOperation = {
           dispatch(UserActionCreator.requireAuthorization(true));
           dispatch(UserActionCreator.saveUser(null));
         }
-      }).catch(() => {
-        dispatch(UserActionCreator.requireAuthorization(true));
-        dispatch(UserActionCreator.saveUser(null));
       });
   },
   checkAuth: () => {
@@ -45,9 +42,6 @@ const UserOperation = {
             dispatch(UserActionCreator.requireAuthorization(true));
             dispatch(UserActionCreator.saveUser(null));
           }
-        }).catch(() => {
-          dispatch(UserActionCreator.requireAuthorization(true));
-          dispatch(UserActionCreator.saveUser(null));
         });
     };
   }

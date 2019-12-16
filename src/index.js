@@ -12,7 +12,10 @@ import {compose} from "recompose";
 import {createAPI} from "./api";
 
 const init = () => {
-  const api = createAPI(() => store.dispatch(UserActionCreator.requireAuthorization(true)));
+  const api = createAPI(() => {
+    store.dispatch(UserActionCreator.requireAuthorization(true));
+    store.dispatch(UserActionCreator.saveUser(null));
+  });
   /* eslint-disable no-underscore-dangle */
   const store = createStore(
       reducer,

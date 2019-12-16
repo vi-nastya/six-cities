@@ -1,5 +1,6 @@
 import {convertApiToApp, convertCommentApiToApp, getRandomNumber} from '../../utils';
 import {SORT_TYPES, SUCCESS_CODE, ActionType} from "../../constants";
+import {UserActionCreator} from "../user-reducer/user-reducer";
 
 const EMPTY_CITY = {name: ``, location: {latitude: 0, longitude: 0}};
 
@@ -60,7 +61,12 @@ const DataOperation = {
     const newStatus = offerData.isFavorite ? 0 : 1;
     return api.post(`/favorite/` + offerData.id.toString() + `/` + newStatus.toString())
       .then((response) => {
-        dispatch(DataActionCreator.updateFavoriteStatus(response.data));
+        if (response && (response.status === SUCCESS_CODE)) {
+          dispatch(DataActionCreator.updateFavoriteStatus(response.data));
+        } else {
+          dispatch(UserActionCreator.requireAuthorization(true));
+          dispatch(UserActionCreator.saveUser(null));
+        }
       });
   },
   loadComments: (offerId) => (dispatch, _getState, api) => {
@@ -73,15 +79,17 @@ const DataOperation = {
     dispatch(DataActionCreator.updateSendingReviewStatus(true));
     return api.post(`/comments/${offerId}`, commentData)
       .then((response) => {
-        if (response.status === SUCCESS_CODE) {
+        if (response && (response.status === SUCCESS_CODE)) {
           dispatch(DataActionCreator.loadComments(response.data));
           dispatch(DataActionCreator.updateReviewErrorStatus(false));
           resetForm();
           dispatch(DataActionCreator.updateSendingReviewStatus(false));
+        } else {
+          dispatch(UserActionCreator.requireAuthorization(true));
+          dispatch(UserActionCreator.saveUser(null));
+          dispatch(DataActionCreator.updateReviewErrorStatus(true));
+          dispatch(DataActionCreator.updateSendingReviewStatus(false));
         }
-      }).catch(() => {
-        dispatch(DataActionCreator.updateReviewErrorStatus(true));
-        dispatch(DataActionCreator.updateSendingReviewStatus(false));
       });
   },
   loadFavorites: () => (dispatch, _getState, api) => {
