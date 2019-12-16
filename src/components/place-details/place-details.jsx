@@ -27,6 +27,7 @@ class PlaceDetails extends PureComponent {
     const {match, onLoadComments} = this.props;
     if (prevProps.match.params.id !== match.params.id) {
       onLoadComments(match.params.id);
+      window.scrollTo(0, 0);
     }
   }
 
