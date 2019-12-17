@@ -61,7 +61,7 @@ const DataOperation = {
     const newStatus = offerData.isFavorite ? 0 : 1;
     return api.post(`/favorite/` + offerData.id.toString() + `/` + newStatus.toString())
       .then((response) => {
-        if (response.data && (response.status === SUCCESS_CODE)) {
+        if (response && (response.status === SUCCESS_CODE)) {
           dispatch(DataActionCreator.updateFavoriteStatus(response.data));
         } else {
           dispatch(UserActionCreator.requireAuthorization(true));
@@ -79,7 +79,7 @@ const DataOperation = {
     dispatch(DataActionCreator.updateSendingReviewStatus(true));
     return api.post(`/comments/${offerId}`, commentData)
       .then((response) => {
-        if (response.data && (response.status === SUCCESS_CODE)) {
+        if (response && (response.status === SUCCESS_CODE)) {
           dispatch(DataActionCreator.loadComments(response.data));
           dispatch(DataActionCreator.updateReviewErrorStatus(false));
           resetForm();

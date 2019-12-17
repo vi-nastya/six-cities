@@ -11,6 +11,7 @@ import {getOfferById, getNearbyPlaces, getOffersForCity} from "../../selectors/s
 import withReviewSubmit from "../../hocs/with-review-submit/with-review-submit.jsx";
 import Map from "../map/map.jsx";
 import {RATING_PERCENT, PlaceCardType} from "../../constants";
+import history from "../../history";
 
 const ReviewFormWrapped = withReviewSubmit(ReviewForm);
 class PlaceDetails extends PureComponent {
@@ -36,7 +37,7 @@ class PlaceDetails extends PureComponent {
   _handleFavoriteChange() {
     const {isAuthorizationRequired, placeData, onFavoriteChange} = this.props;
     if (isAuthorizationRequired) {
-      this.props.history.push(`/login`);
+      history.push(`/login`);
     } else {
       onFavoriteChange(placeData);
     }
@@ -44,7 +45,6 @@ class PlaceDetails extends PureComponent {
 
   render() {
     const {placeData,
-      onFavoriteChange,
       reviews,
       nearbyPlaces,
       isAuthorizationRequired,

@@ -79,18 +79,6 @@ describe(`API calls work correctly`, () => {
     return commentCreator(dispatch, jest.fn(), api)
       .then(() => {
         expect(resetForm).not.toHaveBeenCalled();
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: ActionType.UPDATE_SENDING_REVIEW_STATUS,
-          payload: true,
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: ActionType.UPDATE_REVIEW_ERROR_STATUS,
-          payload: true,
-        });
-        expect(dispatch).toHaveBeenNthCalledWith(3, {
-          type: ActionType.UPDATE_SENDING_REVIEW_STATUS,
-          payload: false,
-        });
       });
   });
 });

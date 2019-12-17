@@ -71,14 +71,11 @@ exports[`FavoritesList component is rendered correctly after relaunch 1`] = `
                 <div
                   className="locations__item"
                 >
-                  <a
+                  <span
                     className="locations__item-link"
-                    href="#"
                   >
-                    <span>
-                      Moscow
-                    </span>
-                  </a>
+                    Moscow
+                  </span>
                 </div>
               </div>
               <div
@@ -397,20 +394,7 @@ exports[`FavoritesList component is rendered correctly after relaunch 1`] = `
     </main>
     <footer
       className="footer container"
-    >
-      <a
-        className="footer__logo-link"
-        href="main.html"
-      >
-        <img
-          alt="6 cities logo"
-          className="footer__logo"
-          height="33"
-          src="img/logo.svg"
-          width="64"
-        />
-      </a>
-    </footer>
+    />
   </div>
 </div>
 `;
