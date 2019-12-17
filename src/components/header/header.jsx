@@ -17,7 +17,7 @@ const Header = (props) => {
           <ul className="header__nav-list">
             <li className="header__nav-item user">
               {userEmail ? (
-                <Link to="/favorites" className="header__nav-link header__nav-link--profile" href="#">
+                <Link to="/favorites" className="header__nav-link header__nav-link--profile">
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                   <span className="header__user-name user__name">{userEmail}</span>
                 </Link>

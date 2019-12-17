@@ -13,9 +13,7 @@ const PlaceCard = (props) => {
       <span>Premium</span>
     </div>
     <div className={`${cardType.imageClass} place-card__image-wrapper`}>
-      <a href="#">
-        <img className="place-card__image" src={images[0]} width="260" height="200" alt="Place image"/>
-      </a>
+      <img className="place-card__image" src={images[0]} width="260" height="200" alt="Place image"/>
     </div>
     <div className="place-card__info">
       <div className="place-card__price-wrapper">

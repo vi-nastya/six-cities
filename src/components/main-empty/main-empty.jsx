@@ -7,34 +7,34 @@ const MainEmpty = () => {
       <section className="locations container">
         <ul className="locations__list tabs__list">
           <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Paris</span>
-            </a>
+            <span className="locations__item-link tabs__item">
+              Paris
+            </span>
           </li>
           <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Cologne</span>
-            </a>
+            <span className="locations__item-link tabs__item">
+              Cologne
+            </span>
           </li>
           <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Brussels</span>
-            </a>
+            <span className="locations__item-link tabs__item">
+              Brussels
+            </span>
           </li>
           <li className="locations__item">
-            <a className="locations__item-link tabs__item">
-              <span>Amsterdam</span>
-            </a>
+            <span className="locations__item-link tabs__item">
+              Amsterdam
+            </span>
           </li>
           <li className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
-              <span>Hamburg</span>
-            </a>
+            <span className="locations__item-link tabs__item">
+              Hamburg
+            </span>
           </li>
           <li className="locations__item">
-            <a className="locations__item-link tabs__item tabs__item--active" href="#">
-              <span>Dusseldorf</span>
-            </a>
+            <span className="locations__item-link tabs__item">
+              Dusseldorf
+            </span>
           </li>
         </ul>
       </section>

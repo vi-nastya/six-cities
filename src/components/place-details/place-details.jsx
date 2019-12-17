@@ -11,13 +11,11 @@ import {getOfferById, getNearbyPlaces, getOffersForCity} from "../../selectors/s
 import withReviewSubmit from "../../hocs/with-review-submit/with-review-submit.jsx";
 import Map from "../map/map.jsx";
 import {RATING_PERCENT, PlaceCardType} from "../../constants";
-import history from "../../history";
 
 const ReviewFormWrapped = withReviewSubmit(ReviewForm);
 class PlaceDetails extends PureComponent {
   constructor(props) {
     super(props);
-
     this._handleFavoriteChange = this._handleFavoriteChange.bind(this);
   }
 
@@ -35,11 +33,11 @@ class PlaceDetails extends PureComponent {
   }
 
   _handleFavoriteChange() {
-    const {isAuthorizationRequired, placeData, onFavoriteChange} = this.props;
+    const {isAuthorizationRequired, placeData, onFavoriteChange, history} = this.props;
     if (isAuthorizationRequired) {
       history.push(`/login`);
     } else {
-      onFavoriteChange(placeData);
+      onFavoriteChange(placeData, () => history.push(`/login`));
     }
   }
 
@@ -187,6 +185,9 @@ PlaceDetails.propTypes = {
       id: PropTypes.string.isRequired,
     })
   }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
   reviews: PropTypes.arrayOf(reviewPropTypes),
   nearbyPlaces: PropTypes.arrayOf(offerPropTypes),
   isAuthorizationRequired: PropTypes.bool.isRequired,
@@ -207,8 +208,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onFavoriteChange: (placeData) => {
-    dispatch(DataOperation.updateFavoriteStatus(placeData));
+  onFavoriteChange: (placeData, onLoginError) => {
+    dispatch(DataOperation.updateFavoriteStatus(placeData, onLoginError));
   },
   onLoadComments: (offerId) => {
     dispatch(DataOperation.loadComments(offerId));

@@ -21,73 +21,56 @@ exports[`MainEmpty component is rendered correctly after relaunch 1`] = `
         <li
           className="locations__item"
         >
-          <a
+          <span
             className="locations__item-link tabs__item"
-            href="#"
           >
-            <span>
-              Paris
-            </span>
-          </a>
+            Paris
+          </span>
         </li>
         <li
           className="locations__item"
         >
-          <a
+          <span
             className="locations__item-link tabs__item"
-            href="#"
           >
-            <span>
-              Cologne
-            </span>
-          </a>
+            Cologne
+          </span>
         </li>
         <li
           className="locations__item"
         >
-          <a
+          <span
             className="locations__item-link tabs__item"
-            href="#"
           >
-            <span>
-              Brussels
-            </span>
-          </a>
+            Brussels
+          </span>
         </li>
         <li
           className="locations__item"
         >
-          <a
+          <span
             className="locations__item-link tabs__item"
           >
-            <span>
-              Amsterdam
-            </span>
-          </a>
+            Amsterdam
+          </span>
         </li>
         <li
           className="locations__item"
         >
-          <a
+          <span
             className="locations__item-link tabs__item"
-            href="#"
           >
-            <span>
-              Hamburg
-            </span>
-          </a>
+            Hamburg
+          </span>
         </li>
         <li
           className="locations__item"
         >
-          <a
-            className="locations__item-link tabs__item tabs__item--active"
-            href="#"
+          <span
+            className="locations__item-link tabs__item"
           >
-            <span>
-              Dusseldorf
-            </span>
-          </a>
+            Dusseldorf
+          </span>
         </li>
       </ul>
     </section>

@@ -9,9 +9,9 @@ const CitiesList = (props) => {
     <ul className="locations__list tabs__list">
       {cities.map((city) => {
         return <li key={`city-` + city.name} className="locations__item" onClick={() => onCityChange(city)}>
-          <a className={`locations__item-link tabs__item ${city.name === activeCity.name && `tabs__item--active`}`} href="#">
-            <span>{city.name}</span>
-          </a>
+          <span className={`locations__item-link tabs__item ${city.name === activeCity.name && `tabs__item--active`}`}>
+            {city.name}
+          </span>
         </li>;
       })}
     </ul>

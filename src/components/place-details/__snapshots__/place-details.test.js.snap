@@ -400,17 +400,13 @@ exports[`PlaceDetails component is rendered correctly after relaunch 1`] = `
               <div
                 className="near-places__image-wrapper place-card__image-wrapper"
               >
-                <a
-                  href="#"
-                >
-                  <img
-                    alt="Place image"
-                    className="place-card__image"
-                    height="200"
-                    src="img/1.png"
-                    width="260"
-                  />
-                </a>
+                <img
+                  alt="Place image"
+                  className="place-card__image"
+                  height="200"
+                  src="img/1.png"
+                  width="260"
+                />
               </div>
               <div
                 className="place-card__info"

@@ -68,14 +68,11 @@ exports[`MainPage component is rendered correctly after relaunch 1`] = `
               className="locations__item"
               onClick={[Function]}
             >
-              <a
+              <span
                 className="locations__item-link tabs__item tabs__item--active"
-                href="#"
               >
-                <span>
-                  City1
-                </span>
-              </a>
+                City1
+              </span>
             </li>
           </ul>
         </section>
@@ -180,17 +177,13 @@ exports[`MainPage component is rendered correctly after relaunch 1`] = `
                 <div
                   className="cities__image-wrapper place-card__image-wrapper"
                 >
-                  <a
-                    href="#"
-                  >
-                    <img
-                      alt="Place image"
-                      className="place-card__image"
-                      height="200"
-                      src="img/1.png"
-                      width="260"
-                    />
-                  </a>
+                  <img
+                    alt="Place image"
+                    className="place-card__image"
+                    height="200"
+                    src="img/1.png"
+                    width="260"
+                  />
                 </div>
                 <div
                   className="place-card__info"
@@ -283,17 +276,13 @@ exports[`MainPage component is rendered correctly after relaunch 1`] = `
                 <div
                   className="cities__image-wrapper place-card__image-wrapper"
                 >
-                  <a
-                    href="#"
-                  >
-                    <img
-                      alt="Place image"
-                      className="place-card__image"
-                      height="200"
-                      src="img/1.png"
-                      width="260"
-                    />
-                  </a>
+                  <img
+                    alt="Place image"
+                    className="place-card__image"
+                    height="200"
+                    src="img/1.png"
+                    width="260"
+                  />
                 </div>
                 <div
                   className="place-card__info"
@@ -382,17 +371,13 @@ exports[`MainPage component is rendered correctly after relaunch 1`] = `
                 <div
                   className="cities__image-wrapper place-card__image-wrapper"
                 >
-                  <a
-                    href="#"
-                  >
-                    <img
-                      alt="Place image"
-                      className="place-card__image"
-                      height="200"
-                      src="img/1.png"
-                      width="260"
-                    />
-                  </a>
+                  <img
+                    alt="Place image"
+                    className="place-card__image"
+                    height="200"
+                    src="img/1.png"
+                    width="260"
+                  />
                 </div>
                 <div
                   className="place-card__info"

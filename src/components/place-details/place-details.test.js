@@ -15,6 +15,7 @@ it(`PlaceDetails component is rendered correctly after relaunch`, () => {
     onFavoriteChange={jest.fn()}
     onLoadComments={jest.fn()}
     match={{params: {id: `1`}}}
+    history={{push: jest.fn()}}
     reviews={MOCK_REVIEWS}
     nearbyPlaces={[MOCK_OFFERS[1]]}
     onFormSubmit={jest.fn()}

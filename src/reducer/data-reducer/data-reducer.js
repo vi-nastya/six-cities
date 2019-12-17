@@ -57,7 +57,7 @@ const DataOperation = {
         dispatch(DataActionCreator.loadOffers(response.data));
       });
   },
-  updateFavoriteStatus: (offerData) => (dispatch, _getState, api) => {
+  updateFavoriteStatus: (offerData, onLoginError) => (dispatch, _getState, api) => {
     const newStatus = offerData.isFavorite ? 0 : 1;
     return api.post(`/favorite/` + offerData.id.toString() + `/` + newStatus.toString())
       .then((response) => {
@@ -66,6 +66,7 @@ const DataOperation = {
         } else {
           dispatch(UserActionCreator.requireAuthorization(true));
           dispatch(UserActionCreator.saveUser(null));
+          onLoginError();
         }
       });
   },
