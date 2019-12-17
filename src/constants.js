@@ -21,6 +21,9 @@ export const MIN_COMMENT_LENGTH = 50;
 export const MAX_COMMENT_LENGTH = 300;
 
 export const SUCCESS_CODE = 200;
+export const UNAUTH_CODE = 401;
+export const BAD_REQUEST_CODE = 400;
+
 
 export const PlaceCardType = {
   FAVORITE: {
